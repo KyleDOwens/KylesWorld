@@ -1,0 +1,105 @@
+@font-face {
+    font-family: "Binomic Medium";
+    src: url("fonts/binomic_medium.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply to everything */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Binomic Medium", sans-serif;
+}
+
+/* MARKER COLORS */
+/* Rather than have different colored markers, just transform a single mark to any color I want */
+.visited-low {
+    filter: invert(96%) sepia(10%) saturate(381%) hue-rotate(46deg) brightness(96%) contrast(91%)
+        drop-shadow(1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 -1px 0 black);
+}
+.visited-medium {
+    filter: invert(73%) sepia(26%) saturate(510%) hue-rotate(57deg) brightness(95%) contrast(88%)
+        drop-shadow(1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 -1px 0 black);
+}
+.visited-high {
+    filter: invert(59%) sepia(65%) saturate(503%) hue-rotate(84deg) brightness(82%) contrast(81%)
+        drop-shadow(1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 -1px 0 black);
+}
+
+.unvisited-low {
+    filter: invert(97%) sepia(63%) saturate(6665%) hue-rotate(176deg) brightness(101%) contrast(97%)
+        drop-shadow(1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 -1px 0 black);
+}
+.unvisited-medium {
+    filter: invert(63%) sepia(67%) saturate(1633%) hue-rotate(190deg) brightness(94%) contrast(96%)
+        drop-shadow(1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 -1px 0 black);
+}
+.unvisited-high {
+    filter: invert(47%) sepia(49%) saturate(4393%) hue-rotate(202deg) brightness(90%) contrast(86%)
+        drop-shadow(1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 -1px 0 black);
+}
+
+/* GENERAL */
+html, body {
+    height: 100%;
+}
+
+.header {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+#body-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: "map sidebar";
+    grid-template-columns: auto 600px;
+}
+
+/* MAP */
+#map-container {
+    background-color: blue;
+    grid-area: map;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#map {
+    width: 80%;
+    height: 90%;
+}
+
+/* SIDEBAR */
+#sidebar-container {
+    grid-area: sidebar;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+    background-color: red;
+    overflow-x: scroll;
+}
+
+#filter-container {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+#sidebar-table {
+    
+}
+
+#sidebar-table thead {
+    background-color: green;
+    height: 1rem;
+}

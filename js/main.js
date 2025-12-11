@@ -29,6 +29,7 @@ let markers = {}
 document.addEventListener("DOMContentLoaded", () => {
     initializeMap();
     loadLocationsIntoCache();
+    initializeFilters();
 });
 
 /**
@@ -168,39 +169,43 @@ function updateAllMarkersShown() {
     }
 }
 
-document.getElementById("dropdown-button").addEventListener("click", function() {
-    
-    // Change arrow direction of button
-    let button = document.getElementById("dropdown-button");
-    button.innerHTML = (button.innerHTML === "▼") ? "▲" : "▼";
+function extractFilters(multiSelect) {
+    let filters = [];
 
-    // Open/Close the dropdown menu
-    // let dropdown = document.getElementById("filter-select");
-    // dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-});
+    let multiOptions = multiSelect.querySelectorAll(".multi-option");
+    
+    for (let option of multiOptions) {
+        let selected = option.children[0].checked;
+        if (selected) {
+            filters.push(option.innerText.trim().toLowerCase());
+        }
+    }
+
+    return filters;
+}
 
 function applyFilters(showAll) {
-    // Get filter values
-    let visitedFilter = document.getElementById("visited-filter").value.toLowerCase();
-    let cuisineFilter = document.getElementById("cuisine-filter").value.toLowerCase();
-    let ratingFilter = document.getElementById("rating-filter").value.toLowerCase();
+    // Extract filter values from the HTML elements
+    let visitedFilters = extractFilters(document.getElementById("visited-filter"));
+    let cuisineFilters = extractFilters(document.getElementById("cuisine-filter"));
+    let ratingFilters = extractFilters(document.getElementById("rating-filter"));
 
     // Update state of map/table to match filter request
     let table = document.getElementById("sidebar-table-body");
     for (let row of table.rows) {
         // Get values of current restaurant
-        let checkbox = row.cells[row.cells.length - 1].children[0];
         let name = row.cells[0].innerText;
         let visited = (row.cells[2].innerHTML === "") ? "unvisited" : "visited";
-        let cuisineTypes = row.cells[1].innerText.toLowerCase().split(" / ");
+        let cuisine = row.cells[1].innerText.toLowerCase();
         let rating = (restaurants[normalizeName(name)]["rating"]) ? restaurants[normalizeName(name)]["rating"] : "low";
 
-        // Check if all filter criteria are met
-        let passVisitedFilter = (visitedFilter === "any") || (visited === visitedFilter);
-        let passCuisineFilter = (cuisineFilter === "any") || (cuisineTypes.includes(cuisineFilter));
-        let passRatingFilter = (ratingFilter === "any") || (rating === ratingFilter);
+        // Check if filter criteria are met
+        let passVisitedFilter = (visitedFilters[0] === "any") || (visitedFilters.includes(visited));
+        let passCuisineFilter = (cuisineFilters[0] === "any") || (cuisineFilters.includes(cuisine));
+        let passRatingFilter = (ratingFilters[0] === "any") || (ratingFilters.includes(rating));
 
         // Update if the marker is shown or not
+        let checkbox = row.cells[row.cells.length - 1].children[0];
         if (passVisitedFilter && passCuisineFilter && passRatingFilter) {
             checkbox.checked = (showAll) ? false : true;
         }
@@ -220,17 +225,99 @@ document.getElementById("hide-all-button").addEventListener("click", function() 
     applyFilters(false);
 });
 
+
+/*************************************
+**** FILTERING MENU FUNCTIONALITY ****
+*************************************/
+function initializeFilters() {
+    let allCheckboxes = document.querySelectorAll(".multi-option input");
+    allCheckboxes.forEach(checkbox => {
+        checkbox.checked = true;
+    });
+
+    applyFilters();
+}
+
 /**
- * Show visited
- * Hide visited
- * Show unvisited
- * Hide unvisited
- * 
- * ==>
- * only visited
- * only unvisited
- * 
+ * Open/close the filter dropdown menu when the filter button is clicked
  */
+document.getElementById("filter-dropdown-button").addEventListener("click", function() {
+    // Change arrow direction of button
+    let button = document.getElementById("filter-dropdown-button");
+    button.innerHTML = (button.innerHTML === "▼") ? "▲" : "▼";
+    // Open/Close the dropdown menu
+    let filterDropdown = document.getElementById("filter-dropdown");
+    filterDropdown.style.display = (filterDropdown.style.display === "none") ? "block" : "none";
+});
+
+/**
+ * Sets all the checkboxes within the multi-select menu to the passed in value (true/false).
+ * Called w
+ * @param {*} multiOptionMenu The multi-select menu HTML element, containing all the multi-select options for this filter
+ */
+function setAllOptionBoxes(multiOptionMenu, value) {
+    let allOptions = multiOptionMenu.querySelectorAll(".multi-option");
+    allOptions.forEach(option => {
+        let optionCheckbox = option.querySelectorAll("input")[0];
+        optionCheckbox.checked = value;
+    });
+}
+
+/**
+ * Determine if all checkboxes within a given multi-select menu are checked (excluding the "any" checkbox)
+ * @param {*} multiOptionMenu The multi-select menu HTML element, containing all the multi-select options for this filter
+ * @returns Boolean of if all checkboxes are checked or not
+ */
+function allOptionsChecked(multiOptionMenu) {
+    let allOptions = multiOptionMenu.querySelectorAll(".multi-option:not(.multi-any)");
+    for (const option of allOptions) {
+        let optionCheckbox = option.querySelectorAll("input")[0];
+        if (!optionCheckbox.checked) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * Handle when the "any" option is selected in a multi-menu
+ * When the "any" option is selected, automatically check all the checkboxes in its associated filter menu
+ * If the "any" option is unselected but all boxes are still checked, "undo" by unchecking all the boxes
+ */
+let anyCheckboxes = document.querySelectorAll(".multi-any input");
+anyCheckboxes.forEach(anyCheckbox => anyCheckbox.addEventListener("click", function() {
+    let multiOptionMenu = anyCheckbox.closest(".multi-select");
+    if (anyCheckbox.checked) {
+        setAllOptionBoxes(multiOptionMenu, true);
+    }
+    else if (allOptionsChecked(multiOptionMenu)) {
+        setAllOptionBoxes(multiOptionMenu, false);
+    }
+
+    applyFilters(true)
+    updateAllMarkersShown();
+}));
+
+/**
+ * Handle how to update the "any" checkbox when an option is selected
+ * If the "any" checkbox is checked, and an option is unselected ==> unchecked "any"
+ * If the "any" checkbox is unchecked, and all options are selected ==> check "any"
+ */
+let allOptionCheckboxes = document.querySelectorAll(".multi-option:not(.multi-any) input");
+allOptionCheckboxes.forEach(optionCheckbox => optionCheckbox.addEventListener("click", function() {
+    let multiOptionMenu = optionCheckbox.parentElement.parentElement;
+    let anyCheckbox = multiOptionMenu.querySelector(".multi-any input");
+    if (!optionCheckbox.checked && anyCheckbox.checked) {
+        anyCheckbox.checked = false;
+    }
+    else if (allOptionsChecked(multiOptionMenu)) {
+        anyCheckbox.checked = true;
+    }
+
+    applyFilters(true)
+    updateAllMarkersShown();
+}));
 
 
 /**********************************
@@ -274,8 +361,6 @@ document.getElementById("export-button").addEventListener("click", async functio
     let newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + 
                  "?selections=" + selections;
     window.history.pushState({ path: newUrl }, '', newUrl);
-
-    console.log(newUrl)
 
     await navigator.clipboard.writeText(newUrl);
     alert('Sharable URL copied to clipboard!');

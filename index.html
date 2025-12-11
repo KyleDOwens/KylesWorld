@@ -26,37 +26,54 @@
 
             <!-- Filtering Options -->
             <div id="filter-container">
-                <h4>Filter Options</h4>
-                <!-- <button id="dropdown-button">▼</button> -->
+                <div id="filter-header">
+                    <h2>Filter Options</h2>
+                    <button id="filter-dropdown-button">▼</button>
+                </div>
 
-                <div id="filter-options">
-                    Visited <select id="visited-filter">
-                        <option>Any</option>
-                        <option>Visited</option>
-                        <option>Unvisited</option>
-                    </select>
-                    <br>
+                <div id="filter-dropdown">
+                    <div id="filter-options">
+                        <div id="visited-filter" class="multi-select">
+                            <div class="multi-option-header">Visited</div>
+                            <!-- <div class="multi-default">Select visited...</div> -->
+                            <div class="multi-option multi-any"><input type="checkbox"> Any</div>
+                            <div class="multi-option"><input type="checkbox"> Visited</div>
+                            <div class="multi-option"><input type="checkbox"> Unvisited</div>
+                        </div>
 
-                    Cuisine type <select id="cuisine-filter">
-                        <option>Any</option>
-                        <option>BBQ </option>
-                        <option>Mexican</option>
-                        <option>Middle Eastern</option>
-                    </select>
-                    <button>+</button>
-                    <br>
+                        <div id="cuisine-filter" class="multi-select">
+                            <div class="multi-option-header">Cuisine type</div>
+                            <!-- <div class="multi-default">Select cuisine...</div> -->
+                            <div class="multi-option multi-any"><input type="checkbox"> Any</div>
+                            <div class="multi-option"><input type="checkbox"> American</div>
+                            <div class="multi-option"><input type="checkbox"> Central American</div>
+                            <div class="multi-option"><input type="checkbox"> South American</div>
+                            <div class="multi-option"><input type="checkbox"> European</div>
+                            <div class="multi-option"><input type="checkbox"> Asian</div>
+                            <div class="multi-option"><input type="checkbox"> African</div>
+                            <div class="multi-option"><input type="checkbox"> Coffee</div>
+                            <div class="multi-option"><input type="checkbox"> Brunch</div>
+                            <div class="multi-option"><input type="checkbox"> Dessert</div>
+                            <div class="multi-option"><input type="checkbox"> BBQ</div>
+                            <div class="multi-option"><input type="checkbox"> Mexican</div>
+                            <div class="multi-option"><input type="checkbox"> Middle Eastern</div>
+                        </div>
 
-                    Rating/Priority <select id="rating-filter">
-                        <option>Any</option>
-                        <option>Low</option>
-                        <option>Medium</option>
-                        <option>High</option>
-                    </select>
-                    <br>
-                    <!-- Distance from point <button id="dropdown-button">Add point</button><br> -->
+                        <div id="rating-filter" class="multi-select">
+                            <div class="multi-option-header">Rating/Priority</div>
+                            <!-- <div class="multi-default">Select rating...</div> -->
+                            <div class="multi-option multi-any"><input type="checkbox"> Any</div>
+                            <div class="multi-option"><input type="checkbox"> Low</div>
+                            <div class="multi-option"><input type="checkbox"> Medium</div>
+                            <div class="multi-option"><input type="checkbox"> High</div>
+                        </div>
+                        <!-- Distance from point <button id="dropdown-button">Add point</button><br> -->
+                    </div>
                     
-                    <button id="show-all-button">Show all filters</button>
-                    <button id="hide-all-button">Hide all filters</button>
+                    <div id="filter-button-container">
+                        <button id="show-all-button">Show all matching</button>
+                        <button id="hide-all-button">Hide all matching</button>
+                    </div>
                 </div>
             </div>            
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Lister</title>
+    <title>Restaurant Tracker</title>
     <link rel="stylesheet" href="css/style.css"> <!-- STYLE -->
      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -14,31 +14,68 @@
 
 <body>
     <div id="body-container">
+        <!-- Restaurant Map -->
         <div id="map-container">
-            <div id="map-header" class="header">
-                Restaurant Map
-            </div>
-
+            <h1>Restaurant Tracker</h1>
             <div id="map"></div>
         </div>
+
+        <!-- Sidebar -->
         <div id="sidebar-container">
-            <div id="sidebar-header" class="header">
-                Restaurant List
-            </div>
+            <h1>Restaurant List</h1>
+
+            <!-- Filtering Options -->
             <div id="filter-container">
-                Filters
-                <button>▼</button>
-                <!-- <button>▲</button> -->
-            </div>
+                <h4>Filter Options</h4>
+                <!-- <button id="dropdown-button">▼</button> -->
+
+                <div id="filter-options">
+                    Visited <select id="visited-filter">
+                        <option>Any</option>
+                        <option>Visited</option>
+                        <option>Unvisited</option>
+                    </select>
+                    <br>
+
+                    Cuisine type <select id="cuisine-filter">
+                        <option>Any</option>
+                        <option>BBQ </option>
+                        <option>Mexican</option>
+                        <option>Middle Eastern</option>
+                    </select>
+                    <button>+</button>
+                    <br>
+
+                    Rating/Priority <select id="rating-filter">
+                        <option>Any</option>
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                    </select>
+                    <br>
+                    <!-- Distance from point <button id="dropdown-button">Add point</button><br> -->
+                    
+                    <button id="show-all-button">Show all filters</button>
+                    <button id="hide-all-button">Hide all filters</button>
+                </div>
+            </div>            
+
+            <!-- Export Sharable URL -->
+            <button id="export-button">Share Selections</button>
+
+            <!-- Restaurant Table -->
             <table id="sidebar-table">
                 <thead>
                     <tr>
                         <td class="name">Name</td>
                         <td class="cuisine">Cuisine</td>
                         <td class="visited">Visited?</td>
-                        <td class="notes">Notes</td>
+                        <td class="hide">Hide?</td>
                     </tr>
                 </thead>
+                <tbody id="sidebar-table-body">
+                    <!-- Will be filled in by JS -->
+                </tbody>
             </table>
         </div>
     </div>

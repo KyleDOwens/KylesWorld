@@ -14,17 +14,17 @@
         * Distance from some point!!!
 
 todo:
-* [-] Update ratings
-* [-] Update cuisine types
+* [+] Update ratings
+* [+] Update cuisine types
 * [-] Add coffee shops from google
 * [-] Add bakeries from google
 
-* [-] Add filters
+* [+] Add filters
     * [+] Individual items
     * [+] Cuisine Type: [input box with dropdown mapping to set of possible options]
     * [+] Visited/unvisited
     * [+] Rating (dropdown asking to select from visited ratings, or of priority to visit ratings low/medium/high)
-    * [-] Within X miles of point (next click will place a point, when clicking on that point the description has input box to set radius (will need lat/long <==> miles converter) and link to delete point (allow arbitrarily many points))
+    * [+] Within X miles of point (next click will place a point, when clicking on that point the description has input box to set radius (will need lat/long <==> miles converter) and link to delete point (allow arbitrarily many points)) ==> changed to apply filter within X minutes of clicked location
 
 * [-] Add ability to normalize colors (all same shade green/blue)
 
@@ -35,8 +35,8 @@ todo:
     * [-] By name, cuisine, visited, rating?
 
 
-* [?] When closing table, reset filters to the previous save
+* [/] When closing table, reset filters to the previous save
 * [+] When selecting "any" check all boxes
 * [+] When "any" is selected, and another box is changed, unselect "any"
 
-* [-] Remove show/hide all matching
+* [+] Remove show/hide all matching

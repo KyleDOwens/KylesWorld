@@ -132,28 +132,28 @@ html, body {
     font-size: 0.75rem;
 }
 
-#filter-options {
+#filter-menus {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     gap: 0.5rem;
     margin-right: 1rem;
     margin-left: 1rem;
     margin-bottom: 1rem;
 }
 
-#filter-options .multi-option-header {
+#filter-menus .multi-option-header {
     font-weight: bold;
 }
 
-#filter-options .multi-select {
+#filter-menus .multi-select {
     background-color: slategray;
     border: 1px solid black;
 }
 
-#filter-options .multi-select .multi-option {
+#filter-menus .multi-select .multi-option {
     background-color:darkgray;
 }
 
-#filter-options .multi-select .multi-any {
+#filter-menus .multi-select .multi-any {
     border-bottom: 1px solid black;
 }

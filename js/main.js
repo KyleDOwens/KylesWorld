@@ -27,6 +27,10 @@ let placingIsochrone = false; // Stores if the user is currently placing an isoc
 let isochroneObject = null; // Stores the isochrone layer added to the map (may or may not actually be shown on the map)
 let doIsochroneFiltering = true // Boolean if the isochrone layer should be used for filtering or just for display
 
+let timerId = null; // Stores the ID of the timer repeated highlighting/unhighlighting the randomly selected marker
+let timerMarker = null; // Stores the marker object the randomly selected marker
+let oldZOffset = null; // Stores the old Z-Offset the randomly selected marker
+
 let debug = true; // Determines if API call with limits should be made
 
 // Example isochrone for testing
@@ -94,6 +98,7 @@ let mockIsochrone = {
     }
 }
 
+
 /********************************
 **** STARTUP / ON LOADING IN ****
 ********************************/
@@ -120,8 +125,8 @@ function normalizeName(name) {
 function initializeMap() {
     if (debug) {
         // Add free tile layer
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors',
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
         maxZoom: 19,
         }).addTo(map);
     }
@@ -195,6 +200,8 @@ function addRow(name, cuisine, visited) {
  * Loads the list of restaurant information in locations.csv into the local cache and updates table/map HTML contents with that info
  */
 function loadCacheAndState() {
+    // Gross function because handling async functions in not fun
+    
     let cuisineFilters = [];
 
     // Read all restaurants from CSV, then insert into map/table
@@ -255,6 +262,7 @@ document.getElementById("filter-dropdown-button").addEventListener("click", func
     // Change arrow direction of button
     let button = document.getElementById("filter-dropdown-button");
     button.innerHTML = (button.innerHTML === "▼") ? "▲" : "▼";
+
     // Open/Close the dropdown menu
     let filterDropdown = document.getElementById("filter-dropdown");
     filterDropdown.style.display = (filterDropdown.style.display === "none") ? "block" : "none";
@@ -347,6 +355,11 @@ function passesMenuFilters(name) {
 function applyFilters(skipManualSelections = false) {
     // Clear manual selections, since they will all be overwritten when filters are applied
     manualSelections = [];
+
+    // Stop displaying a random selection, since the selection is changing
+    if (timerId) {
+        stopHighlightTimer();
+    }
 
     // Check if each restaurant passes the filters
     let table = document.getElementById("sidebar-table-body");
@@ -603,7 +616,7 @@ document.getElementById("export-button").addEventListener("click", async functio
     // Set the encoding as the new URL and copy to clipboard
     window.history.pushState({ path: newUrl }, '', newUrl);
     await navigator.clipboard.writeText(newUrl);
-    alert('Sharable URL copied to clipboard!');
+    alert("Sharable URL copied to clipboard!");
 });
 
 /**
@@ -884,10 +897,10 @@ async function drawDistanceIsochrone(lat, long, range) {
     })
     .bindPopup(`<b>Distance Filter</b><br>
             Locations reachable in ${range} minutes<br>
-            <a onclick=removeIsochrone() href="#">Click to remove</a><br>
-            <a onclick=hideIsochrone() href="#">Click to hide</a><br>
-            <a onclick=removeIsochroneFilter() href="#">Click to remove filter only</a><br>
-            <a onclick=addIsochroneFilter() href="#">Click to add back filter back</a>`)
+            <a onclick=removeIsochrone() href="#">Remove</a><br>
+            <a onclick=hideIsochrone() href="#">Hide</a><br>
+            <a onclick=removeIsochroneFilter() href="#">Remove filter only</a><br>
+            <a onclick=addIsochroneFilter() href="#">Add filter</a>`)
     .addTo(map);
 }
 
@@ -906,3 +919,67 @@ map.on("click", (event) => {
         applyFilters();
     }
 })
+
+
+/*************************
+**** RANDOM SELECTION ****
+*************************/
+/**
+ * Stop the highlight/unhighlight timer and reset the marker to its original state
+ */
+function stopHighlightTimer() {
+    if (timerMarker._icon.classList.contains("highlight")) {
+        timerMarker._icon.classList.remove("highlight");
+    }
+    timerMarker.options.zIndexOffset = oldZOffset;
+    
+    clearInterval(timerId);
+    timerId = null;
+    timerMarker = null;
+    oldZOffset = null;
+
+}
+
+/**
+ * Listener to handle when the button to choose a random selected restaurant is pressed
+ */
+document.getElementById("random-button").addEventListener("click", function() {
+    // If a restaurant is already randomly selected, stop its timer and reset its values
+    if (timerId) {
+        stopHighlightTimer();
+    }
+    
+    // Build list of all restaurants currently selected (AKA passing all filters)
+    let selections = [];
+    let table = document.getElementById("sidebar-table-body");
+    for (let row of table.rows) {
+        // Check the checkbox in the "Hide?" column to see if the restaurant is selected
+        let name = row.cells[0].innerText;
+        let isSelected = row.cells[row.cells.length - 1].children[0].checked;
+        if (isSelected) {
+            selections.push(name);
+        }
+    }
+
+    // Select and display the random selected restaurant
+    let rand = selections[Math.floor(Math.random() * selections.length)]
+    let outputBox = document.getElementById("random-selection");
+    outputBox.value = rand;
+
+    // Bring the marker to the front
+    let marker = markers[normalizeName(rand)];
+    oldZOffset = marker.options.zIndexOffset;
+    marker.options.zIndexOffset = 1000;    
+    
+    // Add timer to alternate between original marker color and highlight
+    timerMarker = marker;
+    marker._icon.classList.add("highlight");
+    timerId = setInterval(() => {
+        if (timerMarker._icon.classList.contains("highlight")) {
+            timerMarker._icon.classList.remove("highlight");
+        }
+        else {
+            timerMarker._icon.classList.add("highlight");
+        }
+    }, 1000);
+});

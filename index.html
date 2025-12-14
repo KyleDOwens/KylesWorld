@@ -31,7 +31,7 @@
                     <button id="filter-dropdown-button">▼</button>
                 </div>
 
-                <div id="filter-dropdown">
+                <div id="filter-dropdown" style="display:none;">
                     <div id="distance-filter">
                         <button id="distance-filter-add-button">Add Isochrone</button><br>
                         <button id="distance-filter-remove-button">Remove Isochrone</button><br>
@@ -67,6 +67,10 @@
 
             <!-- Export Sharable URL -->
             <button id="export-button">Share Selections</button>
+
+            <!-- Choose random restaurant from selected -->
+            <button id="random-button">Choose Random: </button>
+            <input type="text" id="random-selection" readonly>
 
             <!-- Restaurant Table -->
             <table id="sidebar-table">

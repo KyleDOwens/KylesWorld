@@ -21,42 +21,141 @@
                     <span id="window-title">Kyle's Corner</span>
                 </div>
                 <div id="window-controls">
-                    <button class="window-button" id="minimize"></button>
-                    <button class="window-button" id="maximize"></button>
-                    <button class="window-button" id="close"></button>
+                    <button class="square-button window-button" id="minimize"></button>
+                    <button class="square-button window-button" id="maximize"></button>
+                    <button class="square-button window-button" id="close"></button>
                 </div>
             </div>
 
-            <!-- Tool bar -->
-            <nav id="tool-bar"></nav>
+            <!-- Menu bar -->
+            <nav id="menu-bar">
+                <button class="menu-button"><u>F</u>ile</button>
+                <button class="menu-button"><u>E</u>dit</button>
+                <button class="menu-button"><u>V</u>iew</button>
+                <button class="menu-button"><u>I</u>nsert</button>
+                <button class="menu-button"><u>F</u>ormat</button>
+                <button class="menu-button"><u>T</u>ools</button>
+                <button class="menu-button"><u>D</u>ata</button>
+                <button class="menu-button"><u>W</u>indow</button>
+                <button class="menu-button"><u>H</u>elp</button>
+            </nav>
 
-            <!-- Icon bar -->
-            <nav id="icon-bar"#></nav>
+            <!-- Text bar -->
+            <nav id="text-bar"#>
+                <div class="horizontal-group dropdown-input">
+                    <input type="text" id="font-input" value="Arial">
+                    <button class="square-button down-button"></button>
+                </div>
+                
+                <div class="horizontal-group dropdown-input">
+                    <input type="text" id="font-size-input" value="10">
+                    <button class="square-button down-button"></button>
+                </div>
+
+                <div class="horizontal-group">
+                    <button class="square-button" id="bold-button"><b>B</b></button>
+                    <button class="square-button" id="italic-button"><i>I</i></button>
+                    <button class="square-button" id="underline-button"><u>U</u></button>
+                </div>
+
+                <div class="horizontal-group">
+                    <button class="square-button align-button" id="left-align-button"></button>
+                    <button class="square-button align-button" id="center-align-button"></button>
+                    <button class="square-button align-button" id="right-align-button"></button>
+                </div>
+
+            </nav>
+
+            <!-- Cell bar -->
+            <nav id="cell-bar"#>
+                <div class="horizontal-group dropdown-input">
+                    <input type="text" id="current-cell-input" value="<current sheet>: homepage">
+                    <button class="square-button down-button"></button>
+                </div>
+                <input type="text" id="blank-input">
+                <input type="text" id="formula-input" placeholder="Insert formula...">
+                <div class="marquee-container">
+                    <div class="marquee-track" style="--item-count: 14">
+                        <div>
+                            <div class="marquee-item">welcome to my website :)</div>
+                            <div class="marquee-item">go to the 'about' page to learn more!</div>
+                            <div class="marquee-item">choose a page in the bottom left!</div>
+                            <div class="marquee-item">scroll around!</div>
+                            <div class="marquee-item">this isnt a real spreadsheet, sorry :(</div>
+                            <div class="marquee-item">made with love <3</div>
+                            <div class="marquee-item">i've got a mean cookie recipe</div>
+                            <div class="marquee-item">go make a personal website!</div>
+                            <div class="marquee-item">more coming soon™</div>
+                            <div class="marquee-item">the spreadsheet is larger than you think…</div>
+                            <div class="marquee-item">so, you like music?</div>
+                            <div class="marquee-item">i wonder if there are any secrets here…</div>
+                            <div class="marquee-item">mobile users cant see this</div>
+                            <div class="marquee-item">♪♬♪♬♪♬</div>
+                            <div class="marquee-item">☉ ‿ ☉</div>
+                            <div class="marquee-item">aaaaaaaaa</div>
+                        </div>
+                        <!-- Duplicate to make the loop seamless -->
+                        <div>
+                            <div class="marquee-item">welcome to my website :)</div>
+                            <div class="marquee-item">go to the 'about' page to learn more!</div>
+                            <div class="marquee-item">choose a page in the bottom left!</div>
+                            <div class="marquee-item">scroll around!</div>
+                            <div class="marquee-item">this isnt a real spreadsheet, sorry :(</div>
+                            <div class="marquee-item">made with love <3</div>
+                            <div class="marquee-item">i've got a mean cookie recipe</div>
+                            <div class="marquee-item">go make a personal website!</div>
+                            <div class="marquee-item">more coming soon™</div>
+                            <div class="marquee-item">the spreadsheet is larger than you think…</div>
+                            <div class="marquee-item">so, you like music?</div>
+                            <div class="marquee-item">i wonder if there are any secrets here…</div>
+                            <div class="marquee-item">mobile users cant see this</div>
+                            <div class="marquee-item">♪♬♪♬♪♬</div>
+                            <div class="marquee-item">☉ ‿ ☉</div>
+                            <div class="marquee-item">aaaaaaaaa</div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </header>
 
         <main>
-            <table id="sheet"></table>
+            <div id="sheet-container">
+                <table id="sheet"></table>
+            </div>
+            
+            <div id="vertical-scrollbar">
+                <button class="square-button up-button" id="up-scroll-button"></button>
+                <div class="scroll-track" id="vertical-scroll-track">
+                    <div class="scroll-thumb" id="vertical-scroll-thumb"></div>
+                </div>
+                <button class="square-button down-button" id="down-scroll-button"></button>
+            </div>
         </main>
 
         <footer>
             <div id="sheets-and-scrollbar">
+                <button class="square-button left-button" id="first-sheet-button"></button>
+                <button class="square-button left-button" id="previous-sheet-button"></button>
+                <button class="square-button right-button" id="next-sheet-button"></button>
+                <button class="square-button right-button" id="last-sheet-button"></button>
                 <nav id="sheet-tabs">
-                    <div class="sheet-tab" id="sheet-tab-1"><a href="#">home</a></div>
-                    <div class="sheet-tab" id="sheet-tab-2"><a href="#">music</a></div>
-                    <div class="sheet-tab" id="sheet-tab-3"><a href="#">food list</a></div>
-                    <div class="sheet-tab" id="sheet-tab-4"><a href="#">recipies</a></div>
-                    <div class="sheet-tab" id="sheet-tab-5"><a href="#">about</a></div>
-                    <!-- <div><a href="#">vinyls</a></div> -->
-                    <!-- <div><a href="#">fiber arts</a></div> -->
-                    <!-- <div><a href="#">ceramics</a></div> -->
-                    <!-- <div><a href="#">travel</a></div> -->
+                    <div class="sheet-tab active-tab"><a href="#" data-title="homepage">homepage</a></div>
+                    <div class="sheet-tab"><a href="#" data-title="about">about</a></div>
+                    <div class="sheet-tab"><a href="#" data-title="music">music</a></div>
+                    <div class="sheet-tab"><a href="#" data-title="restaurants">restaurants</a></div>
+                    <div class="sheet-tab"><a href="#" data-title="recipies">recipies</a></div>
+                    <div class="sheet-tab"><a href="#" data-title="vinyls">vinyls</a></div>
+                    <div class="sheet-tab"><a href="#" data-title="travel">travel</a></div>
+                    <div class="sheet-tab"><a href="#" data-title="fiber_arts">fiber_arts</a></div>
+                    <div class="sheet-tab"><a href="#" data-title="ceramics">ceramics</a></div>
                 </nav>
                 <div id="horizontal-scrollbar">
-                    <button class="scroll-button" id="left-scroll-button"></button>
-                    <div id="scroll-track">
-                        <div id="scroll-thumb"></div>
+                    <button class="square-button left-button" id="left-scroll-button"></button>
+                    <div class="scroll-track" id="horizontal-scroll-track">
+                        <div class="scroll-thumb" id="horizontal-scroll-thumb"></div>
                     </div>
-                    <button class="scroll-button" id="right-scroll-button"></button>
+                    <button class="square-button right-button" id="right-scroll-button"></button>
+                    <button class="square-button" disabled></button>
                 </div>
             </div>
 

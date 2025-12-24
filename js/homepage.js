@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     initializeSheet();
-    resizeScrollThumb();
+    resizeHorizontalScrollThumb();
+    resizeVerticalScrollThumb();
+    shortenTabTitles();
+    applyTabZIndex();
+    updateTabDisplay();
 });
 
 function initializeSheet() {
@@ -24,94 +28,161 @@ function initializeSheet() {
 }
 
 
-/*************************
-**** CUSTOM SCROLLBAR ****
-*************************/
+/**************************
+**** CUSTOM SCROLLBARS ****
+**************************/
 // Scrollbar resizing
-function resizeScrollThumb() {
-    let sheet_container = document.querySelector("main");
-    let scrollTrack = document.getElementById("scroll-track");
-    let scrollThumb = document.getElementById("scroll-thumb");
+function resizeHorizontalScrollThumb() {
+    let sheet_container = document.getElementById("sheet-container");
+    let scrollTrack = document.getElementById("horizontal-scroll-track");
+    let scrollThumb = document.getElementById("horizontal-scroll-thumb");
 
     // Update how wide the scroll thumb should be
     let ratio = sheet_container.clientWidth / sheet_container.scrollWidth;
     scrollThumb.style.width = `${ratio * scrollTrack.clientWidth}px`;
     scrollThumb.style.left = `${0}px`;
+}
+function resizeVerticalScrollThumb() {
+    let sheet_container = document.getElementById("sheet-container");
+    let scrollTrack = document.getElementById("vertical-scroll-track");
+    let scrollThumb = document.getElementById("vertical-scroll-thumb");
 
-    // Update where the scroll thumb should start
+    // Update how wide the scroll thumb should be
+    let ratio = sheet_container.clientHeight / sheet_container.scrollHeight;
+    scrollThumb.style.height = `${ratio * scrollTrack.clientHeight}px`;
+    scrollThumb.style.top = `${0}px`;
 }
 
-window.addEventListener("resize", resizeScrollThumb);
-
+window.addEventListener("resize", () => {
+    resizeHorizontalScrollThumb();
+    resizeVerticalScrollThumb();
+});
 
 // Scrollbar scrolling
-let isDragging = false;
-let startMouseX = null;
-let startScrollX = null;
+let isHorizontalDragging = false;
+let isVerticalDragging = false;
+let startMousePos = null;
+let startScrollPos = null;
 
-function updateScrollbarPosition(currentMouseX) {
-    let scrollTrack = document.getElementById("scroll-track");
-    let scrollThumb = document.getElementById("scroll-thumb");
+function updateHorizontalScrollbarPosition(currentMouseX) {
+    let scrollTrack = document.getElementById("horizontal-scroll-track");
+    let scrollThumb = document.getElementById("horizontal-scroll-thumb");
     
-    let xDiff = currentMouseX - startMouseX;
+    let xDiff = currentMouseX - startMousePos;
     
-    let newLeft = startScrollX + xDiff;
+    let newLeft = startScrollPos + xDiff;
     newLeft = Math.max(newLeft, 0);
     newLeft = Math.min(newLeft, scrollTrack.clientWidth - parseInt(scrollThumb.style.width, 10));
     scrollThumb.style.left = `${newLeft}px`;
 }
-
-function updateSheetPosition() {
-    let scrollTrack = document.getElementById("scroll-track");
-    let scrollThumb = document.getElementById("scroll-thumb");
-    let sheet_container = document.querySelector("main");
-
-    // Get how far scrolled the scrollbar is
-    let scrollbarRatio = parseInt(scrollThumb.style.left, 10) / scrollTrack.clientWidth;
-
-    // Set sheet left to match the same ratio
-    sheet_container.scrollLeft = scrollbarRatio * (sheet_container.scrollWidth);
+function updateVerticalScrollbarPosition(currentMouseY) {
+    let scrollTrack = document.getElementById("vertical-scroll-track");
+    let scrollThumb = document.getElementById("vertical-scroll-thumb");
+    
+    let yDiff = currentMouseY - startMousePos;
+    
+    let newTop = startScrollPos + yDiff;
+    newTop = Math.max(newTop, 0);
+    newTop = Math.min(newTop, scrollTrack.clientHeight - parseInt(scrollThumb.style.height, 10));
+    scrollThumb.style.top = `${newTop}px`;
 }
 
-function handleThumbDrag(e) {
-    if (!isDragging) {
+function updateSheetPosition() {
+    let horizontalScrollTrack = document.getElementById("horizontal-scroll-track");
+    let horizontalScrollThumb = document.getElementById("horizontal-scroll-thumb");
+    let verticalScrollTrack = document.getElementById("vertical-scroll-track");
+    let verticalScrollThumb = document.getElementById("vertical-scroll-thumb");
+    let sheet_container = document.getElementById("sheet-container");
+
+    // Get how far scrolled the scrollbars are
+    let horizontalScrollbarRatio = parseInt(horizontalScrollThumb.style.left, 10) / horizontalScrollTrack.clientWidth;
+    let verticalScrollbarRatio = parseInt(verticalScrollThumb.style.top, 10) / verticalScrollTrack.clientHeight;
+
+    // Set sheet left to match the same ratios
+    sheet_container.scrollLeft = horizontalScrollbarRatio * sheet_container.scrollWidth;
+    sheet_container.scrollTop = verticalScrollbarRatio * sheet_container.scrollHeight;
+}
+function updateScrollPosition() {
+    let horizontalScrollTrack = document.getElementById("horizontal-scroll-track");
+    let horizontalScrollThumb = document.getElementById("horizontal-scroll-thumb");
+    let verticalScrollTrack = document.getElementById("vertical-scroll-track");
+    let verticalScrollThumb = document.getElementById("vertical-scroll-thumb");
+    let sheet_container = document.getElementById("sheet-container");
+
+    // Get how far scrolled the sheet is
+    let horizontalSheetRatio = sheet_container.scrollLeft / sheet_container.scrollWidth;
+    let verticalSheetRatio = sheet_container.scrollTop / sheet_container.scrollHeight;
+
+    // Set sheet left to match the same ratios
+    horizontalScrollThumb.style.left = `${horizontalSheetRatio * horizontalScrollTrack.scrollWidth}px`;
+    verticalScrollThumb.style.top = `${verticalSheetRatio * verticalScrollTrack.scrollHeight}px`;
+}
+
+function handleHorizontalThumbDrag(e) {
+    if (!isHorizontalDragging) {
         return;
     }
 
     let currentMouseX = e.x;
+    updateHorizontalScrollbarPosition(currentMouseX);
+    updateSheetPosition();
+}
+function handleVerticalThumbDrag(e) {
+    if (!isVerticalDragging) {
+        return;
+    }
 
-    updateScrollbarPosition(currentMouseX);
+    let currentMouseY = e.y;
+    updateVerticalScrollbarPosition(currentMouseY);
     updateSheetPosition();
 }
 
-document.getElementById("scroll-thumb").addEventListener("mousedown", (e) => {
-    isDragging = true;
-    startMouseX = e.pageX;
-    startScrollX = parseInt(document.getElementById("scroll-thumb").style.left, 10);
+document.getElementById("horizontal-scroll-thumb").addEventListener("mousedown", (e) => {
+    isHorizontalDragging = true;
+    startMousePos = e.pageX;
+    startScrollPos = parseInt(document.getElementById("horizontal-scroll-thumb").style.left, 10);
+    document.body.style.userSelect = "none";
+});
+document.getElementById("vertical-scroll-thumb").addEventListener("mousedown", (e) => {
+    isVerticalDragging = true;
+    startMousePos = e.pageY;
+    startScrollPos = parseInt(document.getElementById("vertical-scroll-thumb").style.top, 10);
     document.body.style.userSelect = "none";
 });
 window.addEventListener("mouseup", (e) => {
-    isDragging = false;
-    startMouseX = null;
-    startScrollX = null;
     document.body.style.userSelect = "auto";
+    isHorizontalDragging = false;
+    isVerticalDragging = false;
+    startMousePos = null;
+    startScrollPos = null;
 });
 window.addEventListener("mousemove", (e) => {
-    if (startMouseX != null && startScrollX != null) {
-        handleThumbDrag(e);
+    if (isHorizontalDragging && startMousePos != null && startScrollPos != null) {
+        handleHorizontalThumbDrag(e);
+    }
+    if (isVerticalDragging && startMousePos != null && startScrollPos != null) {
+        handleVerticalThumbDrag(e);
     }
 });
 
 
-// Scrolbar buttons
+document.getElementById("sheet-container").addEventListener("scroll", () => {
+    updateScrollPosition();
+})
+
+
+
+/**************************
+**** SCROLLBAR BUTTONS ****
+**************************/
 let isHolding = true;
 let scrollTimerId = null;
 
-function handleScrollButton(sign, holding = false) {
-    let scrollTrack = document.getElementById("scroll-track");
-    let scrollThumb = document.getElementById("scroll-thumb");
+function handleHorizontalScrollButton(sign, holding = false) {
+    let scrollTrack = document.getElementById("horizontal-scroll-track");
+    let scrollThumb = document.getElementById("horizontal-scroll-thumb");
 
-    let scrollX = parseInt(document.getElementById("scroll-thumb").style.left, 10);
+    let scrollX = parseInt(document.getElementById("horizontal-scroll-thumb").style.left, 10);
     let fiftieth = scrollTrack.clientWidth / 50;
 
     let scale = holding ? 0.15 : 1;
@@ -120,42 +191,87 @@ function handleScrollButton(sign, holding = false) {
     let newLeft = scrollX + sign * (scale * fiftieth);
     newLeft = Math.max(newLeft, 0);
     newLeft = Math.min(newLeft, scrollTrack.clientWidth - parseInt(scrollThumb.style.width, 10));
+    newLeft = (sign == -1) ? Math.floor(newLeft) : Math.ceil(newLeft);
     scrollThumb.style.left = `${newLeft}px`;
     updateSheetPosition();
 }
+function handleVerticalScrollButton(sign, holding = false) {
+    let scrollTrack = document.getElementById("vertical-scroll-track");
+    let scrollThumb = document.getElementById("vertical-scroll-thumb");
 
-function handleHoldScroll(sign) {
+    let scrollY = parseInt(document.getElementById("vertical-scroll-thumb").style.top, 10);
+    let fiftieth = scrollTrack.clientHeight / 50;
+
+    let scale = holding ? 0.15 : 1;
+    // scale *= (sign == -1) ? 0.75 : 1;
+
+    let newTop = scrollY + sign * (scale * fiftieth);
+    newTop = Math.max(newTop, 0);
+    newTop = Math.min(newTop, scrollTrack.clientHeight - parseInt(scrollThumb.style.height, 10));
+    newTop = (sign == -1) ? Math.floor(newTop) : Math.ceil(newTop);
+    scrollThumb.style.top = `${newTop}px`;
+    updateSheetPosition();
+}
+
+function handleHoldHorizontalScroll(sign) {
     if (!isHolding) {
         return;
     }
 
     if (!scrollTimerId) {
         scrollTimerId = setInterval(() => {
-            handleScrollButton(sign, true);
+            console.log("a")
+            handleHorizontalScrollButton(sign, true);
+        }, 5);
+    }
+}
+function handleHoldVerticalScroll(sign) {
+    if (!isHolding) {
+        return;
+    }
+
+    if (!scrollTimerId) {
+        scrollTimerId = setInterval(() => {
+            console.log("a")
+            handleVerticalScrollButton(sign, true);
         }, 5);
     }
 }
 
 document.getElementById("left-scroll-button").addEventListener("mousedown", () => {
     isHolding = true;
-    counter = 0;
-    delme = Date.now();
 
     // Do an initial scroll, then delay, then continuously scroll
-    handleScrollButton(-1);
+    handleHorizontalScrollButton(-1);
     setTimeout(() => {
-        handleHoldScroll(-1);
+        handleHoldHorizontalScroll(-1);
     }, 300);
 });
 document.getElementById("right-scroll-button").addEventListener("mousedown", () => {
     isHolding = true;
-    counter = 0;
-    delme = Date.now();
 
     // Do an initial scroll, then delay, then continuously scroll
-    handleScrollButton(1);
+    handleHorizontalScrollButton(1);
     setTimeout(() => {
-        handleHoldScroll(1);
+        handleHoldHorizontalScroll(1);
+    }, 300);
+});
+document.getElementById("up-scroll-button").addEventListener("mousedown", () => {
+    isHolding = true;
+
+    // Do an initial scroll, then delay, then continuously scroll
+    handleVerticalScrollButton(-1);
+    setTimeout(() => {
+        handleHoldVerticalScroll(-1);
+    }, 300);
+});
+document.getElementById("down-scroll-button").addEventListener("mousedown", () => {
+    isHolding = true;
+
+    // Do an initial scroll, then delay, then continuously scroll
+    handleVerticalScrollButton(1);
+    setTimeout(() => {
+        handleHoldVerticalScroll(1);
     }, 300);
 });
 
@@ -165,4 +281,103 @@ document.addEventListener("mouseup", () => {
         clearInterval(scrollTimerId);
         scrollTimerId = null;
     }
+});
+
+
+
+/*******************
+**** SHEET TABS ****
+*******************/
+/* Loading/Clicking tabs */
+function shortenTabTitles() {
+    let sheetTabs = document.querySelectorAll(".sheet-tab");
+    for (let tab of sheetTabs) {
+        // Get width of body part of tab
+        let tabWidth = tab.clientWidth;
+
+        // Get width of title text in tab
+        let anchor = tab.querySelector("a");
+        let titleWidth = tab.scrollWidth;
+        let pxPerChar = titleWidth / anchor.innerText.length; // ok since using monospaced font
+
+        // Remove the ellipsis in case there is more space now
+
+        // Crude way to limit overflow - limit sheet length to 8 characters
+        if (anchor.innerText.length > 8) {
+            console.l
+            anchor.innerText = anchor.innerText.slice(0, 7) + "…";
+        }
+        
+        // If overflowing, continuously shorten and replace last char with …
+        // let ellipsisIndex = -2;
+        // while (titleWidth > tabWidth) {
+        //     anchor.innerText = anchor.innerText.slice(0, -1);
+        //     titleWidth -= pxPerChar;
+
+        //     ellipsisIndex--;
+
+        //     if (ellipsisIndex < -16) {
+        //         break;
+        //     }
+        // }
+
+        // if (ellipsisIndex != -2) {
+        //     anchor.innerText = anchor.innerText.slice(0, -3) + "…";
+        // }
+    }
+}
+window.addEventListener("resize", () => {
+    shortenTabTitles();
+});
+
+function applyTabZIndex() {
+    let sheetTabs = document.querySelectorAll(".sheet-tab");
+    sheetTabs.forEach((tab, i) => {
+        tab.style.zIndex = sheetTabs.length - i + 1;
+    })
+}
+
+function makeActiveTab(activeTab) {
+    let sheetTabs = document.querySelectorAll(".sheet-tab");
+    sheetTabs.forEach((tab, i) => {
+        tab.classList.remove("active-tab");
+        tab.style.zIndex = sheetTabs.length - i + 1;
+    })
+    activeTab.classList.add("active-tab");
+    activeTab.style.zIndex = 10;
+}
+document.querySelectorAll(".sheet-tab").forEach(tab => tab.addEventListener("click", function() {
+    makeActiveTab(tab);
+}));
+
+
+/* Tab display buttons */
+let firstTabDisplayedIndex = 0;
+function updateTabDisplay() {
+    console.log(firstTabDisplayedIndex);
+    document.querySelectorAll(".sheet-tab").forEach((tab, i) => {
+        if (i >= firstTabDisplayedIndex && i < firstTabDisplayedIndex + 5) {
+            tab.classList.remove("hidden");
+        }
+        else {
+            tab.classList.add("hidden");
+        }
+    });
+}
+
+document.getElementById("first-sheet-button").addEventListener("click", () => {
+    firstTabDisplayedIndex = 0;
+    updateTabDisplay();
+});
+document.getElementById("previous-sheet-button").addEventListener("click", () => {
+    firstTabDisplayedIndex = Math.max(0, --firstTabDisplayedIndex);
+    updateTabDisplay();
+});
+document.getElementById("next-sheet-button").addEventListener("click", () => {
+    firstTabDisplayedIndex = Math.min(document.querySelectorAll(".sheet-tab").length - 5, ++firstTabDisplayedIndex);
+    updateTabDisplay();
+});
+document.getElementById("last-sheet-button").addEventListener("click", () => {
+    firstTabDisplayedIndex = document.querySelectorAll(".sheet-tab").length - 5;
+    updateTabDisplay();
 });

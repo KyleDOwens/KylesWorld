@@ -30,10 +30,101 @@ body {
     height: 90vh;
     width: 70vw;
 
-    aspect-ratio: 7 / 5; /* TODO */
+    /* height: 70vh; */
+
+    /* TODO */
+    /* aspect-ratio: 7 / 5; */
 
     display: grid;
     grid-template-rows: auto 1fr auto;
+
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/*- ================================================ -->
+<--                  GENERIC BUTTONS                 -->
+<-- ================================================ -*/
+.square-button {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+
+    background-color: #c0c0c0;
+
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    border-style: outset; 
+
+    cursor: pointer;
+    position: relative;
+}
+.square-button:active, .square-button:disabled {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+.square-button:disabled {
+    cursor: auto;
+}
+
+.left-button::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+
+    width: 0;
+    height: 0;
+
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 8px solid black;
+}
+.right-button::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 4px;
+
+    width: 0;
+    height: 0;
+
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid black;
+}
+.up-button::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 2px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid black;
+}
+.down-button::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 2px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid black;
 }
 
 
@@ -48,9 +139,15 @@ body {
     height: 2rem;
     padding: 10px;
 
+    border-style: outset; 
     background: linear-gradient(to bottom, green, lightgreen);
 
-    color: white;
+    background: linear-gradient(to bottom, blue, cornflowerblue);
+    color:#f0f0f0;
+    
+    /* background: #000128;
+    color: white; */
+
     font-size: 18pt;
 }
 
@@ -72,24 +169,6 @@ header #title-bar #window-controls {
     width: 20px;
     height: 20px;
     padding: 0;
-
-    cursor: pointer;
-    
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-
-    background: #c0c0c0;
-
-    position: relative;
-}
-
-.window-button:active {
-    border-top: 2px solid #404040;
-    border-left: 2px solid #404040;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
 }
 
 /* Draw minimize button */
@@ -99,7 +178,7 @@ header #title-bar #window-controls {
     display: block;
     width: 70%;
     height: 15%;
-    background: black;
+    background-color: black;
 
     margin: 50% auto 0;
 }
@@ -121,7 +200,7 @@ header #title-bar #window-controls {
     left: 35%;
 }
 .window-button#maximize::after { /* bottom left box*/
-    background: #c0c0c0;
+    background-color: #c0c0c0;
     top: 35%;
     left: 15%;
 }
@@ -133,7 +212,7 @@ header #title-bar #window-controls {
 
     width: 70%;
     height: 15%;
-    background: black;
+    background-color: black;
     
     position: absolute;
     top: 45%;
@@ -148,103 +227,230 @@ header #title-bar #window-controls {
 
 
 /*- ================================================ -->
-<--                    TOOL BAR                      -->
+<--                    MENU BAR                      -->
 <-- ================================================ -*/
-#tool-bar {
-    background-color: #b0b0b0;
+#menu-bar {
+    background-color: #c0c0c0;
+    min-height: 20px;
+    padding-left: 0rem;
+}
+
+.menu-button {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+}
+.menu-button:hover {
+    background-color: #d0d0d0;
+}
+.menu-button:active {
+    background-color: #a0a0a0;
 }
 
 /*- ================================================ -->
-<--                    ICON BAR                      -->
+<--                    TEXT BAR                      -->
 <-- ================================================ -*/
-#icon-bar {
-    background-color: #a0a0a0;
+#text-bar {
+    background-color: #b0b0b0;
+    min-height: 18px;
+
+    display: flex;
+    padding-left: 0.5rem;
+    gap: 1rem;
 }
+
+.horizontal-group {
+    display: flex;
+}
+
+.dropdown-input {
+    text-align: center;
+    
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #404040;
+}
+#font-input {
+    width: 12rem;
+}
+#font-size-input {
+    width: 3rem;
+}
+
+
+.align-button::before {
+    content: "";
+
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+
+    width: 75%;
+    height: 2px;
+
+    background-color: black;
+
+    box-shadow: 0 8px black;
+}
+
+#left-align-button::after {
+    content: "";
+
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+
+    width: 50%;
+    height: 2px;
+
+    background-color: black;
+
+    box-shadow: 0 4px black;
+}
+#center-align-button::after {
+    content: "";
+
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+
+    width: 75%;
+    height: 2px;
+
+    background-color: black;
+
+    box-shadow: 0 4px black;
+}
+#right-align-button::after {
+    content: "";
+
+    position: absolute;
+    top: 12.5%;
+    left: 27.5%;
+
+    width: 50%;
+    height: 2px;
+
+    background-color: black;
+
+    box-shadow: 0 4px black;
+}
+
+
+/*- ================================================ -->
+<--                    CELL BAR                      -->
+<-- ================================================ -*/
+#cell-bar {
+    background-color: #a0a0a0;
+    min-height: 20px;
+
+    display: flex;
+}
+
+#current-cell-input {
+    text-align: center;
+    pointer-events: none;
+}
+
+#blank-input {
+    width: 2rem;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    pointer-events: none;
+}
+
+
+
+.marquee-container {
+    flex: 0.95;
+    border: outset;
+    background-color: #ffffff;
+
+    display: flex;
+
+    overflow: hidden;
+    position: relative;
+}
+.marquee-track {
+    display: flex;
+    width: max-content;
+
+    position: absolute;
+    overflow: hidden;
+
+    animation: marquee calc(3s * var(--item-count) * 2) linear infinite;
+}
+.marquee-item {
+    white-space: pre;
+    float: left;
+    width: max-content;
+    padding-right: 75px;
+}
+.marquee:hover div {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+@keyframes marquee {
+    from { transform: translateX(0) }
+    to { transform: translateX(-50%) }
+}
+
+/* .marquee-container:hover div {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+} */
+
 
 /*- ================================================ -->
 <--                      SHEET                       -->
 <-- ================================================ -*/
 main {
     overflow-x: hidden;
-    overflow-y: scroll;
-    background-color: #c0c0c0;
+    overflow-y: hidden;
+    display: flex;
 }
 
-#sheet {
-    max-width: 100px;
+#sheet-container {
+    background-color: #f8f8f8;
+    overflow-x: scroll;
+    overflow-y: scroll;
+
+    width: 100%
+}
+#sheet-container::-webkit-scrollbar {
+    display: none;
 }
 
 /* Table structure */
 table {
     border-collapse: collapse;
+    width: 100%;
+    height: 100%;
 }
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid #d6d6d6;
 }
 
 /* Headers */
 th, thead {
-    background-color: #a0a0a0;
+    background-color: #c0c0c0;
+    border: 1px solid #2C2C2C;
+    height: 20px;
+    min-height: 20px;
 }
 .vertical-header {
-    padding: 0 5px;
+    width:32px;
+    min-width:32px;
+    border: 1px solid #2C2C2C;
 }
 
 /* Cells */
 td {
     width: 64px;
     min-width: 64px;
+
     height: 20px;
     min-height: 20px;
-}
-
-/* Scrollbar */
-main::-webkit-scrollbar {
-    width: 16px;
-}
-main::-webkit-scrollbar-button {
-    background: #c0c0c0;
-
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-
-    cursor: pointer;
-    position: relative;
-}
-main::-webkit-scrollbar-button:active {
-    border-top: 2px solid #404040;
-    border-left: 2px solid #404040;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
-}
-
-main::-webkit-scrollbar-button:vertical:decrement {
-    background-color: gold;
-}
-main::-webkit-scrollbar-button:vertical:increment {
-    background-color: orange;
-}
-
-main::-webkit-scrollbar-track {
-    width: 16px;
-    background: #e0e0e0;
-
-    border-top: 2px solid #808080;
-    border-left: 2px solid #808080;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
-}
-main::-webkit-scrollbar-thumb {
-    background: #c0c0c0;
-
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-
-    cursor: pointer;
 }
 
 
@@ -252,18 +458,34 @@ main::-webkit-scrollbar-thumb {
 <--                     FOOTER                       -->
 <-- ================================================ -*/
 footer {
-    background-color: lightgreen;
+    background: linear-gradient(to bottom, blue, cornflowerblue);
+}
+
+#first-sheet-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    inset: 2px;
+    border-left: 2px solid black;
+}
+#last-sheet-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    inset: 2px;
+    border-right: 2px solid black;
 }
 
 #sheets-and-scrollbar {
     display: flex;
-    align-items: center;
     overflow: hidden;
     scrollbar-width: none;
     
-    height: 26px;
-
-    border-top: 2px solid #808080;
+    /* border-top: 2px solid #808080; */
 }
 #sheets-and-scrollbar::-webkit-scrollbar {
     display: none;
@@ -272,53 +494,90 @@ footer {
 /* Sheet tabs */
 nav#sheet-tabs {
     display: flex;
-    align-items: center;
-
-    white-space: nowrap;
-
     flex: 0 0 auto;
 
-    background-color: red;
+    margin-right: 6px;
+    white-space: nowrap;
 
     position: relative;
 }
 
 .sheet-tab {
-    padding: 0 0.5rem;
-
     width: 80px;
-
+    padding-bottom: 3px;
+    
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     font-size: 12pt;
     cursor: pointer;
 
-    background-color: lime;
-    
-    border: 1px solid black;
+    background-color: black; /* Border for the tabs! */
+
+    position: relative;
+    margin-right: -6px;
 
     clip-path: polygon(0% 0%, 100% 0%, 92.5% 100%, 7.5% 100%);
 }
+.sheet-tab::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: -2;
+
+    background-color: #c0c0c0; /* Tab background color! */
+
+    clip-path: polygon(0% 0%, 100% 0%, 92.5% 100%, 7.5% 100%);
 
 
-/* Custom scrollbar */
+    pointer-events: none;
+}
+.sheet-tab:hover::after {
+    background-color: #a0a0a0;
+    background-color: #dcdcdc;
+}
+
+.active-tab.sheet-tab::after {
+    background-color: #f8f8f8; /* Tab background color! */
+    margin-top: -1px;
+}
+
+nav#sheet-tabs a {
+    text-decoration: none;
+}
+
+/*- ================================================ -->
+<--                CUSTOM SCROLLBARS                 -->
+<-- ================================================ -*/
 #horizontal-scrollbar {
     display: flex;
-    align-items: center;
+    flex: 1;
+}
+#vertical-scrollbar {
+    display: flex;
+    flex-direction: column;
     flex: 1;
 }
 
-#scroll-track {
+.scroll-track {
     flex: 1;
     position: relative;
-    height: 16px;
-    background: #e0e0e0;
+    background-color: #e0e0e0;
 
     border-top: 2px solid #808080;
     border-left: 2px solid #808080;
     border-right: 2px solid #ffffff;
     border-bottom: 2px solid #ffffff;
 }
+#horizontal-scrollbar .scroll-track {
+    height: 18px;
+}
+#vertical-scrollbar .scroll-track {
+    width: 18px;
+}
 
-#scroll-thumb {
+.scroll-thumb {
     position: absolute;
     top: 0;
     left: 0;
@@ -326,7 +585,7 @@ nav#sheet-tabs {
     height: 100%;
     width: 60px;
 
-    background: #c0c0c0;
+    background-color: #c0c0c0;
 
     border-top: 2px solid #ffffff;
     border-left: 2px solid #ffffff;
@@ -335,51 +594,12 @@ nav#sheet-tabs {
 
     cursor: pointer;
 }
-
-.scroll-button {
-    width: 18px;
-    height: 18px;
-    padding: 0;
-
-    background: #c0c0c0;
-
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-
-    cursor: pointer;
-    position: relative;
+#horizontal-scrollbar .scroll-thumb {
+    height: 100%;
+    width: 60px;
 }
-.scroll-button:active {
-    border-top: 2px solid #404040;
-    border-left: 2px solid #404040;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
+#vertical-scrollbar .scroll-thumb {
+    height: 160px;
+    width: 100%;
 }
-#left-scroll-button::before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 2px;
 
-    width: 0;
-    height: 0;
-
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-right: 8px solid black;
-}
-#right-scroll-button::before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 4px;
-
-    width: 0;
-    height: 0;
-
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 8px solid black;
-}

@@ -1,18 +1,24 @@
-# Plan
-* Website to host all hobby information
-    * Restaurant list
-    * Album list
-
-* Focus on restaurant list:
-    * Have google maps underlay
-    * Show list on a sidebar
-        * Each entry has genre, visited, notes
-        * Be able to highlight specific restaurant on map
-    * Have each item correspond to a marker on map
-    * Be able to toggle specific restaurants on map
-        * Individual or category (genre, visited, etc.)
-        * Distance from some point!!!
-
+# RESTAURANT LIST
 todo:
-* [-] Update CSS
 * [-] Reduce # of markers on map
+* [-] Redo CSS in style of homepage
+
+
+# HOMEPAGE
+## GENERAL
+* [+] Add generic window outline around everything
+
+## TEXT BAR
+* [-] Add info box somewhere in toolbar saying "Readonly file" or something similar
+
+## CELL BAR
+* [-] Allow user to select current page in the "current sheet" dropdown
+
+## SHEET
+* [?] Have user be able to select/highlight cells/rows/columns (but not write)
+    * [?] Includes navigation by arrow keys
+
+## FOOTER SHEET TABS
+* [-] Have small tab to the right/left of all tabs, indicating if there are hidden tabs in that direction
+    * [-] Always make selected tab first
+    * [-] Always keep selected tab in first position when updating display window

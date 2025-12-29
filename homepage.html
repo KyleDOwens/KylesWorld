@@ -181,11 +181,22 @@
         <!-- ================================================ --->
         <main>
             <!-- Main sheet -->
-            <div id="header-corner"></div>
-            <div id="sheet-container">
-                <table id="sheet">
-                </table>
+            <div id="corner-header"></div>
+            <div id="scroll-container">
+                <div id="sheet-canvas">
+                    <!-- Sheet "background" -->
+                    <div id="mock-grid">
+                        <div id="mock-hheader"></div>
+                        <div id="mock-vheader"></div>
+                    </div>
+
+                    <!-- Sheet overlay -->
+                    <div id="sheet-overlay">
+                        <!-- This is where each page's HTML will be injected -->
+                    </div>
+                </div>
             </div>
+            
 
             <!-- Vertical scrollbar -->
             <div id="vertical-scrollbar">

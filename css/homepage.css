@@ -52,17 +52,24 @@ body {
     color: #606060;
 }
 
-/* z-index */
 :root {
-    --zindex-sheet-h-header: 11;
-    --zindex-sheet-v-header: 8;
-    --zindex-sheet-cells: 9;
-    --zindex-dropdown: 20;
+    /* TODO: */
+    --zindex-sheet-corner-header: 4;
+    --zindex-sheet-headers: 3;
+    --zindex-sheet-embeds: 2;
+    --zindex-sheet-cells: 1;
+
+    --zindex-dropdown: 10;
+
+    --cell-height: 20px;
+    --cell-header-width: 32px;
+    --cell-width: 64px;
 }
 
 /*-- ================================================ --->
 <---                  GENERIC BUTTONS                 --->
 <--- ================================================ --*/
+/*#region BUTTONS*/
 .square-button {
     width: 18px; /* TODO: maybe make this value a constant since i use 18px measurement elsewhere in reference to this */
     height: 18px;
@@ -141,11 +148,13 @@ body {
     border-right: 5px solid transparent;
     border-top: 8px solid black;
 }
+/*#endregion BUTTONS*/
 
 
 /*-- ================================================ --->
 <---                    TITLE BAR                     --->
 <--- ================================================ --*/
+/*#region TITLEBAR*/
 #title-bar {
     display: flex;
     justify-content: space-between;
@@ -233,11 +242,13 @@ header #title-bar #window-controls {
 #close::after {
     rotate: -45deg;
 }
+/*#endregion TITLEBAR*/
 
 
 /*-- ================================================ --->
 <---                    MENU BAR                      --->
 <--- ================================================ --*/
+/*#region MENUBAR*/
 #menu-bar {
     background-color: #c0c0c0;
     min-height: 20px;
@@ -256,10 +267,13 @@ header #title-bar #window-controls {
 .menu-button:active {
     background-color: #a0a0a0;
 }
+/*#endregion MENUBAR*/
+
 
 /*-- ================================================ --->
 <---                    TEXT BAR                      --->
 <--- ================================================ --*/
+/*#region TEXTBAR*/
 #text-bar {
     background-color: #b0b0b0;
     min-height: 18px;
@@ -535,18 +549,19 @@ header #title-bar #window-controls {
 
     box-shadow: 0 4px black;
 }
+/*#endregion TEXTBAR*/
 
 
 /*-- ================================================ --->
 <---                    CELL BAR                      --->
 <--- ================================================ --*/
+/*#region CELLBAR*/
 #cell-bar {
     background-color: #a0a0a0;
     min-height: 20px;
 
     display: flex;
 }
-
 
 #blank-input {
     width: 5%;
@@ -566,11 +581,13 @@ header #title-bar #window-controls {
         display: none;
     }
 }
+/*#endregion CELLBAR*/
 
 
 /*-- ================================================ --->
 <---                     MARQUEE                      --->
 <--- ================================================ --*/
+/*#region MARQUEE*/
 .marquee-container {
     flex: 1 1 auto;
     background-color: #ffffff;
@@ -609,11 +626,13 @@ header #title-bar #window-controls {
     from { transform: translateX(0) }
     to { transform: translateX(-50%) }
 }
+/*#endregion MARQUEE*/
 
 
 /*-- ================================================ --->
 <---                      SHEET                       --->
 <--- ================================================ --*/
+/*#region SHEET*/
 main {
     overflow-x: hidden;
     overflow-y: hidden;
@@ -621,81 +640,149 @@ main {
     position: relative;
 }
 
-#sheet-container {
+#scroll-container {
     background-color: #f8f8f8;
     overflow-x: scroll;
     overflow-y: scroll;
 
     width: 100%
 }
-#sheet-container::-webkit-scrollbar {
+#scroll-container::-webkit-scrollbar {
     display: none;
 }
 
-/* Table structure */
-table {
-    border-collapse: separate;
-    border-spacing: 0;
+#sheet-canvas {
+    position: relative;
+    width: calc(32px + 64px*26);
+    height: calc(20px + 20px*99);
+}
+
+/* Mock grid headers & cells */
+#mock-grid {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-}
-#sheet {
-    border: none;
-}
-table, th, td {
-  border: 1px solid #d6d6d6;
+
+    background-image:
+        linear-gradient(#d4d4d4 1px, transparent 1px),
+        linear-gradient(90deg, #d4d4d4 1px, transparent 1px);
+    background-size: 64px 20px;
+    background-position: 31px 19px;
 }
 
-/* Headers */
-#header-corner {
+#corner-header {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 11;
+    top: 0;
+    left: 0;
+    z-index: 4;
 
     background-color: #c0c0c0;
     border: 1px solid #2C2C2C;
 
     height: 20px;
     min-height: 20px;
-
-    width:32px;
-    min-width:32px;
+    width: 32px;
+    min-width: 32px;
 }
-th, thead {
+
+#mock-hheader {
+    display: flex;
+    text-align: center;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.horizontal-header {
     position: sticky;
     top: 0;
-    z-index: 9;
+    z-index: 3;
     
     background-color: #c0c0c0;
-    border: 1px solid #2C2C2C;
-    height: 20px;
-    min-height: 20px;
-}
-.vertical-header {
-    width:32px;
-    min-width:32px;
-    border: 1px solid #2C2C2C;
+    border-top: 1px solid #2C2C2C;
+    border-bottom: 1px solid #2C2C2C;
+    border-right: 1px solid #2C2C2C;
 
-    position: sticky;
-    left: 0;
-    z-index: 8;
-}
-
-
-/* Cells */
-td {
     width: 64px;
     min-width: 64px;
-
     height: 20px;
     min-height: 20px;
 }
+#A0 {
+    margin-left: 32px;
+}
+
+#mock-vheader {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.vertical-header {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+
+    background-color: #c0c0c0;
+    border-left: 1px solid #2C2C2C;
+    border-right: 1px solid #2C2C2C;
+    border-bottom: 1px solid #2C2C2C;
+    
+    width: 32px;
+    min-width: 32px;
+    height: 20px;
+    min-height: 20px;
+}
+/*#endregion SHEET*/
+
+
+#sheet-overlay {
+    position: absolute;
+    inset: 0;
+    margin-left: 32px;
+    margin-top: 20px;
+    z-index: 2;
+}
+
+#test {
+    position: absolute;
+    left: calc(64px*2);
+    top: calc(20px*2);
+
+    width: calc(64px*4);
+    height: calc(20px*12);
+
+    background-color: red;
+    border: 10px solid green;
+}
+#test2 {
+    position: absolute;
+    left: calc(64px*4);
+    top: calc(20px*12);
+
+    width: calc(64px*4);
+    height: calc(20px*12);
+
+    background-color: blue;
+    border: 10px solid gold;
+}
+
+.embedded-window {
+    
+}
+
 
 
 /*-- ================================================ --->
 <---                     FOOTER                       --->
 <--- ================================================ --*/
+/*#region FOOTER*/
 footer {
     background: linear-gradient(to bottom, blue, cornflowerblue);
 }
@@ -785,10 +872,13 @@ nav#sheet-tabs {
 .sheet-link {
     text-decoration: none;
 }
+/*#endregion FOOTER*/
+
 
 /*-- ================================================ --->
 <---                CUSTOM SCROLLBARS                 --->
 <--- ================================================ --*/
+/*#region SCROLLBARS*/
 #horizontal-scrollbar {
     display: flex;
     flex: 1;
@@ -841,11 +931,13 @@ nav#sheet-tabs {
     height: 160px;
     width: 100%;
 }
+/*#endregion SCROLLBARS*/
 
 
 /*-- ================================================ --->
 <---                 CUSTOM DROPDOWN                  --->
 <--- ================================================ --*/
+/*#region DROPDOWN*/
 .dropdown {
     position: relative;
 }
@@ -882,3 +974,4 @@ nav#sheet-tabs {
 .dropdown-selected, .dropdown-selected:hover {
     background-color: #e0e0e0;
 }
+/*#endregion DROPDOWN*/

@@ -7,37 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     resizeHorizontalScrollThumb();
     resizeVerticalScrollThumb();
-
-    moveDivsIntoSheet();
 });
 
 function initializeSheet() {
-    let sheet = document.getElementById("sheet");
-
-    // Add column header
-    let headerRow = sheet.insertRow(-1);
-    let colHeaders = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // Add column headers
+    let mockHorizontalHeader = document.getElementById("mock-hheader");
+    let colHeaders = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (let i = 0; i < colHeaders.length; i++) {
-        headerRow.insertCell().outerHTML = `<th class="horizontal-header">${colHeaders[i]}</th>`;
+        let headerCell = document.createElement("span");
+        headerCell.classList.add("horizontal-header");
+        headerCell.id = `${colHeaders[i]}0`;
+        headerCell.innerHTML = `${colHeaders[i]}`;
+        mockHorizontalHeader.appendChild(headerCell);
     }
 
-    // Add rows
-    for (let i = 0; i < 99; i++) {
-        let newRow = sheet.insertRow(-1);
-        newRow.insertCell().outerHTML = `<th class="vertical-header">${i+1}</th>`;
-        for (let j = 0; j < colHeaders.length - 1; j++) {
-            newRow.insertCell().outerHTML = `<td id="${colHeaders[j+1]}${i+1}"></td>`;
-        }
+    // Add row headers
+    let mockVerticalHeader = document.getElementById("mock-vheader");
+    for (let i = 0; i <= 99; i++) {
+        let headerCell = document.createElement("span");
+        headerCell.classList.add("vertical-header");
+        headerCell.id = `_${i}`;
+        headerCell.innerHTML = `${i}`;
+        mockVerticalHeader.appendChild(headerCell);
     }
-}
-
-function moveDivsIntoSheet() {
-    // console.log("Movign");
-    // let test2 = document.getElementById("test2");
-
-    // let B3 = document.getElementById("B3");
-
-    // B3.appendChild(test2);
 }
 
 
@@ -46,7 +38,7 @@ function moveDivsIntoSheet() {
 **************************/
 // Scrollbar resizing
 function resizeHorizontalScrollThumb() {
-    let sheet_container = document.getElementById("sheet-container");
+    let sheet_container = document.getElementById("scroll-container");
     let scrollTrack = document.getElementById("horizontal-scroll-track");
     let scrollThumb = document.getElementById("horizontal-scroll-thumb");
 
@@ -56,7 +48,7 @@ function resizeHorizontalScrollThumb() {
     scrollThumb.style.left = `${0}px`;
 }
 function resizeVerticalScrollThumb() {
-    let sheet_container = document.getElementById("sheet-container");
+    let sheet_container = document.getElementById("scroll-container");
     let scrollTrack = document.getElementById("vertical-scroll-track");
     let scrollThumb = document.getElementById("vertical-scroll-thumb");
 
@@ -105,7 +97,7 @@ function updateSheetPosition() {
     let horizontalScrollThumb = document.getElementById("horizontal-scroll-thumb");
     let verticalScrollTrack = document.getElementById("vertical-scroll-track");
     let verticalScrollThumb = document.getElementById("vertical-scroll-thumb");
-    let sheet_container = document.getElementById("sheet-container");
+    let sheet_container = document.getElementById("scroll-container");
 
     // Get how far scrolled the scrollbars are
     let horizontalScrollbarRatio = parseInt(horizontalScrollThumb.style.left, 10) / horizontalScrollTrack.clientWidth;
@@ -120,7 +112,7 @@ function updateScrollPosition() {
     let horizontalScrollThumb = document.getElementById("horizontal-scroll-thumb");
     let verticalScrollTrack = document.getElementById("vertical-scroll-track");
     let verticalScrollThumb = document.getElementById("vertical-scroll-thumb");
-    let sheet_container = document.getElementById("sheet-container");
+    let sheet_container = document.getElementById("scroll-container");
 
     // Get how far scrolled the sheet is
     let horizontalSheetRatio = sheet_container.scrollLeft / sheet_container.scrollWidth;
@@ -179,7 +171,7 @@ window.addEventListener("mousemove", (e) => {
 });
 
 
-document.getElementById("sheet-container").addEventListener("scroll", () => {
+document.getElementById("scroll-container").addEventListener("scroll", () => {
     updateScrollPosition();
 })
 

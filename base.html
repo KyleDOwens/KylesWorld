@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyle's Corner</title>
+    <link rel="stylesheet" href="css/base.css"> <!-- STYLE -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=0.4" /> -->
+</head>
+
+<body>
+    <div id="excel-window">
+
+        <!-- ================================================ --->
+        <!--                     HEADER                       --->
+        <!-- ================================================ --->
+        <header>
+            <div class="title-bar">
+                <!-- Window title -->
+                <div class="title-left">
+                    <span>∟</span>
+                    <span>Kyle's Corner</span>
+                </div>
+
+                <!-- Window control buttons -->
+                <div class="window-controls">
+                    <button class="square-button minimize"></button>
+                    <button class="square-button maximize"></button>
+                    <button class="square-button close"></button>
+                </div>
+            </div>
+
+            <!-- Menu bar -->
+            <nav id="menu-bar">
+                <button class="menu-button"><u>F</u>ile</button>
+                <button class="menu-button"><u>E</u>dit</button>
+                <button class="menu-button"><u>V</u>iew</button>
+                <button class="menu-button"><u>I</u>nsert</button>
+                <button class="menu-button"><u>F</u>ormat</button>
+                <button class="menu-button"><u>T</u>ools</button>
+                <button class="menu-button"><u>D</u>ata</button>
+                <button class="menu-button"><u>W</u>indow</button>
+                <button class="menu-button"><u>H</u>elp</button>
+            </nav>
+
+            <!-- Text formatting bar -->
+            <nav id="text-bar" #>
+                <!-- Cut, Copy, Paste,,, Save, Undo, Redo -->
+                <div class="horizontal-group">
+                    <button class="square-button" id="save-button"></button>
+                </div>
+
+                <div class="horizontal-group">
+                    <button class="square-button unredo-button" id="undo-button"><span id="undo-hook"></span></button>
+                    <button class="square-button unredo-button" id="redo-button"></button>
+                </div>
+
+                <div class="horizontal-group">
+                    <button class="square-button clipboard-button" id="cut-button"></button>
+                    <button class="square-button clipboard-button" id="copy-button"></button>
+                    <button class="square-button clipboard-button" id="paste-button">
+                        <div id="paste-button-2"></div>
+                    </button>
+                </div>
+
+                <div class="horizontal-group dropdown-display">
+                    <input type="text" id="font-input" value="Arial">
+                    <button class="square-button down-button"></button>
+                </div>
+
+                <div class="horizontal-group dropdown-display">
+                    <input type="text" id="font-size-input" value="10">
+                    <button class="square-button down-button"></button>
+                </div>
+
+                <div class="horizontal-group">
+                    <button class="square-button font-button" id="bold-button"><b>B</b></button>
+                    <button class="square-button font-button" id="italic-button"><i>I</i></button>
+                    <button class="square-button font-button" id="underline-button"><u>U</u></button>
+                </div>
+
+                <div class="horizontal-group">
+                    <button class="square-button align-button" id="left-align-button"></button>
+                    <button class="square-button align-button" id="center-align-button"></button>
+                    <button class="square-button align-button" id="right-align-button"></button>
+                </div>
+
+                <div>
+                    <span class="faint-text">*READONLY MODE*</span>
+                </div>
+
+            </nav>
+
+            <!-- Cell info / marquee bar -->
+            <nav id="cell-bar" #>
+                <div class="dropdown">
+                    <div class="dropdown-display horizontal-group">
+                        <input type="text" autocomplete="off" readonly class="dropdown-input" id="sheet-selector-input"
+                            value="&lt;current sheet&gt;: homepage">
+                        <button class="square-button down-button" id="sheet-selector-dropdown"></button>
+                    </div>
+                    <div class="dropdown-menu hidden" id="sheet-dropdown-menu">
+                        <a class="sheet-link" href="homepage.html" data-title="homepage"><div class="dropdown-item dropdown-selected">homepage</div></a>
+                        <a class="sheet-link" href="about.html" data-title="about"><div class="dropdown-item">about</div></a>
+                        <a class="sheet-link" href="#" data-title="music"><div class="dropdown-item">music</div></a>
+                        <a class="sheet-link" href="#" data-title="restaurants"><div class="dropdown-item">restaurants</div></a>
+                        <a class="sheet-link" href="#" data-title="recipies"><div class="dropdown-item">recipies</div></a>
+                        <a class="sheet-link" href="#" data-title="vinyls"><div class="dropdown-item">vinyls</div></a>
+                        <a class="sheet-link" href="#" data-title="travel"><div class="dropdown-item">travel</div></a>
+                        <a class="sheet-link" href="#" data-title="fiber_arts"><div class="dropdown-item">fiber_arts</div></a>
+                        <a class="sheet-link" href="#" data-title="ceramics"><div class="dropdown-item">ceramics</div></a>
+                    </div>
+                </div>
+                <input type="text" id="blank-input">
+                <input type="text" id="formula-input" placeholder="Insert formula...">
+                <div class="marquee-container">
+                    <div class="marquee-track" style="--item-count: 14">
+                        <div>
+                            <div class="marquee-item">welcome to my website :)</div>
+                            <div class="marquee-item">go to the 'about' page to learn more!</div>
+                            <div class="marquee-item">choose a page in the bottom left!</div>
+                            <div class="marquee-item">scroll around!</div>
+                            <div class="marquee-item">this isnt a real spreadsheet, sorry :(</div>
+                            <div class="marquee-item">made with love &lt;3</div>
+                            <div class="marquee-item">wheee!</div>
+                            <div class="marquee-item">i've got a mean cookie recipe</div>
+                            <div class="marquee-item">go make a personal website!</div>
+                            <div class="marquee-item">the spreadsheet is larger than you think…</div>
+                            <div class="marquee-item">i wonder if there are any secrets here…</div>
+                            <div class="marquee-item">more coming soon™</div>
+                            <div class="marquee-item">♪♬♪♬♪♬</div>
+                            <div class="marquee-item">☉ ‿ ☉</div>
+                            <div class="marquee-item">so, you like music?</div>
+                        </div>
+                        <!-- Duplicate to make the loop seamless -->
+                        <div>
+                            <div class="marquee-item">welcome to my website :)</div>
+                            <div class="marquee-item">go to the 'about' page to learn more!</div>
+                            <div class="marquee-item">choose a page in the bottom left!</div>
+                            <div class="marquee-item">scroll around!</div>
+                            <div class="marquee-item">this isnt a real spreadsheet, sorry :(</div>
+                            <div class="marquee-item">made with love &lt;3</div>
+                            <div class="marquee-item">i've got a mean cookie recipe</div>
+                            <div class="marquee-item">go make a personal website!</div>
+                            <div class="marquee-item">more coming soon™</div>
+                            <div class="marquee-item">the spreadsheet is larger than you think…</div>
+                            <div class="marquee-item">so, you like music?</div>
+                            <div class="marquee-item">i wonder if there are any secrets here…</div>
+                            <div class="marquee-item">mobile users cant see this</div>
+                            <div class="marquee-item">♪♬♪♬♪♬</div>
+                            <div class="marquee-item">☉ ‿ ☉</div>
+                            <div class="marquee-item">aaaaaaaaa</div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ================================================ --->
+        <!--                      SHEET                       --->
+        <!-- ================================================ --->
+        <main>
+            <!-- Main sheet -->
+            <div id="corner-header"></div>
+            <div id="scroll-container">
+                <div id="sheet-canvas">
+                    <!-- Sheet "background" -->
+                    <div id="mock-grid">
+                        <div id="mock-hheader"></div>
+                        <div id="mock-vheader"></div>
+                    </div>
+
+                    <!-- Sheet overlay -->
+                    <div id="sheet-overlay">
+                        <!-- This is where each page's HTML will be injected -->
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Vertical scrollbar -->
+            <div id="vertical-scrollbar">
+                <button class="square-button up-button" id="up-scroll-button"></button>
+                <div class="scroll-track" id="vertical-scroll-track">
+                    <div class="scroll-thumb" id="vertical-scroll-thumb"></div>
+                </div>
+                <button class="square-button down-button" id="down-scroll-button"></button>
+            </div>
+        </main>
+
+        <!-- ================================================ --->
+        <!--                     FOOTER                       --->
+        <!-- ================================================ --->
+        <footer>
+            <div id="sheets-and-scrollbar">
+                <!-- Sheet selection buttons -->
+                <button class="square-button left-button" id="first-sheet-button"></button>
+                <button class="square-button left-button" id="previous-sheet-button"></button>
+                <button class="square-button right-button" id="next-sheet-button"></button>
+                <button class="square-button right-button" id="last-sheet-button"></button>
+
+                <!-- Sheet tabs -->
+                <nav id="sheet-tabs">
+                    <div class="sheet-tab active-tab"><a class="sheet-link" href="homepage.html" data-title="homepage">homepage</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="about.html" data-title="about">about</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="music">music</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="restaurants">restaurants</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="recipies">recipies</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="vinyls">vinyls</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="travel">travel</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="fiber_arts">fiber_arts</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="ceramics">ceramics</a></div>
+                </nav>
+
+                <!-- Horizontal scrollbar -->
+                <div id="horizontal-scrollbar">
+                    <button class="square-button left-button" id="left-scroll-button"></button>
+                    <div class="scroll-track" id="horizontal-scroll-track">
+                        <div class="scroll-thumb" id="horizontal-scroll-thumb"></div>
+                    </div>
+                    <button class="square-button right-button" id="right-scroll-button"></button>
+                    <button class="square-button" disabled></button>
+                </div>
+            </div>
+
+            <div id="footer-bar"></div>
+        </footer>
+
+
+    </div>
+
+    <script src="js/base.js"></script>
+</body>

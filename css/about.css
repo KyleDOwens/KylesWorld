@@ -1,0 +1,24 @@
+#test1 {
+    position: absolute;
+    left: calc(64px*2);
+    top: calc(20px*2);
+
+    width: calc(64px*4);
+    height: calc(20px*12);
+}
+#test2 {
+    position: absolute;
+    left: calc(64px*4);
+    top: calc(20px*12);
+
+    width: calc(64px*4);
+    height: calc(20px*12);
+}
+#test3 {
+    position: absolute;
+    left: calc(64px*13);
+    top: calc(20px*50);
+
+    width: calc(64px*4);
+    height: calc(20px*12);
+}

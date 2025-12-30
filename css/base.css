@@ -1,0 +1,960 @@
+@font-face {
+    font-family: "fixedsys";
+    src: url("fonts/fixedsys.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply to everything */
+* {
+    box-sizing: border-box;
+    font-family: "fixedsys", sans-serif;
+
+    /* outline: 1px solid pink; */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background-image: url("../images/space_background.png");
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#excel-window {
+    height: 90vh;
+    width: 70vw;
+
+    /* height: 70vh; */
+
+    /* TODO */
+    /* aspect-ratio: 7 / 5; */
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+}
+
+.hidden {
+    display: none !important;
+}
+
+.horizontal-group {
+    display: flex;
+}
+
+.faint-text {
+    color: #606060;
+}
+
+:root {
+    /* TODO: */
+    --zindex-sheet-corner-header: 4;
+    --zindex-sheet-headers: 3;
+    --zindex-sheet-embeds: 2;
+    --zindex-sheet-cells: 1;
+
+    --zindex-dropdown: 10;
+
+    --cell-height: 20px;
+    --cell-header-width: 32px;
+    --cell-width: 64px;
+}
+
+/*-- ================================================ --->
+<---                  GENERIC BUTTONS                 --->
+<--- ================================================ --*/
+/*#region BUTTONS*/
+.square-button {
+    width: 18px; /* TODO: maybe make this value a constant since i use 18px measurement elsewhere in reference to this */
+    height: 18px;
+    padding: 0;
+
+    background-color: #c0c0c0;
+
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    border-style: outset; 
+
+    cursor: pointer;
+    position: relative;
+}
+.square-button:active, .square-button:disabled {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+.square-button:disabled {
+    cursor: auto;
+}
+
+.left-button::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+
+    width: 0;
+    height: 0;
+
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 8px solid black;
+}
+.right-button::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 4px;
+
+    width: 0;
+    height: 0;
+
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid black;
+}
+.up-button::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 2px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid black;
+}
+.down-button::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 2px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid black;
+}
+/*#endregion BUTTONS*/
+
+
+/*-- ================================================ --->
+<---                    TITLE BAR                     --->
+<--- ================================================ --*/
+/*#region TITLEBAR*/
+.title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+
+
+    height: 2rem;
+    padding: 10px;
+
+    border-style: outset; 
+    background: linear-gradient(rgb(10, 36, 106), rgb(58, 110, 165));
+    /* background: linear-gradient(rgb(0, 0, 128), rgb(16, 132, 208)); */
+    color:#f8f8f8;
+    font-weight: bold;
+
+    font-size: 18pt;
+}
+
+/* Title & Icon */
+.title-left {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Window controls */
+.window-controls {
+    display: flex;
+    gap: 0.5rem;
+
+    transition: filter 0.2s ease;
+}
+
+/* Draw minimize button */
+.minimize::after {
+    content: "";
+
+    display: block;
+    width: 70%;
+    height: 15%;
+    background-color: black;
+
+    margin: 50% auto 0;
+}
+
+/* Draw maximize button */
+.maximize::before,
+.maximize::after {
+    content: "";
+
+    width: 35%;
+    height: 28%;
+
+    border: 2px solid black;
+    
+    position: absolute;
+}
+.maximize::before { /* top right box*/
+    top: 15%;
+    left: 35%;
+}
+.maximize::after { /* bottom left box*/
+    background-color: #c0c0c0;
+    top: 35%;
+    left: 15%;
+}
+
+/* Draw close button */
+.close::before,
+.close::after {
+    content: "";
+
+    width: 70%;
+    height: 15%;
+    background-color: black;
+    
+    position: absolute;
+    top: 45%;
+    left: 15%;
+}
+.close::before {
+    rotate: 45deg;
+}
+.close::after {
+    rotate: -45deg;
+}
+/*#endregion TITLEBAR*/
+
+
+/*-- ================================================ --->
+<---                    MENU BAR                      --->
+<--- ================================================ --*/
+/*#region MENUBAR*/
+#menu-bar {
+    background-color: #c0c0c0;
+    min-height: 20px;
+    padding-left: 0rem;
+    user-select: none;
+}
+
+.menu-button {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+}
+.menu-button:hover {
+    background-color: #d0d0d0;
+}
+.menu-button:active {
+    background-color: #a0a0a0;
+}
+/*#endregion MENUBAR*/
+
+
+/*-- ================================================ --->
+<---                    TEXT BAR                      --->
+<--- ================================================ --*/
+/*#region TEXTBAR*/
+#text-bar {
+    background-color: #b0b0b0;
+    min-height: 18px;
+
+    display: flex;
+    padding-left: 0.5rem;
+    gap: 1rem;
+
+    align-items: center;
+    user-select: none;
+}
+#text-bar .square-button:not(.dropdown-display button) {
+    margin-top: 2px;
+}
+
+#save-button::before {
+    content: "";
+
+    position: absolute;
+    top: 5%;
+    left: 9%;
+
+    width: 70%;
+    height: 72%;
+
+    background-color: #808080; /* main box*/
+
+    border: 1px solid black;
+}
+#save-button::after {
+    content: "";
+
+    position: absolute;
+    top: 5%;
+    left: 25%;
+
+    width: 40%;
+    height: 32%;
+
+    background-color: #e0e0e0; /* upper box*/
+
+    border: 1px solid black;
+
+    box-shadow: 0px 3px 0px 0 #303030; /* lower box*/
+}
+
+#undo-button::before {
+    content: "";
+
+    position: absolute;
+    top: 25%;
+    left: 30%;
+
+    width: 40%;
+    height: 40%;
+
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+
+    rotate: 45deg;
+}
+#undo-button::after {
+    content: "";
+
+    position: absolute;
+    top: 30%;
+    left: 5%;
+
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 6px solid black;
+
+    rotate: -45deg;
+}
+
+#redo-button::before {
+    content: "";
+
+    position: absolute;
+    top: 25%;
+    left: 17%;
+
+    width: 40%;
+    height: 40%;
+
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+
+    rotate: 45deg;
+}
+#redo-button::after {
+    content: "";
+
+    position: absolute;
+    top: 30%;
+    left: 55%;
+
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 6px solid black;
+
+    rotate: 45deg;
+}
+
+#cut-button::before {
+    content: "o";
+    color: transparent;
+
+    position: absolute;
+    top: -10%;
+    left: 0%;
+
+    height: 80%;
+    
+    border-right: 2px solid black;
+    text-shadow: 2px 1px 0 black;
+    border-top: 2px solid transparent;
+
+    rotate: 20deg;
+}
+#cut-button::after {
+    content: "o";
+    color: transparent;
+
+    position: absolute;
+    top: -10%;
+    left: 40%;
+
+    height: 80%;
+    
+    border-left: 2px solid black;
+    text-shadow: -2px 1px 0 black;
+    border-top: 2px solid transparent;
+
+    rotate: -20deg;
+}
+
+#copy-button::before {
+    content: "";
+    
+    position: absolute;
+    top: 17%;
+    left: 10%;
+
+    width: 35%;
+    height: 50%;
+    
+    border: 2px solid black;
+}
+#copy-button::after {
+    content: "";
+    
+    position: absolute;
+    top: 0%;
+    left: 30%;
+
+    width: 35%;
+    height: 50%;
+    
+    border: 2px solid black;
+    /* background-color: #c0c0c0; */
+    background:
+        linear-gradient(
+            to bottom,
+            #000 1px,
+            #c0c0c0 1px
+        ) 1px 1px/ 3px 2px repeat-y,
+        #c0c0c0;
+}
+
+#paste-button-2 {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+
+    width: 60%;
+    height: 80%;
+    border: 2px solid black;
+}
+#paste-button::before {
+    content: "";
+    
+    position: absolute;
+    top: 2%;
+    left: 25%;
+
+    width: 11%;
+    height: 15%;
+    border: 1px solid black;
+    background-color: black;
+}
+#paste-button::after {
+    content: "";
+    
+    position: absolute;
+    top: 35%;
+    left: 40%;
+
+    width: 25%;
+    height: 35%;
+    
+    border: 2px solid black;
+    /* background-color: #c0c0c0; */
+    background:
+        linear-gradient(
+            to bottom,
+            #000 1px,
+            #c0c0c0 1px
+        ) 1px 1px/ 2px 2px repeat-y,
+        #c0c0c0;
+}
+
+#font-input {
+    width: 12rem;
+}
+#font-size-input {
+    width: 3rem;
+}
+
+.align-button::before {
+    content: "";
+
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+
+    width: 75%;
+    height: 2px;
+
+    background-color: black;
+
+    box-shadow: 0 8px black;
+}
+#left-align-button::after {
+    content: "";
+
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+
+    width: 50%;
+    height: 2px;
+
+    background-color: black;
+
+    box-shadow: 0 4px black;
+}
+#center-align-button::after {
+    content: "";
+
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+
+    width: 75%;
+    height: 2px;
+
+    background-color: black;
+
+    box-shadow: 0 4px black;
+}
+#right-align-button::after {
+    content: "";
+
+    position: absolute;
+    top: 12.5%;
+    left: 27.5%;
+
+    width: 50%;
+    height: 2px;
+
+    background-color: black;
+
+    box-shadow: 0 4px black;
+}
+/*#endregion TEXTBAR*/
+
+
+/*-- ================================================ --->
+<---                    CELL BAR                      --->
+<--- ================================================ --*/
+/*#region CELLBAR*/
+#cell-bar {
+    background-color: #a0a0a0;
+    min-height: 20px;
+
+    display: flex;
+}
+
+#blank-input {
+    width: 5%;
+    max-width: 2rem;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    pointer-events: none;
+}
+#formula-input {
+    width: 20%;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+}
+@media only screen and (max-width: 900px) {
+    #blank-input,
+    #formula-input {
+        display: none;
+    }
+}
+/*#endregion CELLBAR*/
+
+
+/*-- ================================================ --->
+<---                     MARQUEE                      --->
+<--- ================================================ --*/
+/*#region MARQUEE*/
+.marquee-container {
+    flex: 1 1 auto;
+    background-color: #ffffff;
+    border-bottom: 2px solid #808080;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-top: 2px solid black;
+
+    display: flex;
+
+    overflow: hidden;
+    position: relative;
+}
+.marquee-track {
+    display: flex;
+    width: max-content;
+
+    position: absolute;
+    overflow: hidden;
+    margin-top: -1px;
+
+    animation: marquee calc(8s * var(--item-count) * 2) linear infinite;
+}
+.marquee-item {
+    white-space: pre;
+    float: left;
+    width: max-content;
+    padding-left: 100px;
+    user-select: none;
+}
+/* .marquee-container:hover div {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+} */
+@keyframes marquee {
+    from { transform: translateX(0) }
+    to { transform: translateX(-50%) }
+}
+/*#endregion MARQUEE*/
+
+
+/*-- ================================================ --->
+<---                      SHEET                       --->
+<--- ================================================ --*/
+/*#region SHEET*/
+main {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: flex;
+    position: relative;
+}
+
+#scroll-container {
+    background-color: #f8f8f8;
+    overflow-x: scroll;
+    overflow-y: scroll;
+
+    width: 100%
+}
+#scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+#sheet-canvas {
+    position: relative;
+    width: calc(32px + 64px*26);
+    height: calc(20px + 20px*99);
+}
+
+/* Mock grid headers & cells */
+#mock-grid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        linear-gradient(#d4d4d4 1px, transparent 1px),
+        linear-gradient(90deg, #d4d4d4 1px, transparent 1px);
+    background-size: 64px 20px;
+    background-position: 31px 19px;
+}
+
+#corner-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+
+    background-color: #c0c0c0;
+    border: 1px solid #2C2C2C;
+
+    height: 20px;
+    min-height: 20px;
+    width: 32px;
+    min-width: 32px;
+}
+
+#mock-hheader {
+    display: flex;
+    text-align: center;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.horizontal-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    
+    background-color: #c0c0c0;
+    border-top: 1px solid #2C2C2C;
+    border-bottom: 1px solid #2C2C2C;
+    border-right: 1px solid #2C2C2C;
+
+    width: 64px;
+    min-width: 64px;
+    height: 20px;
+    min-height: 20px;
+}
+#A0 {
+    margin-left: 32px;
+}
+
+#mock-vheader {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.vertical-header {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+
+    background-color: #c0c0c0;
+    border-left: 1px solid #2C2C2C;
+    border-right: 1px solid #2C2C2C;
+    border-bottom: 1px solid #2C2C2C;
+    
+    width: 32px;
+    min-width: 32px;
+    height: 20px;
+    min-height: 20px;
+}
+/*#endregion SHEET*/
+
+
+#sheet-overlay {
+    position: absolute;
+    inset: 0;
+    margin-left: 32px;
+    margin-top: 20px;
+    z-index: 2;
+}
+
+
+
+.embedded-window {
+    background: #ece9d8;
+    border-top: 2px solid #e8f0ff;
+    border-left: 2px solid #e8f0ff;
+    border-right: 2px solid #2f4f6f;
+    border-bottom: 2px solid #2f4f6f;
+    box-shadow: inset 1px 1px 0 #dfdfdf;
+}
+
+
+
+/*-- ================================================ --->
+<---                     FOOTER                       --->
+<--- ================================================ --*/
+/*#region FOOTER*/
+footer {
+    background: linear-gradient(to bottom, blue, cornflowerblue);
+}
+
+#first-sheet-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    inset: 2px;
+    border-left: 2px solid black;
+}
+#last-sheet-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    inset: 2px;
+    border-right: 2px solid black;
+}
+
+#sheets-and-scrollbar {
+    display: flex;
+    overflow: hidden;
+    scrollbar-width: none;
+    
+    /* border-top: 2px solid #808080; */
+}
+#sheets-and-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Sheet tabs */
+nav#sheet-tabs {
+    display: flex;
+    flex: 0 0 auto;
+
+    margin-right: 6px;
+    white-space: nowrap;
+
+    position: relative;
+}
+
+.sheet-tab {
+    width: 80px;
+    padding-bottom: 3px;
+    
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 12pt;
+    cursor: pointer;
+
+    background-color: black; /* Border for the tabs! */
+
+    position: relative;
+    margin-right: -6px;
+
+    clip-path: polygon(0% 0%, 100% 0%, 92.5% 100%, 7.5% 100%);
+}
+.sheet-tab::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: -2;
+
+    background-color: #c0c0c0; /* Tab background color! */
+
+    clip-path: polygon(0% 0%, 100% 0%, 92.5% 100%, 7.5% 100%);
+
+
+    pointer-events: none;
+}
+.sheet-tab:hover::after {
+    background-color: #a0a0a0;
+    background-color: #dcdcdc;
+}
+
+.active-tab.sheet-tab::after {
+    background-color: #f8f8f8; /* Tab background color! */
+    margin-top: -1px;
+}
+
+.sheet-link {
+    text-decoration: none;
+}
+/*#endregion FOOTER*/
+
+
+/*-- ================================================ --->
+<---                CUSTOM SCROLLBARS                 --->
+<--- ================================================ --*/
+/*#region SCROLLBARS*/
+#horizontal-scrollbar {
+    display: flex;
+    flex: 1;
+}
+#vertical-scrollbar {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.scroll-track {
+    flex: 1;
+    position: relative;
+    background-color: #e0e0e0;
+
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+#horizontal-scrollbar .scroll-track {
+    height: 18px;
+}
+#vertical-scrollbar .scroll-track {
+    width: 18px;
+}
+
+.scroll-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 60px;
+
+    background-color: #c0c0c0;
+
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+
+    cursor: pointer;
+}
+#horizontal-scrollbar .scroll-thumb {
+    height: 100%;
+    width: 60px;
+}
+#vertical-scrollbar .scroll-thumb {
+    height: 160px;
+    width: 100%;
+}
+/*#endregion SCROLLBARS*/
+
+
+/*-- ================================================ --->
+<---                 CUSTOM DROPDOWN                  --->
+<--- ================================================ --*/
+/*#region DROPDOWN*/
+.dropdown {
+    position: relative;
+}
+.dropdown-display {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #404040;
+    user-select: none;
+}
+.dropdown-input {
+    text-align: center;
+    cursor: pointer;
+}
+.dropdown-menu {
+    margin-left: 3px;
+
+    position: absolute;
+    z-index: 20;
+    width: calc(100% - 22px - 4px);
+
+    background-color: #ffffff;
+    border-left: 2px solid #9e9e9e;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+.dropdown-item {
+    padding-left: 1.5rem;
+    color: #000;
+    border-top: 1px solid #f0f0f0;
+}
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+.dropdown-selected, .dropdown-selected:hover {
+    background-color: #e0e0e0;
+}
+/*#endregion DROPDOWN*/

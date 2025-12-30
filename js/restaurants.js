@@ -219,7 +219,7 @@ function addRow(name, cuisine, visited) {
 }
 
 /**
- * Loads the list of restaurant information in locations.csv into the local cache and updates table/map HTML contents with that info
+ * Loads the list of restaurant information in restaurants.csv into the local cache and updates table/map HTML contents with that info
  */
 function loadCacheAndInitializeState() {
     // Gross function because handling async functions in not fun
@@ -227,7 +227,7 @@ function loadCacheAndInitializeState() {
     let cuisineFilters = [];
 
     // Read all restaurants from CSV, then insert into map/table
-    let filename = "csv/locations.csv";
+    let filename = "csv/restaurants.csv";
     d3.csv(filename).then(async function(data) {
         data.forEach(row => {
             // Add data to local cache        

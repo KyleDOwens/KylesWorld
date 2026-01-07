@@ -26,6 +26,9 @@ todo:
 * [-] Make the base responsive! Then can add in additional conent
 
 
+## VINYLS
+* [-] windows with popcorn beige background? shelves for albums to sit on? solg/silver/bronze plaque under the album "nailed" onlto the shelf that displays name/genre?
+
 
 * Font dropdown - corresponds to zoom
 * undo/redo - page back/forward

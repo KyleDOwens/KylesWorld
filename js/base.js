@@ -471,11 +471,7 @@ document.getElementById("sheet-selector-input").addEventListener("click", toggle
 
 function handlePageLoad() {
     // Get the current page name
-    let pageName = window.location.pathname.slice(window.location.pathname.indexOf("/") + 1, window.location.pathname.indexOf(".html"));
-
-    // Update the dropdown input in the info bar
-    let sheetDropdownInput = document.getElementById("sheet-selector-input");
-    sheetDropdownInput.value = `<current sheet>: ${pageName}`;
+    let pageName = window.location.pathname.slice(window.location.pathname.lastIndexOf("/") + 1, window.location.pathname.indexOf(".html"));
 
     // Update the dropdown item classes
     document.querySelectorAll("#sheet-dropdown-menu .sheet-link").forEach(sheetLink => {

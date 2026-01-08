@@ -7,6 +7,7 @@
     <title>Kyle's Corner</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/REPLACEME_PAGENAME.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/> <!-- TODO: eventually remove reliance on LeafletJS -->
     <!-- <meta name="viewport" content="width=device-width, initial-scale=0.4" /> -->
 </head>
 
@@ -205,13 +206,13 @@
                 <nav id="sheet-tabs">
                     <div class="sheet-tab active-tab"><a class="sheet-link" href="homepage.html" data-title="homepage">homepage</a></div>
                     <div class="sheet-tab"><a class="sheet-link" href="about.html" data-title="about">about</a></div>
-                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="music">music</a></div>
-                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="restaurants">restaurants</a></div>
-                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="recipies">recipies</a></div>
-                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="vinyls">vinyls</a></div>
-                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="travel">travel</a></div>
-                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="fiber_arts">fiber_arts</a></div>
-                    <div class="sheet-tab"><a class="sheet-link" href="#" data-title="ceramics">ceramics</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="music.html" data-title="music">music</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="restaurants.html" data-title="restaurants">restaurants</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="recipies.html" data-title="recipies">recipies</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="vinyls.html" data-title="vinyls">vinyls</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="travel.html" data-title="travel">travel</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="fiber_arts.html" data-title="fiber_arts">fiber_arts</a></div>
+                    <div class="sheet-tab"><a class="sheet-link" href="ceramics.html" data-title="ceramics">ceramics</a></div>
                 </nav>
 
                 <!-- Horizontal scrollbar -->
@@ -232,5 +233,5 @@
     </div>
 
     <script src="js/base.js"></script>
-    <script src="js/REPLACEME_PAGENAME.js"></script>
+    <script type="module" src="js/REPLACEME_PAGENAME.js"></script> <!-- TODO: same as above - evnetually stop using LeafletJS -->
 </body>

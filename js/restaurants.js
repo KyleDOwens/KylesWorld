@@ -198,7 +198,7 @@ function addRestaurantMarker(name, lat, long, cuisine, visited, rating, notes, o
  * @param {string} visited Indication if the restaurant has been visited or not
  */
 function addRow(name, cuisine, visited) {
-    let table = document.getElementById("sidebar-table-body");
+    let table = document.getElementById("restaurant-table-body");
     let newRow = table.insertRow(-1);
 
     let nameCell = newRow.insertCell();
@@ -285,18 +285,6 @@ function loadCacheAndInitializeState() {
 **** APPLYING MENU FILTERS ****
 ******************************/
 /**
- * Open/close the filter dropdown menu when the filter button is clicked
- */
-document.getElementById("filter-dropdown-button").addEventListener("click", function() {
-    // Change arrow direction of button
-    this.innerHTML = (this.innerHTML === "▼") ? "▲" : "▼";
-
-    // Open/Close the dropdown menu
-    let filterDropdown = document.getElementById("filter-dropdown");
-    filterDropdown.style.display = (filterDropdown.style.display === "none") ? "block" : "none";
-});
-
-/**
  * Callback function to show/hide an individual restaurant marker assocaited with the passed in checkbox, depending on if it is checked or not
  * @param {checkbox} checkbox The HTML checkbox
  */
@@ -319,7 +307,7 @@ window.updateMarkerShown = function(checkbox) {
  */
 function updateAllMarkersShown() {
     // For each restaurant, see if the marker needs to be shown/hidden
-    let table = document.getElementById("sidebar-table-body");
+    let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
         // Check the checkbox in the "Hide?" column to see if the marker should be shown
         let name = row.cells[tableColNameToIndex("Name")].innerText;
@@ -390,7 +378,7 @@ function applyFilters(skipManualSelections = false) {
     }
 
     // Check if each restaurant passes the filters
-    let table = document.getElementById("sidebar-table-body");
+    let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
         let name = row.cells[tableColNameToIndex("Name")].innerText;
         let shownCheckbox = row.cells[tableColNameToIndex("Show?")].children[0];
@@ -736,7 +724,7 @@ function setManualSelectionsFromBitString(bitString) {
         manualSelections.push(name);
 
         // Flip the shown/hidden for the manually selected restaurant
-        let table = document.getElementById("sidebar-table-body");
+        let table = document.getElementById("restaurant-table-body");
         for (let row of table.rows) {
             if (name == normalizeName(row.cells[tableColNameToIndex("Name")].innerText)) {
                 let checkbox = row.cells[tableColNameToIndex("Show?")].children[0];
@@ -1025,7 +1013,7 @@ document.getElementById("random-button").addEventListener("click", function() {
     
     // Build list of all restaurants currently selected (AKA passing all filters)
     let selections = [];
-    let table = document.getElementById("sidebar-table-body");
+    let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
         // Check the checkbox in the "Hide?" column to see if the restaurant is selected
         let name = row.cells[tableColNameToIndex("Name")].innerText;
@@ -1079,7 +1067,7 @@ function updateActiveSortButton(activeButton) {
 }
 
 function tableColNameToIndex(colName) {
-    let tableHeader = document.getElementById("sidebar-table-header");
+    let tableHeader = document.getElementById("restaurant-table-header");
     let index = 0;
 
     for (let child of tableHeader.rows[0].children) {
@@ -1158,7 +1146,7 @@ document.getElementById("sort-shown-button").addEventListener("click", function(
 });
 
 function sortTable(sortIndex, sortFunc) {
-    let table = document.getElementById("sidebar-table-body");
+    let table = document.getElementById("restaurant-table-body");
     let rows = Array.from(table.rows);
 
     for (let i = 1; i < table.rows.length; i++) {

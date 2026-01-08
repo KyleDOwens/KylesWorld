@@ -394,10 +394,6 @@ function makeActiveTab(activeTab) {
     activeTab.classList.add("active-tab");
     activeTab.style.zIndex = 10;
 }
-document.querySelectorAll(".sheet-tab").forEach(tab => tab.addEventListener("click", function() {
-    makeActiveTab(tab);
-}));
-
 
 /**
  * Updates which of the 5 tabs are currently displayed at the bottom of the website

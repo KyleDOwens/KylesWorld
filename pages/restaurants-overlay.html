@@ -1,0 +1,116 @@
+<!-- Restaurant Map -->
+<seciton class="embedded-window" id="map-panel">
+    <div class="title-bar">
+        <div class="title-left">
+            <span>Map</span>
+        </div>
+
+        <div class="window-controls">
+            <button class="square-button minimize"></button>
+            <button class="square-button maximize"></button>
+            <button class="square-button close"></button>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Choose random restaurant from selected -->
+    <div id="random-container">
+        <button id="random-button">Choose Random: </button>
+        <input type="text" id="random-selection" readonly>
+    </div>
+    
+    <!-- Export Sharable URL -->
+    <div id="share-container">
+        <button id="export-button">Share Selections!</button>
+    </div>
+</seciton>
+
+<!-- Filters -->
+<section class="embedded-window" id="filter-panel">
+    <div class="title-bar">
+        <div class="title-left">
+            <span>Filters</span>
+        </div>
+
+        <div class="window-controls">
+            <button class="square-button minimize"></button>
+            <button class="square-button maximize"></button>
+            <button class="square-button close"></button>
+        </div>
+    </div>
+
+    <!-- Filtering Options -->
+    <div id="filter-container">
+        <!-- Isochrone filtering -->
+        <div id="distance-filter">
+            <div class="filter-header">Distance filter!</div>
+            <div class="filter-subheader">(Places within X minutes from clicked location)</div>
+            <input id="distance-filter-input" placeholder="Time (minutes)">
+            <button id="distance-filter-add-button">Add Isochrone</button>
+            <button id="distance-filter-remove-button" disabled>Remove Isochrone</button>
+        </div>
+
+        <!-- Attribute filter menus -->
+        <div id="attributes-container">
+            <div id="filter-header">Attribute filters!</div>
+            <div id="filter-subheader">(Select from restaurant qualities)</div>
+            <!-- Visited filter -->
+            <div id="filter-menus">
+                <div id="visited-filter" class="multi-select">
+                    <div class="multi-option-header">Visited</div>
+                    <div class="multi-option multi-any"><input type="checkbox"> Any</div>
+                    <div class="multi-option"><input type="checkbox"> Visited </div>
+                    <div class="multi-option"><input type="checkbox"> Unvisited </div>
+                </div>
+                <!-- Cuisine filter -->
+                <div id="cuisine-filter" class="multi-select">
+                    <div class="multi-option-header">Cuisine</div>
+                    <div class="multi-option multi-any"><input type="checkbox"> Any</div>
+                </div>
+                <!-- Rating filter -->
+                <div id="rating-filter" class="multi-select">
+                    <div class="multi-option-header">Rating</div>
+                    <div class="multi-option multi-any"><input type="checkbox"> Any</div>
+                    <div class="multi-option"><input type="checkbox"> Low </div>
+                    <div class="multi-option"><input type="checkbox"> Medium </div>
+                    <div class="multi-option"><input type="checkbox"> High </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- List -->
+<seciton class="embedded-window" id="list-panel">
+    <div class="title-bar">
+        <div class="title-left">
+            <span>List</span>
+        </div>
+
+        <div class="window-controls">
+            <button class="square-button minimize"></button>
+            <button class="square-button maximize"></button>
+            <button class="square-button close"></button>
+        </div>
+    </div>
+
+    <!-- Restaurant Table -->
+    <div id="restaurant-table-container">
+        <div id="inner-table-container">
+            <table id="restaurant-table">
+                <thead id="restaurant-table-header">
+                    <tr>
+                        <th class="name">Name <button id="sort-name-button" class="table-sort-button">▼</button></th>
+                        <th class="cuisine">Cuisine <button id="sort-cuisine-button" class="table-sort-button">▼</button></th>
+                        <th class="visited">Visited <button id="sort-visited-button" class="table-sort-button">▼</button></th>
+                        <th class="shown">Show <button id="sort-shown-button" class="table-sort-button">▼</button></th>
+                    </tr>
+                </thead>
+                <tbody id="restaurant-table-body">
+                    REPLACEME_RESTAURANTROWS
+                </tbody>
+            </table>
+        </div>
+    </div>
+</seciton>

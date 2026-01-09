@@ -58,54 +58,67 @@
 /******************
 **** MAP PANEL ****
 ******************/
-#map-panel {
+#map-window {
     position: absolute;
     left: calc(64px*0.5);
     top: calc(20px*0.5);
-    width: calc(64px*8);
-    height: calc(20px*32);
+    width: calc(64px*10);
+    height: calc(20px*31);
 }
 
 #map {
-    margin: 15px;
-    height: 75%;
+    margin: 10px;
+    height: 78%;
+    border: inset;
+
+    border-top: 3px solid #808080;
+    border-left: 3px solid #808080;
+    border-right: 3px solid #d0d0d0;
+    border-bottom: 3px solid #d0d0d0;
 }
 
 
 /*********************
 **** FILTER PANEL ****
 *********************/
-#filter-panel {
+#filter-window {
     position: absolute;
-    left: calc(64px*3.5);
-    top: calc(20px*33.5);
+    left: calc(64px*10.75);
+    top: calc(20px*21.125);
     width: calc(64px*8);
-    height: calc(20px*32);
+    height: calc(20px*19.5);
 }
 
 #filter-container {
     box-sizing: border-box;
 }
 
+.filter-header {
+    font-size: 12pt;
+}
 
-/***************************
-**** DISTANCE FILTERING ****
-***************************/
-#distance-filter {
-    margin: 10px;
-    padding: 10px;
-    background-color: burlywood;
+.filter-subheader {
+    font-size: 10pt;
 }
 
 
-/****************************
-**** ATTRIBUTE FILTERING ****
-****************************/
-#attributes-container {
-    margin: 10px;
+/**** DISTANCE FILTERING ****/
+#distance-filter {
+    margin: 5px;
     padding: 10px;
-    background-color: rosybrown;
+    border: inset;
+}
 
+ul {
+    margin: 0;
+}
+
+
+/**** ATTRIBUTE FILTERING ****/
+#attributes-container {
+    margin: 5px;
+    padding: 10px;
+    border: inset;
 }
 
 #filter-menus {
@@ -123,7 +136,7 @@
 }
 #cuisine-filter {
     grid-area: cuisine;
-    max-height: 300px;
+    max-height: 200px;
     overflow-y: scroll; /* TODO: replace with custom scrollbar */
 }
 #rating-filter {
@@ -156,21 +169,42 @@
 **** RANDOM SELECTION ****
 *************************/
 #random-container {
-    padding-top: 10px;
-    
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
+    gap: 5px;
 }
 #random-container button {
     padding: 4px;
+
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
 }
+#random-container button:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
 #random-container input {
-    width: 100%;
-    max-width: 200px;
-    padding: 4px;
     text-align: center;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+
+    border: inset;
+}
+
+#random-selection {
+    width: 200px;
+}
+#random-cuisine {
+    width: 150px;
+}
+
+#random-container input:focus {
+    outline-width: 0;
 }
 
 @media (max-width: 875px) {
@@ -185,26 +219,43 @@
 **** SHARE SELECTIONS ****
 *************************/
 #share-container {
-    padding: 10px;
-
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    margin: 10px;
 }
-#share-container button {
+#share-button {
     padding: 4px;
+
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+#share-button:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
 }
 
+#share-subheader {
+    margin-top: 5px;
+    color: gray;
+    font-size: 10pt;
+}
 
-/*****************************
-**** RESTAURANT LIST PANEL ***
-*****************************/
-#list-panel {
+/******************
+**** LIST PANEL ***
+******************/
+#list-window {
     position: absolute;
-    left: calc(64px*9);
-    top: calc(20px*0.5);
+    left: calc(64px*10.75);
+    top: calc(20px*0.25);
     width: calc(64px*8);
-    height: calc(20px*32);
+    height: calc(20px*20);
 
     display: flex;
     flex-direction: column;
@@ -214,6 +265,9 @@
     flex: 1;
     overflow-y: scroll; /* TODO: Replace with custom scrollbar*/
     position: relative;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 /* Table */
@@ -229,7 +283,7 @@
 #restaurant-table-header {
     position: sticky;
     top: 0;
-    background-color: beige;
+    background-color: #d5d3c6;
     border-bottom: 1px solid red;
     white-space: nowrap;
 }
@@ -254,4 +308,66 @@
 }
 #restaurant-table .shown {
     text-align: center;
+}
+
+
+/**********************
+**** GIF CONTAINERS ***
+**********************/
+#hamburger-window {
+    position: absolute;
+    left: calc(64px*0.25);
+    top: calc(20px*32.5);
+    width: calc(64px*4.25);
+    height: calc(20px*10);
+}
+
+#locket-window {
+    position: absolute;
+    left: calc(64px*10.875);
+    top: calc(20px*41);
+    width: calc(64px*4.25);
+    height: calc(20px*10);
+}
+
+#locket-window {
+    position: absolute;
+    left: calc(64px*10.875);
+    top: calc(20px*41);
+    width: calc(64px*4.25);
+    height: calc(20px*10);
+}
+#locket-window img {
+    border: inset;
+    width: 185px;
+}
+
+#sandwich-window {
+    position: absolute;
+    left: calc(64px*15.375);
+    top: calc(20px*41);
+    width: calc(64px*4.25);
+    height: calc(20px*10);
+}
+
+#foodfun-window {
+    position: absolute;
+    left: calc(64px*0.375);
+    top: calc(20px*43.125);
+    width: calc(64px*10);
+    height: calc(20px*10);
+}
+#foodfun-window img {
+    width: 650px;
+}
+
+/**************************
+**** PERSONAL FAVORITES ***
+**************************/
+#favorites-window {
+    position: absolute;
+    left: calc(64px*4.625);
+    top: calc(20px*31.875);
+    width: calc(64px*6);
+    height: calc(22px*10);
 }

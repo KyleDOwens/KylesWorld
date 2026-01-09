@@ -110,3 +110,20 @@ with open(f"{BUILD_DIR}/restaurants.html", "w") as output_file:
 
 
 # TODO: load albums CSV data into music.html
+
+
+#######################################################
+# Add in page-specific data
+
+# Add LeafletJS info to restaurants
+input_html = None
+with open(f"{BUILD_DIR}/restaurants.html", "r") as input_file:
+    input_html = input_file.read()
+
+leaflet_script = '<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> <!-- TODO: -->'
+leaflet_link = '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/> <!-- TODO: eventually remove reliance on LeafletJS -->'
+output_html = input_html.replace("<!-- REPLACEME_EXTRASCRIPT -->", leaflet_script)
+output_html = output_html.replace("<!-- REPLACEME_EXTRASCRIPT -->", leaflet_link)
+
+with open(f"{BUILD_DIR}/restaurants.html", "w") as output_file:
+    output_file.write(output_html)

@@ -1,8 +1,8 @@
 <!-- Restaurant Map -->
-<seciton class="embedded-window" id="map-panel">
+<div class="embedded-window" id="map-window">
     <div class="title-bar">
         <div class="title-left">
-            <span>Map</span>
+            <span>Map Viewer</span>
         </div>
 
         <div class="window-controls">
@@ -16,21 +16,23 @@
 
     <!-- Choose random restaurant from selected -->
     <div id="random-container">
-        <button id="random-button">Choose Random: </button>
+        <button id="random-button">choose random</button>
         <input type="text" id="random-selection" readonly>
+        <input type="text" id="random-cuisine" readonly>
     </div>
     
     <!-- Export Sharable URL -->
     <div id="share-container">
-        <button id="export-button">Share Selections!</button>
+        <div><button id="share-button">share selections!</button></div>
+        <div id="share-subheader"></div>
     </div>
-</seciton>
+</div>
 
 <!-- Filters -->
-<section class="embedded-window" id="filter-panel">
+<section class="embedded-window" id="filter-window">
     <div class="title-bar">
         <div class="title-left">
-            <span>Filters</span>
+            <span>Filter Options</span>
         </div>
 
         <div class="window-controls">
@@ -82,10 +84,10 @@
 </section>
 
 <!-- List -->
-<seciton class="embedded-window" id="list-panel">
+<div class="embedded-window" id="list-window">
     <div class="title-bar">
         <div class="title-left">
-            <span>List</span>
+            <span>Restaurant Table</span>
         </div>
 
         <div class="window-controls">
@@ -97,20 +99,123 @@
 
     <!-- Restaurant Table -->
     <div id="restaurant-table-container">
-        <div id="inner-table-container">
-            <table id="restaurant-table">
-                <thead id="restaurant-table-header">
-                    <tr>
-                        <th class="name">Name <button id="sort-name-button" class="table-sort-button">▼</button></th>
-                        <th class="cuisine">Cuisine <button id="sort-cuisine-button" class="table-sort-button">▼</button></th>
-                        <th class="visited">Visited <button id="sort-visited-button" class="table-sort-button">▼</button></th>
-                        <th class="shown">Show <button id="sort-shown-button" class="table-sort-button">▼</button></th>
-                    </tr>
-                </thead>
-                <tbody id="restaurant-table-body">
-                    REPLACEME_RESTAURANTROWS
-                </tbody>
-            </table>
+        <table id="restaurant-table">
+            <thead id="restaurant-table-header">
+                <tr>
+                    <th class="name">Name <button id="sort-name-button" class="table-sort-button square-button down-button"></button></th>
+                    <th class="cuisine">Cuisine <button id="sort-cuisine-button" class="table-sort-button square-button down-button"></button></th>
+                    <th class="visited">Visited <button id="sort-visited-button" class="table-sort-button square-button down-button"></button></th>
+                    <th class="shown">Show <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                </tr>
+            </thead>
+            <tbody id="restaurant-table-body">
+                REPLACEME_RESTAURANTROWS
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Hamburger Gif -->
+<div class="embedded-window" id="hamburger-window">
+    <div class="title-bar">
+        <div class="title-left">
+            <span>hamburger.gif</span>
+        </div>
+
+        <div class="window-controls">
+            <button class="square-button minimize"></button>
+            <button class="square-button maximize"></button>
+            <button class="square-button close"></button>
         </div>
     </div>
-</seciton>
+
+    <div class="gif-container">
+        <img src="/images/restaurants/hamburger_spin.gif" alt="Spinning Hamburger Gif" width="150px">
+    </div>
+</div>
+
+<!-- Personal Favorites -->
+<div class="embedded-window" id="favorites-window">
+    <div class="title-bar">
+        <div class="title-left">
+            <span>Favorites</span>
+        </div>
+
+        <div class="window-controls">
+            <button class="square-button minimize"></button>
+            <button class="square-button maximize"></button>
+            <button class="square-button close"></button>
+        </div>
+    </div>
+
+    <div class="window-container">
+        some of my personal favorites!
+        <ul>
+            <li>Mina & Dimi's <span class="faint-text"> - (greek)</span></li>
+            <li>Zito's Deli <span class="faint-text"> - (deli)</span></li>
+            <li>Stixs & Stone <span class="faint-text"> - (mexican/asian fusion)</span></li>
+            <li>PRESS Coffee @ Boardwalk <span class="faint-text"> - (coffee)</span></li>
+            <li>The Shack <span class="faint-text"> - (burgers)</span></li>
+            <li>Tokyo Cowboy <span class="faint-text"> - (mexican/asian fusion)</span></li>
+            <li>Grey Moss Inn <span class="faint-text"> - (mexican)</span></li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- Locket Gif -->
+<div class="embedded-window" id="locket-window">
+    <div class="title-bar">
+        <div class="title-left">
+            <span>locket.gif</span>
+        </div>
+
+        <div class="window-controls">
+            <button class="square-button minimize"></button>
+            <button class="square-button maximize"></button>
+            <button class="square-button close"></button>
+        </div>
+    </div>
+
+    <div class="gif-container">
+        <img src="/images/restaurants/serious_locket.gif" alt="Zito's Serious Sandwich Locket Gif" width="150px">
+    </div>
+</div>
+
+<!-- Sandwich Gif -->
+<div class="embedded-window" id="sandwich-window">
+    <div class="title-bar">
+        <div class="title-left">
+            <span>sandwich.gif</span>
+        </div>
+
+        <div class="window-controls">
+            <button class="square-button minimize"></button>
+            <button class="square-button maximize"></button>
+            <button class="square-button close"></button>
+        </div>
+    </div>
+
+    <div class="gif-container">
+        <img src="/images/restaurants/sandwich.gif" alt="Sandwich Dancing Gif" width="150px">
+    </div>
+</div>
+
+<!-- Food & Fun Gif -->
+<div class="embedded-window" id="foodfun-window">
+    <div class="title-bar">
+        <div class="title-left">
+            <span>food_&_fun.gif</span>
+        </div>
+
+        <div class="window-controls">
+            <button class="square-button minimize"></button>
+            <button class="square-button maximize"></button>
+            <button class="square-button close"></button>
+        </div>
+    </div>
+
+    <div class="gif-container">
+        <img src="/images/restaurants/food_&_fun.gif" alt="Sandwich Dancing Gif" width="150px">
+    </div>
+</div>

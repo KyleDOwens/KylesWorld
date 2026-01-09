@@ -6,7 +6,17 @@ const map = L.map("map", {
             [29.46630060995385, 
             -98.50546763124163],
         zoom: 11,
-        zoomControl: true,
+        zoomControl: false,
+        minZoom: 9,
+        maxZoom: 18,
+        inertia: false,
+        maxBounds: [
+            [28.884902,-99.1386173],
+            [30.0487506,-97.9010104]
+        ],
+        zoomAnimation: false,
+        markerZoomAnimation: false,
+        fadeAnimation: false,
     });
 
 const newIcon = L.icon({
@@ -24,7 +34,7 @@ let markers = {} // Dictionary containing the map markers accessed by the restau
 let manualSelections = []; // Stores which of the current restaurants were selected manually (not with a filter menu) 
 
 let placingIsochrone = false; // Stores if the user is currently placing an isochrone on their next map click
-let isochroneObject = null; // Stores the isochrone layer added to the map (may or may not actually be shown on the map)
+let isochroneLayer = null; // Stores the isochrone layer added to the map (may or may not actually be shown on the map)
 let doIsochroneFiltering = false // Boolean if the isochrone layer should be used for filtering or just for display
 
 let randomTimerId = null; // Stores the ID of the timer repeated highlighting/unhighlighting the randomly selected marker
@@ -35,7 +45,7 @@ let randomStartTime = null; // Stores the time that the random restaurant is fir
 let errorTimerId = null; // Stores the ID of the timer used for displaying an error
 let errorStartTime = null; // Stores the time that the error is first displayed, used to determine when to stop displaying error
 
-let debug = true; // Determines if API call with limits should be made
+let debug = false; // Determines if API call with limits should be made
 
 // Example isochrone for testing
 let mockIsochrone = {
@@ -135,15 +145,18 @@ function initializeMap() {
         // }).addTo(map);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(map);
     }
     else {
         // Add rate limited tile layer (OpenStreetMap)
-        L.tileLayer("https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=" + OSM_API_KEY, {
-            maxZoom: 18,
-            attribution: "© MapTiler © OpenStreetMap contributors"
+        // L.tileLayer("https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=" + OSM_API_KEY, {
+        //     maxZoom: 18,
+        //     attribution: "© MapTiler © OpenStreetMap contributors"
+        // }).addTo(map);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(map);
     }
 }
@@ -230,6 +243,11 @@ function loadCacheAndInitializeState() {
     let filename = "csv/restaurants.csv";
     d3.csv(filename).then(async function(data) {
         data.forEach(row => {
+            // Apply small fix to longitude (for some reason tileset and Google Maps are slightly off)
+            let lat = row["gps"].split(",")[0];
+            let long = row["gps"].split(",")[1];
+            row["gps"] = lat + "," + (parseFloat(long) + 0.0026).toString()
+
             // Add data to local cache        
             restaurants[normalizeName(row["name"])] = row;
 
@@ -397,6 +415,11 @@ function applyFilters(skipManualSelections = false) {
         }
         updateMarkerShown(shownCheckbox);
     }
+
+    // Resort the table if sorting for "shown"
+    if (currentSortIndex == tableColNameToIndex("Show?")) {
+        sortTable(currentSortIndex, currentSortFunc);
+    }
 }
 
 
@@ -556,17 +579,17 @@ function getIsochroneBitString() {
     let bitString = "";
 
     // Append bit string representing isochrone (lat, long, range)
-    if (isochroneObject) {
+    if (isochroneLayer) {
         // First bit denotes if the isochrone is shown (1) or not (0)
-        bitString += map.hasLayer(isochroneObject) ? "1" : "0";
+        bitString += map.hasLayer(isochroneLayer) ? "1" : "0";
 
         // Second bit denotes if the isochrone is being used for filtering (1) or not (0)
         bitString += doIsochroneFiltering ? "1" : "0";
         
         // Remaining bits are the center lat/long and the range (in minutes) encoded as binary values
-        let long = mockIsochrone.features[0].properties.center[0];
-        let lat = mockIsochrone.features[0].properties.center[1];
-        let range = mockIsochrone.features[0].properties.value;
+        let long = isochroneLayer.toGeoJSON().features[0].properties.center[0];
+        let lat = isochroneLayer.toGeoJSON().features[0].properties.center[1];
+        let range = isochroneLayer.toGeoJSON().features[0].properties.value;
         
         let latLongBitLen = Math.pow(10, PRECISION + 2).toString(2).length;
         let rangeBitLen = Math.pow(2, 3).toString(2).length;
@@ -604,7 +627,7 @@ function getManualSelectionsBitString() {
 /**
  * Listener to handle when the button to create the sharable URL is clicked - will update the URL and copy sharable URL to clipboard
  */
-document.getElementById("export-button").addEventListener("click", async function() {
+document.getElementById("share-button").addEventListener("click", async function() {
     let newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname
 
     // Get bit strings representing the state
@@ -632,7 +655,13 @@ document.getElementById("export-button").addEventListener("click", async functio
     // Set the encoding as the new URL and copy to clipboard
     window.history.pushState({ path: newUrl }, '', newUrl);
     await navigator.clipboard.writeText(newUrl);
-    alert("Sharable URL copied to clipboard!");
+    // alert("Sharable URL copied to clipboard!");
+    let subheader = document.getElementById("share-subheader");
+    subheader.innerText = "link copied to clipboard!";
+    setTimeout(() => {
+        subheader.innerText = "";
+    }, 15000);
+    
 });
 
 /**
@@ -702,7 +731,7 @@ function setIsochroneFromBitString(bitString) {
 
     // Hide isochrone if it is only being used for filtering
     if (!shown) {
-        map.removeLayer(isochroneObject);
+        map.removeLayer(isochroneLayer);
     }
 
     applyFilters();
@@ -796,15 +825,15 @@ document.getElementById("distance-filter-remove-button").addEventListener("click
 window.removeIsochrone = function() {
     doIsochroneFiltering = false;
     
-    if (!isochroneObject) {
+    if (!isochroneLayer) {
         return;
     }
 
     let button = document.getElementById("distance-filter-remove-button");
     button.disabled = true;
 
-    map.removeLayer(isochroneObject);
-    isochroneObject = null;
+    map.removeLayer(isochroneLayer);
+    isochroneLayer = null;
     applyFilters();
 }
 
@@ -812,7 +841,7 @@ window.removeIsochrone = function() {
  * Hide isochrone drawing on the map, but keep the object in cache so the filter still applies
  */
 window.hideIsochrone = function() {
-    map.removeLayer(isochroneObject);
+    map.removeLayer(isochroneLayer);
 }
 
 /**
@@ -837,12 +866,12 @@ window.addIsochroneFilter = function() {
  * @returns Boolean true/false
  */
 function passesIsochroneFilter(name) {
-    if (!doIsochroneFiltering || !isochroneObject) {
+    if (!doIsochroneFiltering || !isochroneLayer) {
         return true;
     }
 
-    let polygon = isochroneObject.toGeoJSON().features[0].geometry.coordinates[0];
-    let boundingBox = isochroneObject.getBounds();
+    let polygon = isochroneLayer.toGeoJSON().features[0].geometry.coordinates[0];
+    let boundingBox = isochroneLayer.getBounds();
 
     // Get restaurant info
     let long = restaurants[normalizeName(name)]["gps"].split(",")[1];
@@ -926,12 +955,12 @@ async function drawDistanceIsochrone(lat, long, range, alsoApply = false) {
     }
 
     // Only 1 isochrone allowed at a time, so remove old one if it exists
-    if (isochroneObject && map.hasLayer(isochroneObject)) {
-        map.removeLayer(isochroneObject)
+    if (isochroneLayer && map.hasLayer(isochroneLayer)) {
+        map.removeLayer(isochroneLayer)
     }
 
     // Draw the received polygon to the map
-    isochroneObject = L.geoJSON(data, {
+    isochroneLayer = L.geoJSON(data, {
         style: {
             color: "red",
             weight: 2,
@@ -939,15 +968,19 @@ async function drawDistanceIsochrone(lat, long, range, alsoApply = false) {
         }
     })
     .bindPopup(`<b>Isochrone Filter</b><br>
-            Locations reachable in ${range} minutes<br>
-            <a onclick=removeIsochrone() href="#">Remove filter & hide</a><br>
-            <a onclick=hideIsochrone() href="#">Hide</a><br>
-            <a onclick=removeIsochroneFilter() href="#">Remove filter</a><br>
-            <a onclick=addIsochroneFilter() href="#">Add filter</a>`)
+            Places reachable in ${range} minutes<br>
+            <div style="padding-top:5px">Options:</div>
+            <ul style="padding-left:25px">
+                <li><a onclick=removeIsochrone() href="#">Remove filter & hide</a><br></li>
+                <li><a onclick=hideIsochrone() href="#">Hide</a><br></li>
+                <li><a onclick=removeIsochroneFilter() href="#">Remove filter</a><br></li>
+                <li><a onclick=addIsochroneFilter() href="#">Add filter</a></li>
+            </ul>
+            `)
     .addTo(map);
 
     // update html objects (enable remove button, remove input value)
-    if (isochroneObject) {
+    if (isochroneLayer) {
         let button = document.getElementById("distance-filter-remove-button");
         button.disabled = false;
 
@@ -1012,24 +1045,27 @@ document.getElementById("random-button").addEventListener("click", function() {
     }
     
     // Build list of all restaurants currently selected (AKA passing all filters)
-    let selections = [];
+    let selections = {};
     let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
         // Check the checkbox in the "Hide?" column to see if the restaurant is selected
         let name = row.cells[tableColNameToIndex("Name")].innerText;
+        let cuisine = row.cells[tableColNameToIndex("Cuisine")].innerText;
         let isSelected = row.cells[tableColNameToIndex("Show?")].children[0].checked;
         if (isSelected) {
-            selections.push(name);
+            selections[name] = cuisine;
         }
     }
 
     // Select and display the random selected restaurant
-    let rand = selections[Math.floor(Math.random() * selections.length)]
-    let outputBox = document.getElementById("random-selection");
-    outputBox.value = rand;
+    let rand = Math.floor(Math.random() * Object.values(selections).length);
+    let randName = Object.keys(selections)[rand];
+    let randCuisine = Object.values(selections)[rand]
+    document.getElementById("random-selection").value = randName;
+    document.getElementById("random-cuisine").value = randCuisine;
 
     // Bring the marker to the front
-    let marker = markers[normalizeName(rand)];
+    let marker = markers[normalizeName(randName)];
     randomOldZOffset = marker.options.zIndexOffset;
     marker.options.zIndexOffset = 1000;
     marker.setLatLng(marker.getLatLng()); // redraws the marker
@@ -1061,7 +1097,8 @@ function updateActiveSortButton(activeButton) {
         }
         else {
             button.classList.add("inactive-button");
-            button.innerHTML = "▼";
+            button.classList.remove("up-button");
+            button.classList.add("down-button");
         }
     }
 }
@@ -1090,11 +1127,11 @@ function checkboxSort(a, b) { return (!a.children[0].checked && b.children[0].ch
 function reverseCheckboxSort(a, b) { return !checkboxSort(a, b); };
 
 document.getElementById("sort-name-button").addEventListener("click", function() {
-    // Update button to new sorting direction
-    this.innerHTML = (this.innerHTML === "▼") ? "▲" : "▼";
+    this.classList.toggle("up-button");
+    this.classList.toggle("down-button");
     
     // Sort the table to match button
-    let sortingFunc = (this.innerHTML === "▲") ? alphaSort : reverseAlphaSort;
+    let sortingFunc = (this.classList.contains("up-button")) ? alphaSort : reverseAlphaSort;
     sortTable(tableColNameToIndex("Name"), sortingFunc);
 
     // Update all sorting buttons for the table
@@ -1102,11 +1139,11 @@ document.getElementById("sort-name-button").addEventListener("click", function()
 });
 
 document.getElementById("sort-cuisine-button").addEventListener("click", function() {
-    // Update button to new sorting direction
-    this.innerHTML = (this.innerHTML === "▼") ? "▲" : "▼";
+    this.classList.toggle("up-button");
+    this.classList.toggle("down-button");
     
     // Sort the table to match button
-    let sortingFunc = (this.innerHTML === "▲") ? alphaSort : reverseAlphaSort;
+    let sortingFunc = (this.classList.contains("up-button")) ? alphaSort : reverseAlphaSort;
     sortTable(tableColNameToIndex("Cuisine"), sortingFunc);
 
     // Update all sorting buttons for the table
@@ -1114,15 +1151,15 @@ document.getElementById("sort-cuisine-button").addEventListener("click", functio
 });
 
 document.getElementById("sort-visited-button").addEventListener("click", function() {
-    // Update button to new sorting direction
-    this.innerHTML = (this.innerHTML === "▼") ? "▲" : "▼";
+    this.classList.toggle("up-button");
+    this.classList.toggle("down-button");
     
     // First sort alphabetically by name
-    let sortingFunc = (this.innerHTML === "▲") ? alphaSort : reverseAlphaSort;
+    let sortingFunc = (this.classList.contains("up-button")) ? alphaSort : reverseAlphaSort;
     sortTable(tableColNameToIndex("Name"), sortingFunc);
     
     // Then sort by visited or not
-    let sortingFunc2 = (this.innerHTML === "▲") ? visitSort : reverseVisitSort;
+    let sortingFunc2 = (this.classList.contains("up-button")) ? visitSort : reverseVisitSort;
     sortTable(tableColNameToIndex("Visited?"), sortingFunc2);
 
     // Update all sorting buttons for the table
@@ -1130,22 +1167,28 @@ document.getElementById("sort-visited-button").addEventListener("click", functio
 });
 
 document.getElementById("sort-shown-button").addEventListener("click", function() {
-    // Update button to new sorting direction
-    this.innerHTML = (this.innerHTML === "▼") ? "▲" : "▼";
-    
+    this.classList.toggle("up-button");
+    this.classList.toggle("down-button");
+
     // First sort alphabetically by name
-    let sortingFunc = (this.innerHTML === "▲") ? alphaSort : reverseAlphaSort;
+    let sortingFunc = (this.classList.contains("up-button")) ? alphaSort : reverseAlphaSort;
     sortTable(tableColNameToIndex("Name"), sortingFunc);
     
     // Then sort by visited or not
-    let sortingFunc2 = (this.innerHTML === "▲") ? checkboxSort : reverseCheckboxSort;
+    let sortingFunc2 = (this.classList.contains("up-button")) ? checkboxSort : reverseCheckboxSort;
     sortTable(tableColNameToIndex("Show?"), sortingFunc2);
 
     // Update all sorting buttons for the table
     updateActiveSortButton(this);
 });
 
+let currentSortIndex ;
+let currentSortFunc;
+
 function sortTable(sortIndex, sortFunc) {
+    currentSortIndex = sortIndex;
+    currentSortFunc = sortFunc;
+
     let table = document.getElementById("restaurant-table-body");
     let rows = Array.from(table.rows);
 

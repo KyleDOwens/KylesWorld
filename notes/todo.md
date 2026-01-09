@@ -34,3 +34,14 @@ todo:
 * undo/redo - page back/forward
 * x out/close window - close webpage
 * 'Help' - link to about page?
+
+
+
+* make random select last forever, but add button to remove random selection
+
+
+
+* find way to limit the sheet size so there is not so much extra scroll room
+
+* !!!!! Tear out D3 use in restaurants script, then test if final restaurants page works
+* Write small summary of the restaurants page, how to use it, how to use it, what tools are available (e.g. isochrones), my rating system

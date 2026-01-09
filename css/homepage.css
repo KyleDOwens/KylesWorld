@@ -4,5 +4,14 @@
     top: calc(20px*0.5);
 
     width: calc(64px*8);
-    height: calc(20px*32);
+    height: calc(20px*20);
+}
+
+#test5 {
+    position: absolute;
+    left: calc(64px*9.25);
+    top: calc(20px*2);
+
+    width: calc(64px*6);
+    height: calc(20px*24);
 }

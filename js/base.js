@@ -484,7 +484,7 @@ function handlePageLoad() {
     let pageTab = null;
     document.querySelectorAll(".sheet-tab").forEach(tab => {
         let sheetLink = tab.children[0];
-        if (sheetLink.innerHTML == pageName) {
+        if (sheetLink.dataset.title == pageName) {
             pageTab = tab;
         }
     });

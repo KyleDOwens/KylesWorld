@@ -54,6 +54,9 @@
     display: none !important;
 }
 
+ul {
+    margin: 0;
+}
 
 /******************
 **** MAP PANEL ****
@@ -83,7 +86,7 @@
 *********************/
 #filter-window {
     position: absolute;
-    left: calc(64px*10.75);
+    left: calc(64px*10.865);
     top: calc(20px*21.125);
     width: calc(64px*8);
     height: calc(20px*19.5);
@@ -109,8 +112,19 @@
     border: inset;
 }
 
-ul {
-    margin: 0;
+#distance-filter input {
+    padding: 3px;
+    border: inset;
+}
+
+#distance-filter button {
+    padding: 3px;
+}
+#distance-filter button:active:not(:disabled) {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
 }
 
 
@@ -145,7 +159,7 @@ ul {
 
 #filter-menus .multi-option-header {
     font-weight: bold;
-    background-color: slategray;
+    background-color: #bfbeb4;
 
     position: sticky;
     top: 0;
@@ -153,12 +167,12 @@ ul {
 }
 #filter-menus .multi-select {
     border: 1px solid black;
-    background-color:darkgray;
+    background-color: #d5d3c6;
     flex: 1 1 auto;
     min-width: min-content; 
 }
 #filter-menus .multi-select .multi-option {
-    background-color:darkgray;
+    background-color: #d5d3c6;
     white-space: pre-wrap;
 }
 #filter-menus .multi-select .multi-any {
@@ -174,12 +188,7 @@ ul {
     gap: 5px;
 }
 #random-container button {
-    padding: 4px;
-
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
+    padding: 3px;
 }
 #random-container button:active {
     border-top: 2px solid #404040;
@@ -190,9 +199,6 @@ ul {
 
 #random-container input {
     text-align: center;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-
     border: inset;
 }
 
@@ -227,7 +233,7 @@ ul {
     margin: 10px;
 }
 #share-button {
-    padding: 4px;
+    padding: 3px;
 
     border-top: 2px solid #ffffff;
     border-left: 2px solid #ffffff;

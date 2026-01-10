@@ -91,10 +91,10 @@ with open(f"./csv/restaurants.csv", "r") as restaurants_file:
             '<td class="shown">'
                 '<input type="checkbox" onclick="manuallySelectRestaurant(this)" checked="">'
             '</td>'
-            f'<td class="rating" style="display:none">{row["rating"]}</td>'
-            f'<td class="notes" style="display:none">{row["notes"]}</td>'
-            f'<td class="gps" style="display:none">{row["gps"]}</td>'
-            f'<td class="originalUrl" style="display:none">{row["originalUrl"]}</td>'
+            f'<td class="rating hidden">{row["rating"]}</td>'
+            f'<td class="notes hidden">{row["notes"]}</td>'
+            f'<td class="gps hidden">{row["gps"]}</td>'
+            f'<td class="originalUrl hidden">{row["originalUrl"]}</td>'
         '</tr>\n'
         )
 
@@ -123,7 +123,7 @@ with open(f"{BUILD_DIR}/restaurants.html", "r") as input_file:
 leaflet_script = '<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> <!-- TODO: -->'
 leaflet_link = '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/> <!-- TODO: eventually remove reliance on LeafletJS -->'
 output_html = input_html.replace("<!-- REPLACEME_EXTRASCRIPT -->", leaflet_script)
-output_html = output_html.replace("<!-- REPLACEME_EXTRASCRIPT -->", leaflet_link)
+output_html = output_html.replace("<!-- REPLACEME_EXTRALINK -->", leaflet_link)
 
 with open(f"{BUILD_DIR}/restaurants.html", "w") as output_file:
     output_file.write(output_html)

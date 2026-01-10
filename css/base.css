@@ -53,6 +53,20 @@ body {
     color: #606060;
 }
 
+.outset {
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+
+.inset {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
 :root {
     /* TODO: */
     --zindex-sheet-corner-header: 4;

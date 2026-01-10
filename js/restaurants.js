@@ -121,7 +121,19 @@ let mockIsochrone = {
  */
 document.addEventListener("DOMContentLoaded", () => {
     initializeMap();
-    loadCacheAndInitializeState(); // async
+    loadCache();
+    initializeCuisineFilter();
+    addListenerToFilters();
+    initializeFilters();
+    parseUrl();
+    applyFilters(true);
+
+    // Sort the table in ascending alphabetical order (by simulating a click on the table sort button)
+    document.getElementById("sort-name-button").dispatchEvent(new Event("click"));
+
+    // Update map tiles since some may not load by this point
+    map.invalidateSize();
+    map.setView([29.46630060995385, -98.50546763124163], 11);
 });
 
 /**
@@ -130,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
  * @returns String of the normalized alphanumeric name
  */
 function normalizeName(name) {
-    return name.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+    return name.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 }
 
 /**
@@ -205,97 +217,68 @@ function addRestaurantMarker(name, lat, long, cuisine, visited, rating, notes, o
 }
 
 /**
- * Adds a new row to the HTML restaurant list table
- * @param {string} name The restaurant name
- * @param {string} cuisine The restaurant cuisine type
- * @param {string} visited Indication if the restaurant has been visited or not
- */
-function addRow(name, cuisine, visited) {
+ * Loads the list of restaurant information the HTML table into a local variable */
+function loadCache() {
+    // Load the restaurant data from HTML table into local cache
     let table = document.getElementById("restaurant-table-body");
-    let newRow = table.insertRow(-1);
+    for (let row of table.rows) {
+        let name = row.cells[tableColNameToIndex("Name")].textContent;
+        let cuisine = row.cells[tableColNameToIndex("Cuisine")].textContent;
+        let visited = row.cells[tableColNameToIndex("Visited")].textContent;
+        let show = row.cells[tableColNameToIndex("Show")].children[0].checked;
+        let rating = row.cells[tableColNameToIndex("Rating")].textContent;
+        let notes = row.cells[tableColNameToIndex("Notes")].textContent;
+        let gps = row.cells[tableColNameToIndex("Gps")].textContent;
+        let originalUrl = row.cells[tableColNameToIndex("OriginalUrl")].textContent;
 
-    let nameCell = newRow.insertCell();
-    nameCell.innerHTML = name;
-    nameCell.classList.add("name");
+        restaurants[normalizeName(name)] = {
+            "name": name,
+            "cuisine" : cuisine,
+            "visited" : visited,
+            "show" : show,
+            "rating" : rating,
+            "notes" : notes,
+            "gps" : gps,
+            "originalUrl" : originalUrl,
+        };
 
-    let cuisineCell = newRow.insertCell();
-    cuisineCell.innerHTML = cuisine;
-    cuisineCell.classList.add("cuisine");
-
-    let visitedCell = newRow.insertCell();
-    visitedCell.innerHTML = visited;
-    visitedCell.classList.add("visited");
-    
-    let shownCell = newRow.insertCell();
-    shownCell.innerHTML = "<input type=\"checkbox\" onclick=\"manuallySelectRestaurant(this)\" checked>";
-    shownCell.classList.add("shown");
+        // Add marker on the map
+        addRestaurantMarker(name,
+                gps.split(",")[0],
+                gps.split(",")[1],
+                cuisine,
+                visited,
+                rating,
+                notes,
+                originalUrl);
+    }
 }
 
-/**
- * Loads the list of restaurant information in restaurants.csv into the local cache and updates table/map HTML contents with that info
- */
-function loadCacheAndInitializeState() {
-    // Gross function because handling async functions in not fun
-    
+function initializeCuisineFilter() {
     let cuisineFilters = [];
 
-    // Read all restaurants from CSV, then insert into map/table
-    let filename = "csv/restaurants.csv";
-    d3.csv(filename).then(async function(data) {
-        data.forEach(row => {
-            // Apply small fix to longitude (for some reason tileset and Google Maps are slightly off)
-            let lat = row["gps"].split(",")[0];
-            let long = row["gps"].split(",")[1];
-            row["gps"] = lat + "," + (parseFloat(long) + 0.0026).toString()
-
-            // Add data to local cache        
-            restaurants[normalizeName(row["name"])] = row;
-
-            // Update map/table
-            addRestaurantMarker(row["name"],
-                row["gps"].split(",")[0],
-                row["gps"].split(",")[1],
-                row["cuisine"],
-                row["visited"],
-                row["rating"],
-                row["notes"],
-                row["originalUrl"]);
-            addRow(row["name"], row["cuisine"], row["visited"])
-
-            // Update cuisine type filters
-            let cuisines = row["cuisine"].split(" / ");
-            for (let cuisine of cuisines) {
-                if (!cuisineFilters.includes(cuisine)) {
-                    cuisineFilters.push(cuisine);
-                }
+    let table = document.getElementById("restaurant-table-body");
+    for (let row of table.rows) {
+        // Update cuisine type filters
+        let cuisines = row.cells[tableColNameToIndex("Cuisine")].textContent.split(" / ");
+        for (let c of cuisines) {
+            if (!cuisineFilters.includes(c)) {
+                cuisineFilters.push(c);
             }
-        })
-
-        // Sort cuisines in alphabetical order
-        cuisineFilters.sort();
-
-        // Create HTML element for each cuisine type
-        let cuisineFilterMenu = document.getElementById("cuisine-filter");
-        for (let cuisine of cuisineFilters) {
-            let filterHtml = document.createElement("div");
-            filterHtml.classList.add("multi-option");
-            filterHtml.innerHTML = `<input type="checkbox"> ${cuisine}`;
-            cuisineFilterMenu.appendChild(filterHtml);
         }
-        addListenerToFilters();
+    }
 
-        // Set filters (all true, or to the URL parameters if they exists), then update website
-        initializeFilters();
-        parseUrl();
-        applyFilters(true);
+    // Sort cuisines in alphabetical order
+    cuisineFilters.sort();
 
-        // Sort the table in ascending alphabetical order (by simulating a click on the table sort button)
-        document.getElementById("sort-name-button").dispatchEvent(new Event("click"));
-
-        // Update map tiles since some may not load by this point
-        map.invalidateSize();
-        map.setView([29.46630060995385, -98.50546763124163], 11);
-    });
+    // Create HTML element for each cuisine type
+    let cuisineFilterMenu = document.getElementById("cuisine-filter");
+    for (let cuisine of cuisineFilters) {
+        let filterHtml = document.createElement("div");
+        filterHtml.classList.add("multi-option");
+        filterHtml.innerHTML = `<input type="checkbox"> ${cuisine}`;
+        cuisineFilterMenu.appendChild(filterHtml);
+    }
 }
 
 
@@ -329,7 +312,7 @@ function updateAllMarkersShown() {
     for (let row of table.rows) {
         // Check the checkbox in the "Hide?" column to see if the marker should be shown
         let name = row.cells[tableColNameToIndex("Name")].innerText;
-        let shouldBeShown = row.cells[tableColNameToIndex("Show?")].children[0].checked;
+        let shouldBeShown = row.cells[tableColNameToIndex("Show")].children[0].checked;
         if (shouldBeShown) {
             markers[normalizeName(name)]._icon.classList.remove("hidden");
         }
@@ -399,7 +382,7 @@ function applyFilters(skipManualSelections = false) {
     let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
         let name = row.cells[tableColNameToIndex("Name")].innerText;
-        let shownCheckbox = row.cells[tableColNameToIndex("Show?")].children[0];
+        let shownCheckbox = row.cells[tableColNameToIndex("Show")].children[0];
 
         // Skip manually selected restaurants (only done on load in with URL parameters)
         if (skipManualSelections || manualSelections.includes(name)) {
@@ -417,7 +400,7 @@ function applyFilters(skipManualSelections = false) {
     }
 
     // Resort the table if sorting for "shown"
-    if (currentSortIndex == tableColNameToIndex("Show?")) {
+    if (currentSortIndex == tableColNameToIndex("Show")) {
         sortTable(currentSortIndex, currentSortFunc);
     }
 }
@@ -756,7 +739,7 @@ function setManualSelectionsFromBitString(bitString) {
         let table = document.getElementById("restaurant-table-body");
         for (let row of table.rows) {
             if (name == normalizeName(row.cells[tableColNameToIndex("Name")].innerText)) {
-                let checkbox = row.cells[tableColNameToIndex("Show?")].children[0];
+                let checkbox = row.cells[tableColNameToIndex("Show")].children[0];
                 checkbox.checked = !checkbox.checked;
                 updateMarkerShown(checkbox);
                 break;
@@ -1051,7 +1034,7 @@ document.getElementById("random-button").addEventListener("click", function() {
         // Check the checkbox in the "Hide?" column to see if the restaurant is selected
         let name = row.cells[tableColNameToIndex("Name")].innerText;
         let cuisine = row.cells[tableColNameToIndex("Cuisine")].innerText;
-        let isSelected = row.cells[tableColNameToIndex("Show?")].children[0].checked;
+        let isSelected = row.cells[tableColNameToIndex("Show")].children[0].checked;
         if (isSelected) {
             selections[name] = cuisine;
         }
@@ -1176,7 +1159,7 @@ document.getElementById("sort-shown-button").addEventListener("click", function(
     
     // Then sort by visited or not
     let sortingFunc2 = (this.classList.contains("up-button")) ? checkboxSort : reverseCheckboxSort;
-    sortTable(tableColNameToIndex("Show?"), sortingFunc2);
+    sortTable(tableColNameToIndex("Show"), sortingFunc2);
 
     // Update all sorting buttons for the table
     updateActiveSortButton(this);

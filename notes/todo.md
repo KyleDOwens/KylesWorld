@@ -43,5 +43,9 @@ todo:
 
 * find way to limit the sheet size so there is not so much extra scroll room
 
-* !!!!! Tear out D3 use in restaurants script, then test if final restaurants page works
 * Write small summary of the restaurants page, how to use it, how to use it, what tools are available (e.g. isochrones), my rating system
+
+
+* limit time in isochrone input!
+
+* not loading in manual table correctly on webpage load?

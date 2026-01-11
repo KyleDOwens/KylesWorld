@@ -371,7 +371,9 @@ function passesMenuFilters(name) {
  */
 function applyFilters(skipManualSelections = false) {
     // Clear manual selections, since they will all be overwritten when filters are applied
-    manualSelections = [];
+    if (!skipManualSelections) {
+        manualSelections = [];
+    }
 
     // Stop displaying a random selection, since the selection is changing
     if (randomTimerId) {
@@ -543,7 +545,7 @@ function bitStringToBase62(bitString) {
  * Converts the current state of all filters into a bit string
  * @returns A bit string representing the filter states
  */
-function getFiltersBitString() {
+function encodeFilters() {
     // Build bit string of all menu filters, where filter on = "1", filter off = "0"
     let bitString = "";
     let filterCheckboxes = document.querySelectorAll(".multi-option input");
@@ -558,7 +560,7 @@ function getFiltersBitString() {
  * Converts the current isochrone object into a bit string
  * @returns A bit string representing the isochrone object
  */
-function getIsochroneBitString() {
+function encodeIsochrone() {
     let bitString = "";
 
     // Append bit string representing isochrone (lat, long, range)
@@ -594,7 +596,10 @@ function getIsochroneBitString() {
  * Converts the current manually selected restaurants into a bit string
  * @returns A bit string representing the manually selected restaurants
  */
-function getManualSelectionsBitString() {
+function encodeManualSelections() {
+    console.log(`When encoding, manual selections are`)
+    console.log(manualSelections)
+
     let bitString = "";
 
     // Append bit string representing the key indices of the manual selections
@@ -614,9 +619,9 @@ document.getElementById("share-button").addEventListener("click", async function
     let newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname
 
     // Get bit strings representing the state
-    let filtersBitString = getFiltersBitString()
-    let isochroneBitString = getIsochroneBitString()
-    let manualSelectionsBitString = getManualSelectionsBitString()
+    let filtersBitString = encodeFilters()
+    let isochroneBitString = encodeIsochrone()
+    let manualSelectionsBitString = encodeManualSelections()
     
     // Encode the map state as base62 and add to URL
     if (filtersBitString) {
@@ -667,7 +672,7 @@ function base62ToBitString(encoding) {
  * Set which filters are on/off, based on the state info within the bit string
  * @param {string} bitString The bit string containing the state of each filter
  */
-function setFiltersFromBitString(bitString) {
+function decodeAndSetFilters(bitString) {
     // Each bit represents a filter on/off
     let filterCheckboxes = document.querySelectorAll(".multi-option input");
     for (let i = 0; i < filterCheckboxes.length; i++) {
@@ -682,7 +687,7 @@ function setFiltersFromBitString(bitString) {
  * Create an isochrone based on the info within the bit string
  * @param {string} bitString The bit string containing the isochrone info
  */
-function setIsochroneFromBitString(bitString) {
+function decodeAndSetIsochrone(bitString) {
     let latLongBitLen = Math.pow(10, PRECISION + 2).toString(2).length;
     let rangeBitLen = Math.pow(2, 3).toString(2).length;
     
@@ -724,7 +729,8 @@ function setIsochroneFromBitString(bitString) {
  * Set which restaurants should be manually set shown/hidden, based on the info within the bit string
  * @param {string} bitString The bit string containing the manually selected restaurants
  */
-function setManualSelectionsFromBitString(bitString) {
+function decodeAndSetManualSelections(bitString) {
+    console.log("decoding manual selections")
     let selectionBitLen = parseInt(Object.keys(restaurants).length).toString(2).length;
 
     let i = 0;
@@ -748,6 +754,9 @@ function setManualSelectionsFromBitString(bitString) {
 
         i += selectionBitLen;
     }
+
+    console.log(`After parsing URL, manual selections are`)
+    console.log(manualSelections)
 }
 
 /**
@@ -769,15 +778,15 @@ function parseUrl() {
     // Apply all passed in state information
     if (encodedFilters) {
         let filtersBitString = base62ToBitString(encodedFilters).slice(1);
-        setFiltersFromBitString(filtersBitString);
+        decodeAndSetFilters(filtersBitString);
     }
     if (encodedIsochrone) {
         let isochroneBitString = base62ToBitString(encodedIsochrone).slice(1);
-        setIsochroneFromBitString(isochroneBitString);
+        decodeAndSetIsochrone(isochroneBitString);
     }
     if (encodedManualSelections) {
         let manualSelectionsBitString = base62ToBitString(encodedManualSelections).slice(1);
-        setManualSelectionsFromBitString(manualSelectionsBitString);
+        decodeAndSetManualSelections(manualSelectionsBitString);
     }
 }
 
@@ -791,7 +800,10 @@ function parseUrl() {
 document.getElementById("distance-filter-add-button").addEventListener("click", function() {
     placingIsochrone = true;
     document.getElementById("map").classList.add("blob-cursor");
-    console.log(document.getElementById("map").classList);
+
+    // Display info text
+    let infoOutput = document.getElementById("distance-info");
+    infoOutput.innerText = "Click the map at your starting location!";
 });
 
 /**
@@ -885,10 +897,12 @@ function displayIsochroneError(errorMsg) {
     console.log("ERROR:" + errorMsg);
         
     // display error text to user for 15 seconds
-    let errorOutput = document.getElementById("distance-error");
+    let errorOutput = document.getElementById("distance-info");
+    errorOutput.classList.toggle("error-red-tex")
     errorOutput.innerText = errorMsg;;
     setTimeout(() => {
         errorOutput.innerHTML = "&nbsp;";
+        errorOutput.classList.toggle("error-red-tex")
     }, 500*15);
     
     // start timer to flash input cell red (if not already going)
@@ -1003,6 +1017,9 @@ map.on("click", (event) => {
         let lat = event["latlng"]["lat"];
         let long = event["latlng"]["lng"];
         let range = document.getElementById("distance-filter-input").value;
+
+        let infoOutput = document.getElementById("distance-info");
+        infoOutput.innerText = "&nbsp;";
         
         drawDistanceIsochrone(lat, long, range, true);
     }

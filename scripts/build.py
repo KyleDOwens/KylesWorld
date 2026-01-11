@@ -34,6 +34,8 @@ os.makedirs(f"{BUILD_DIR}/js")
 shutil.copyfile(f"./css/{BASE_FILE}.css", f"./build/css/{BASE_FILE}.css")
 shutil.copyfile(f"./js/{BASE_FILE}.js", f"./build/js/{BASE_FILE}.js")
 
+shutil.copyfile(f"./js/config.js", f"./build/js/config.js") # TODO: remove
+
 shutil.copytree("./css/fonts", "build/css/fonts", dirs_exist_ok=True)
 shutil.copytree("./images", "build/images", dirs_exist_ok=True)
 

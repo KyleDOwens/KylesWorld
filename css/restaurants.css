@@ -96,7 +96,7 @@ ul {
     left: calc(64px*10.865);
     top: calc(20px*21.125);
     width: calc(64px*8);
-    height: calc(20px*19.5);
+    height: calc(20px*20.5);
 }
 
 #filter-container {
@@ -134,12 +134,11 @@ ul {
     border-bottom: 2px solid #ffffff;
 }
 
-#distance-error {
+#distance-info {
     margin-top: 5px;
     color: gray;
     font-size: 10pt;
     vertical-align: top;
-    color: red
 }
 
 /**** ATTRIBUTE FILTERING ****/
@@ -180,17 +179,19 @@ ul {
     z-index: 10;
 }
 #filter-menus .multi-select {
-    border: 1px solid black;
+    border: outset;
     background-color: #d5d3c6;
     flex: 1 1 auto;
-    min-width: min-content; 
+    min-width: min-content;
 }
 #filter-menus .multi-select .multi-option {
     background-color: #d5d3c6;
     white-space: pre-wrap;
 }
 #filter-menus .multi-select .multi-any {
-    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+    border-bottom: 2px solid #aaa9a2;
+    margin-bottom: 1px;
 }
 
 /*************************
@@ -345,16 +346,8 @@ ul {
 
 #locket-window {
     position: absolute;
-    left: calc(64px*10.875);
-    top: calc(20px*41);
-    width: calc(64px*4.25);
-    height: calc(20px*10);
-}
-
-#locket-window {
-    position: absolute;
     left: calc(64px*10.75);
-    top: calc(20px*40.785);
+    top: calc(20px*41.785);
     width: calc(64px*4.25);
     height: calc(20px*10);
 }
@@ -366,7 +359,7 @@ ul {
 #sandwich-window {
     position: absolute;
     left: calc(64px*15.375);
-    top: calc(20px*41);
+    top: calc(20px*42);
     width: calc(64px*4.25);
     height: calc(20px*10);
 }
@@ -374,7 +367,7 @@ ul {
 #foodfun-window {
     position: absolute;
     left: calc(64px*10.125);
-    top: calc(20px*51.625);
+    top: calc(20px*52.625);
     width: calc(64px*10);
     height: calc(20px*10);
 }

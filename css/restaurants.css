@@ -178,8 +178,15 @@ ul {
 }
 #cuisine-filter {
     grid-area: cuisine;
+}
+#cuisine-scroll-container {
+    flex: 1;
+    overflow-y: scroll;
+    position: relative;
     max-height: 200px;
-    overflow-y: scroll; /* TODO: replace with custom scrollbar */
+}
+#cuisine-scroll-container::-webkit-scrollbar {
+    display: none;
 }
 #rating-filter {
     grid-area: rating;
@@ -311,13 +318,23 @@ ul {
     flex-direction: column;
 }
 
-#restaurant-table-container {
+.scroll-and-content {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: flex;
+    position: relative;
+}
+
+#restaurant-scroll-container {
     flex: 1;
-    overflow-y: scroll; /* TODO: Replace with custom scrollbar*/
+    overflow-y: scroll;
     position: relative;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
+}
+#restaurant-scroll-container::-webkit-scrollbar {
+    display: none;
 }
 /*#endregion LIST_PANEL */
 
@@ -337,6 +354,7 @@ ul {
 /* Table header */
 #restaurant-table-header {
     position: sticky;
+    z-index: 2;
     top: 0;
     background-color: #d5d3c6;
     border-bottom: 1px solid red;

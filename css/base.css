@@ -1039,7 +1039,6 @@ nav#sheet-tabs {
 .vertical-scrollbar {
     display: flex;
     flex-direction: column;
-    flex: 1;
 }
 
 .scroll-track {

@@ -123,7 +123,6 @@ let mockIsochrone = {
 document.addEventListener("DOMContentLoaded", () => {
     initializeMap();
     loadCache();
-    initializeCuisineFilter();
     addListenerToFilters();
     initializeFilters();
     parseUrl();
@@ -252,36 +251,6 @@ function loadCache() {
                 rating,
                 notes,
                 originalUrl);
-    }
-}
-
-/**
- * Creates all the HTML elements for the cuisine filters from the data in the restaurant table
- */
-function initializeCuisineFilter() {
-    let cuisineFilters = [];
-
-    let table = document.getElementById("restaurant-table-body");
-    for (let row of table.rows) {
-        // Update cuisine type filters
-        let cuisines = row.cells[tableColNameToIndex("Cuisine")].textContent.split(" / ");
-        for (let c of cuisines) {
-            if (!cuisineFilters.includes(c)) {
-                cuisineFilters.push(c);
-            }
-        }
-    }
-
-    // Sort cuisines in alphabetical order
-    cuisineFilters.sort();
-
-    // Create HTML element for each cuisine type
-    let cuisineFilterMenu = document.getElementById("cuisine-filter");
-    for (let cuisine of cuisineFilters) {
-        let filterHtml = document.createElement("div");
-        filterHtml.classList.add("multi-option");
-        filterHtml.innerHTML = `<label><input type="checkbox">${cuisine}</label>`;
-        cuisineFilterMenu.appendChild(filterHtml);
     }
 }
 //#endregion INITIALIZATION

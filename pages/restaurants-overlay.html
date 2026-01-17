@@ -58,21 +58,35 @@
         <div id="attributes-container">
             <div id="filter-header">Attribute filters!</div>
             <div class="filter-subheader faint-text">(Select from restaurant qualities)</div>
-            <!-- Visited filter -->
             <div id="filter-menus">
-                <div id="visited-filter" class="multi-select">
+                <!-- Visited filter -->
+                <div class="multi-select" id="visited-filter">
                     <div class="multi-option-header">Visited</div>
                     <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
                     <div class="multi-option"><label><input type="checkbox">Visited</label></div>
                     <div class="multi-option"><label><input type="checkbox">Unvisited</label></div>
                 </div>
                 <!-- Cuisine filter -->
-                <div id="cuisine-filter" class="multi-select">
-                    <div class="multi-option-header">Cuisine</div>
-                    <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
+                <div class="scroll-and-content">
+                    <div class="scroll-container multi-select" id="cuisine-scroll-container">
+                        <div id="cuisine-filter">
+                            <div class="multi-option-header">Cuisine</div>
+                            <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
+                            REPLACEME_CUISINEROWS
+                        </div>
+                    </div>
+
+                    <!-- Vertical scrollbar -->
+                    <div class="vertical-scrollbar" data-prefix="cuisine" id="cuisine-vertical-scrollbar">
+                        <button class="square-button up-button" id="cuisine-up-scroll-button"></button>
+                        <div class="scroll-track" id="cuisine-vertical-scroll-track">
+                            <div class="scroll-thumb" id="cuisine-vertical-scroll-thumb"></div>
+                        </div>
+                        <button class="square-button down-button" id="cuisine-down-scroll-button"></button>
+                    </div>
                 </div>
                 <!-- Rating filter -->
-                <div id="rating-filter" class="multi-select">
+                <div class="multi-select" id="rating-filter">
                     <div class="multi-option-header">Rating</div>
                     <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
                     <div class="multi-option"><label><input type="checkbox">Low</label></div>
@@ -98,25 +112,36 @@
         </div>
     </div>
 
-    <!-- Restaurant Table -->
-    <div id="restaurant-table-container">
-        <table id="restaurant-table">
-            <thead id="restaurant-table-header">
-                <tr>
-                    <th class="name">Name <button id="sort-name-button" class="table-sort-button square-button down-button"></button></th>
-                    <th class="cuisine">Cuisine <button id="sort-cuisine-button" class="table-sort-button square-button down-button"></button></th>
-                    <th class="visited">Visited <button id="sort-visited-button" class="table-sort-button square-button down-button"></button></th>
-                    <th class="shown">Show <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                    <th class="rating hidden">Rating <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                    <th class="notes hidden">Notes <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                    <th class="gps hidden">Gps <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                    <th class="originalUrl hidden">OriginalUrl <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                </tr>
-            </thead>
-            <tbody id="restaurant-table-body">
-                REPLACEME_RESTAURANTROWS
-            </tbody>
-        </table>
+    <div class="scroll-and-content">
+        <!-- Restaurant Table -->
+        <div class="scroll-container" id="restaurant-scroll-container">
+            <table id="restaurant-table">
+                <thead id="restaurant-table-header">
+                    <tr>
+                        <th class="name">Name <button id="sort-name-button" class="table-sort-button square-button down-button"></button></th>
+                        <th class="cuisine">Cuisine <button id="sort-cuisine-button" class="table-sort-button square-button down-button"></button></th>
+                        <th class="visited">Visited <button id="sort-visited-button" class="table-sort-button square-button down-button"></button></th>
+                        <th class="shown">Show <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                        <th class="rating hidden">Rating <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                        <th class="notes hidden">Notes <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                        <th class="gps hidden">Gps <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                        <th class="originalUrl hidden">OriginalUrl <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                    </tr>
+                </thead>
+                <tbody id="restaurant-table-body">
+                    REPLACEME_RESTAURANTROWS
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Vertical scrollbar -->
+        <div class="vertical-scrollbar" data-prefix="restaurant" id="restaurant-vertical-scrollbar">
+            <button class="square-button up-button" id="restaurant-up-scroll-button"></button>
+            <div class="scroll-track" id="restaurant-vertical-scroll-track">
+                <div class="scroll-thumb" id="restaurant-vertical-scroll-thumb"></div>
+            </div>
+            <button class="square-button down-button" id="restaurant-down-scroll-button"></button>
+        </div>
     </div>
 </div>
 

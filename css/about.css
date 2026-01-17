@@ -23,13 +23,3 @@
 #test-scroll-container::-webkit-scrollbar {
     display: none;
 }
-
-/*
-
-main
-    scroll container
-        sheet-canvas
-            sheet-overlay
-    scrollbar
-
-*/

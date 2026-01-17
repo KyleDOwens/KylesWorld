@@ -97,14 +97,6 @@ function getAllScrollbars() {
         let prefix = container.dataset.prefix;
        verticalScrollbars.push(prefix);
     })
-
-    console.log("scrollbars:");
-    for (let h of horizontalScrollbars) {
-        console.log(`h : ${h}`);
-    }
-    for (let v of verticalScrollbars) {
-        console.log(`v : ${v}`);
-    }
 }
 
 /**

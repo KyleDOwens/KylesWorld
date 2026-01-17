@@ -80,6 +80,7 @@ for file in os.listdir(os.fsencode("./pages")):
 
 # Load restaurants from CSV
 restaurant_rows = ""
+seen_cuisines = []
 with open(f"./csv/restaurants.csv", "r") as restaurants_file:
     reader = csv.DictReader(restaurants_file, delimiter=",")
     next(reader, None)
@@ -100,12 +101,24 @@ with open(f"./csv/restaurants.csv", "r") as restaurants_file:
         '</tr>\n'
         )
 
+        for cuisine in row["cuisine"].split(" / "):
+            if (cuisine not in seen_cuisines):
+                seen_cuisines.append(cuisine)
+
+# Sort cuisines by name
+seen_cuisines.sort()
+
+cuisine_rows = ""
+for cuisine in seen_cuisines:
+    cuisine_rows += f'<div class="multi-option"><label><input type="checkbox">{cuisine}</label></div>'
+
 # Fill restaurants.html with CSV data
 unfilled_html = None
 with open(f"{BUILD_DIR}/restaurants.html", "r") as input_file:
     unfilled_html = input_file.read()
 
 filled_html = unfilled_html.replace("REPLACEME_RESTAURANTROWS", restaurant_rows)
+filled_html = filled_html.replace("REPLACEME_CUISINEROWS", cuisine_rows)
 
 with open(f"{BUILD_DIR}/restaurants.html", "w") as output_file:
     output_file.write(filled_html)

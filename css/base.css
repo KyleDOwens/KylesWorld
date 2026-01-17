@@ -31,6 +31,8 @@ body {
     width: 70vw;
 
     display: grid;
+
+    border: 1px solid #c0c0c0;
 }
 #excel-window > * {
   min-width: 0;
@@ -79,6 +81,33 @@ body {
     border-bottom: 2px solid #ffffff;
 }
 
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+    
+    width: 16px;
+    height: 16px;
+    border: inset;
+
+    display: grid;
+    place-content: center;
+}
+input[type="checkbox"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+
+    /* background-color: red; */
+    transform: scale(0);
+    transform-origin: bottom left;
+    box-shadow: inset 1em 1em black;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
 :root {
     /* TODO: */
     --zindex-sheet-corner-header: 4;
@@ -91,6 +120,16 @@ body {
     --cell-height: 20px;
     --cell-header-width: 32px;
     --cell-width: 64px;
+
+    --title-blue: #080065;
+    --background-gray: #B9B6BB;
+    --background-gray-bright2: #c7c4c8;
+    --background-gray-bright3: #cecbcf;
+    --background-gray-bright4: #d4d3d6;
+    --background-gray-dark1: #a09ea2;
+    --background-gray-dark2: #89868a;
+
+    --background-beige: #ece9d8;
 }
 
 /*-- ================================================ --->
@@ -194,8 +233,9 @@ body {
     padding: 10px;
 
     border-style: outset; 
-    background: linear-gradient(rgb(10, 36, 106), rgb(58, 110, 165));
+    /* background: linear-gradient(rgb(10, 36, 106), rgb(58, 110, 165)); */
     /* background: linear-gradient(rgb(0, 0, 128), rgb(16, 132, 208)); */
+    background: var(--title-blue);
     color:#f8f8f8;
 
     font-size: 18pt;
@@ -244,7 +284,7 @@ body {
     left: 35%;
 }
 .maximize::after { /* bottom left box*/
-    background-color: #c0c0c0;
+    background-color: var(--background-gray);
     top: 35%;
     left: 15%;
 }
@@ -276,7 +316,7 @@ body {
 <--- ================================================ --*/
 /*#region MENUBAR*/
 #menu-bar {
-    background-color: #c0c0c0;
+    background-color: var(--background-gray);
     min-height: 20px;
     padding-left: 0rem;
     user-select: none;
@@ -288,10 +328,10 @@ body {
     font-size: 1rem;
 }
 .menu-button:hover {
-    background-color: #d0d0d0;
+    background-color: var(--background-gray-bright3);
 }
 .menu-button:active {
-    background-color: #a0a0a0;
+    background-color: var(--background-gray-dark1);
 }
 
 @media only screen and (max-width: 545px) {
@@ -322,7 +362,7 @@ body {
 <--- ================================================ --*/
 /*#region TEXTBAR*/
 #text-bar {
-    background-color: #b0b0b0;
+    background-color: var(--background-gray);
     min-height: 18px;
 
     display: flex;
@@ -657,7 +697,7 @@ body {
 <--- ================================================ --*/
 /*#region CELLBAR*/
 #cell-bar {
-    background-color: #a0a0a0;
+    background-color: var(--background-gray);
     min-height: 20px;
 
     display: flex;
@@ -709,6 +749,7 @@ body {
 .marquee-container {
     flex: 1 1 auto;
     background-color: #ffffff;
+
     border-bottom: 2px solid #808080;
     border-left: 2px solid #ffffff;
     border-right: 2px solid #404040;
@@ -795,7 +836,7 @@ main {
     left: 0;
     z-index: 4;
 
-    background-color: #c0c0c0;
+    background-color: var(--background-gray);
     border: 1px solid #2C2C2C;
 
     height: 20px;
@@ -816,7 +857,7 @@ main {
     top: 0;
     z-index: 3;
     
-    background-color: #c0c0c0;
+    background-color: var(--background-gray);
     border-top: 1px solid #2C2C2C;
     border-bottom: 1px solid #2C2C2C;
     border-right: 1px solid #2C2C2C;
@@ -843,7 +884,7 @@ main {
     left: 0;
     z-index: 3;
 
-    background-color: #c0c0c0;
+    background-color: var(--background-gray);
     border-left: 1px solid #2C2C2C;
     border-right: 1px solid #2C2C2C;
     border-bottom: 1px solid #2C2C2C;
@@ -893,7 +934,8 @@ main {
 <--- ================================================ --*/
 /*#region FOOTER*/
 footer {
-    background: linear-gradient(to bottom, blue, cornflowerblue);
+    background: linear-gradient(to bottom, var(--title-blue), blue);
+    background: var(--title-blue);
 }
 
 #first-sheet-button::after {
@@ -961,7 +1003,7 @@ nav#sheet-tabs {
     inset: 1px;
     z-index: -2;
 
-    background-color: #c0c0c0; /* Tab background color! */
+    background-color: var(--background-gray); /* Tab background color! */
 
     clip-path: polygon(0% 0%, 100% 0%, 92.5% 100%, 7.5% 100%);
 
@@ -969,8 +1011,7 @@ nav#sheet-tabs {
     pointer-events: none;
 }
 .sheet-tab:hover::after {
-    background-color: #a0a0a0;
-    background-color: #dcdcdc;
+    background-color: var(--background-gray-bright4);
 }
 
 .active-tab.sheet-tab::after {
@@ -1023,7 +1064,7 @@ nav#sheet-tabs {
     height: 100%;
     width: 60px;
 
-    background-color: #c0c0c0;
+    background-color: var(--background-gray);
 
     border-top: 2px solid #ffffff;
     border-left: 2px solid #ffffff;
@@ -1087,7 +1128,7 @@ nav#sheet-tabs {
 }
 .dropdown-item {
     padding-left: 1.5rem;
-    color: #000;
+    color: black;
     border-top: 1px solid #f0f0f0;
 }
 .dropdown-item:hover {
@@ -1104,7 +1145,7 @@ nav#sheet-tabs {
 <--- ================================================ --*/
 /*#region EMBEDWINDOWS*/
 .embedded-window {
-    background: #ece9d8;
+    background: var(--background-beige);
     border-top: 2px solid #e8f0ff;
     border-left: 2px solid #e8f0ff;
     border-right: 2px solid #2f4f6f;

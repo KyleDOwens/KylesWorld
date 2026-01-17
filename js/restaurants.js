@@ -276,7 +276,7 @@ function initializeCuisineFilter() {
     for (let cuisine of cuisineFilters) {
         let filterHtml = document.createElement("div");
         filterHtml.classList.add("multi-option");
-        filterHtml.innerHTML = `<input type="checkbox"> ${cuisine}`;
+        filterHtml.innerHTML = `<label><input type="checkbox">${cuisine}</label>`;
         cuisineFilterMenu.appendChild(filterHtml);
     }
 }
@@ -333,7 +333,7 @@ function extractFilters(multiSelect) {
     let multiOptions = multiSelect.querySelectorAll(".multi-option");
     
     for (let option of multiOptions) {
-        let selected = option.children[0].checked;
+        let selected = option.children[0].children[0].checked;
         if (selected) {
             filters.push(option.innerText.trim().toLowerCase());
         }
@@ -499,8 +499,9 @@ anyCheckboxes.forEach(anyCheckbox => anyCheckbox.addEventListener("click", funct
  */
 function addListenerToFilters() {
     let allOptionCheckboxes = document.querySelectorAll(".multi-option:not(.multi-any) input");
+
     allOptionCheckboxes.forEach(optionCheckbox => optionCheckbox.addEventListener("click", function() {
-        let multiOptionMenu = optionCheckbox.parentElement.parentElement;
+        let multiOptionMenu = optionCheckbox.parentElement.parentElement.parentElement; // <div><label><input></label></div>
         let anyCheckbox = multiOptionMenu.querySelector(".multi-any input");
         if (!optionCheckbox.checked && anyCheckbox.checked) {
             anyCheckbox.checked = false;
@@ -597,9 +598,6 @@ function encodeIsochrone() {
  * @returns A bit string representing the manually selected restaurants
  */
 function encodeManualSelections() {
-    console.log(`When encoding, manual selections are`)
-    console.log(manualSelections)
-
     let bitString = "";
 
     // Append bit string representing the key indices of the manual selections
@@ -730,7 +728,6 @@ function decodeAndSetIsochrone(bitString) {
  * @param {string} bitString The bit string containing the manually selected restaurants
  */
 function decodeAndSetManualSelections(bitString) {
-    console.log("decoding manual selections")
     let selectionBitLen = parseInt(Object.keys(restaurants).length).toString(2).length;
 
     let i = 0;
@@ -754,9 +751,6 @@ function decodeAndSetManualSelections(bitString) {
 
         i += selectionBitLen;
     }
-
-    console.log(`After parsing URL, manual selections are`)
-    console.log(manualSelections)
 }
 
 /**
@@ -1008,9 +1002,6 @@ async function drawDistanceIsochrone(lat, long, range, alsoApply = false) {
  * Check if user is applying a distance filter when the map is clicked
  */
 map.on("click", (event) => {
-    console.log(map.getCenter());
-    console.log(map.getZoom());
-    
     if (placingIsochrone) {
         placingIsochrone = false;
         document.getElementById("map").classList.remove("blob-cursor");

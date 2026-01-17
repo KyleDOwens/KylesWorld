@@ -61,6 +61,7 @@ This is done in a separate step *after* combining the base base and page files i
 * [Search for gifs](https://gifcities.org/search?)
 * [Word art maker](https://www.makewordart.com/)
 * [Create static map image](https://stadiamaps.com/build-a-map/#map=9.78/29.4673/-98.5817&style=outdoors)
+* [Get shades/hues of a color](https://colorkit.co/color-picker/)
 
 ## "Go Build a Personal Website" Inspiration
 * [Motivation for building a personal website](https://localghost.dev/blog/building-a-website-like-it-s-1999-in-2022/)

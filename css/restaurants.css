@@ -1,6 +1,7 @@
-/***************************
-**** COLROS & CONSTANTS ****
-***************************/
+/*-- ================================================ --->
+<---                COLORS & CONSTANTS                --->
+<--- ================================================ --*/
+/*#region CONSTANTS */
 /* Rather than have different colored markers, just transform a single black marker into any color I want */
 .visited-low {
     color: #A8C95B;
@@ -64,10 +65,13 @@
 ul {
     margin: 0;
 }
+/*#endregion CONSTANTS */
 
-/******************
-**** MAP PANEL ****
-******************/
+
+/*-- ================================================ --->
+<---                     MAP PANEL                    --->
+<--- ================================================ --*/
+/*#region MAP_PANEL */
 #map-window {
     position: absolute;
     left: calc(64px*0.5);
@@ -86,11 +90,13 @@ ul {
     border-right: 3px solid #d0d0d0;
     border-bottom: 3px solid #d0d0d0;
 }
+/*#endregion MAP_PANEL */
 
 
-/*********************
-**** FILTER PANEL ****
-*********************/
+/*-- ================================================ --->
+<---                   FILTER PANEL                   --->
+<--- ================================================ --*/
+/*#region FILTER_PANEL */
 #filter-window {
     position: absolute;
     left: calc(64px*10.865);
@@ -110,9 +116,13 @@ ul {
 .filter-subheader {
     font-size: 10pt;
 }
+/*#endregion FILTER_PANEL */
 
 
-/**** DISTANCE FILTERING ****/
+/*-- ================================================ --->
+<---                  DISTANCE FILTER                 --->
+<--- ================================================ --*/
+/*#region DISTANCE_FILTER */
 #distance-filter {
     margin: 5px;
     padding: 10px;
@@ -140,8 +150,13 @@ ul {
     font-size: 10pt;
     vertical-align: top;
 }
+/*#endregion DISTANCE_FILTER */
 
-/**** ATTRIBUTE FILTERING ****/
+
+/*-- ================================================ --->
+<---                  ATTRIBUTE FILTER                --->
+<--- ================================================ --*/
+/*#region ATTRIBUTE_FILTER */
 #attributes-container {
     margin: 5px;
     padding: 10px;
@@ -170,7 +185,7 @@ ul {
     grid-area: rating;
 }
 
-#filter-menus .multi-option-header {
+.multi-option-header {
     font-weight: bold;
     background-color: #bfbeb4;
 
@@ -178,25 +193,33 @@ ul {
     top: 0;
     z-index: 10;
 }
-#filter-menus .multi-select {
+.multi-select {
     border: outset;
     background-color: #d5d3c6;
     flex: 1 1 auto;
     min-width: min-content;
 }
-#filter-menus .multi-select .multi-option {
+.multi-option {
     background-color: #d5d3c6;
-    white-space: pre-wrap;
 }
-#filter-menus .multi-select .multi-any {
+.multi-option label {
+    display:flex;
+    gap: 5px;
+    margin-left: 5px;
+    margin-bottom: 2px;
+}
+.multi-any {
     padding-bottom: 2px;
     border-bottom: 2px solid #aaa9a2;
     margin-bottom: 1px;
 }
+/*#endregion ATTRIBUTE_FILTER */
 
-/*************************
-**** RANDOM SELECTION ****
-*************************/
+
+/*-- ================================================ --->
+<---                  RANDOM SELECTION                --->
+<--- ================================================ --*/
+/*#region RANDOM_SELECTION */
 #random-container {
     display: flex;
     justify-content: center;
@@ -234,11 +257,13 @@ ul {
         gap: 0;
     }
 }
+/*#endregion RANDOM_SELECTION */
 
 
-/*************************
-**** SHARE SELECTIONS ****
-*************************/
+/*-- ================================================ --->
+<---                  SHARE SELECTIONS                --->
+<--- ================================================ --*/
+/*#region SHARE_SELECTIONS */
 #share-container {
     display: flex;
     flex-direction: column;
@@ -268,10 +293,13 @@ ul {
     font-size: 10pt;
     vertical-align: top;
 }
+/*#endregion SHARE_SELECTIONS */
 
-/******************
-**** LIST PANEL ***
-******************/
+
+/*-- ================================================ --->
+<---                     LIST PANEL                   --->
+<--- ================================================ --*/
+/*#region LIST_PANEL */
 #list-window {
     position: absolute;
     left: calc(64px*10.75);
@@ -291,8 +319,13 @@ ul {
     margin-right: 5px;
     margin-bottom: 5px;
 }
+/*#endregion LIST_PANEL */
 
-/* Table */
+
+/*-- ================================================ --->
+<---                 RESTAURANT TABLE                 --->
+<--- ================================================ --*/
+/*#region RESTAURANT_TABLE */
 #restaurant-table {
     /* table-layout: fixed; */
     width: 100%;
@@ -325,17 +358,20 @@ ul {
     border-bottom: 1px solid black;
 }
 
-#restaurant-table .visited {
+.visited {
     text-align: center;
 }
-#restaurant-table .shown {
-    text-align: center;
+.shown input {
+    margin-left: auto;
+    margin-right: auto;
 }
+/*#endregion RESTAURANT_TABLE */
 
 
-/**********************
-**** GIF CONTAINERS ***
-**********************/
+/*-- ================================================ --->
+<---                    GIF WINDOWS                   --->
+<--- ================================================ --*/
+/*#region GIF_WINDOWS */
 #hamburger-window {
     position: absolute;
     left: calc(64px*0.25);
@@ -374,10 +410,13 @@ ul {
 #foodfun-window img {
     width: 650px;
 }
+/*#endregion GIF_WINDOWS */
 
-/**************************
-**** PERSONAL FAVORITES ***
-**************************/
+
+/*-- ================================================ --->
+<---                  CONTENT WINDOWS                 --->
+<--- ================================================ --*/
+/*#region CONTENT_WINDOWS */
 #favorites-window {
     position: absolute;
     left: calc(64px*4.625);
@@ -393,3 +432,4 @@ ul {
     width: calc(64px*9.5);
     height: calc(22px*25);
 }
+/*#endregion CONTENT_WINDOWS */

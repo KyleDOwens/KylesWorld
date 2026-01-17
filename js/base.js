@@ -1,3 +1,7 @@
+/*-- ================================================ --->
+<---                   INITIALIZATION                 --->
+<--- ================================================ --*/
+//#region INITIALIZATION
 document.addEventListener("DOMContentLoaded", () => {
     initializeSheet();
 
@@ -37,11 +41,13 @@ function initializeSheet() {
         mockVerticalHeader.appendChild(headerCell);
     }
 }
+//#endregion INITIALIZATION
 
 
-/**************************
-**** CUSTOM SCROLLBARS ****
-**************************/
+/*-- ================================================ --->
+<---                 CUSTOM SCROLLBARS                --->
+<--- ================================================ --*/
+//#region SCROLLBARS
 /**
  * Constants used for storing state info when dragging a scrollbar
  */
@@ -211,11 +217,13 @@ window.addEventListener("mousemove", (e) => {
 document.getElementById("scroll-container").addEventListener("scroll", () => {
     updateScrollPosition();
 })
+//#endregion SCROLLBARS
 
 
-/**************************
-**** SCROLLBAR BUTTONS ****
-**************************/
+/*-- ================================================ --->
+<---                 SCROLLBAR BUTTONS                --->
+<--- ================================================ --*/
+//#region SCROLLBAR_BUTTONS
 /**
  * Constants used for storing state info when a scrollbar scroll button is held
  */
@@ -348,11 +356,13 @@ document.addEventListener("mouseup", () => {
         scrollTimerId = null;
     }
 });
+//#endregion SCROLLBAR_BUTTONS
 
 
-/*******************
-**** SHEET TABS ****
-*******************/
+/*-- ================================================ --->
+<---                     SHEET TABS                   --->
+<--- ================================================ --*/
+//#region SHEET_TABS
 let NUM_TABS_SHOWN = 5;
 
 /**
@@ -473,7 +483,6 @@ document.getElementById("last-sheet-button").addEventListener("click", () => {
     updateTabDisplay();
 });
 
-
 /**
  * Handles the toggling of the <current sheet> dropdown menu
  */
@@ -486,7 +495,9 @@ document.getElementById("sheet-selector-dropdown").addEventListener("click", tog
 document.getElementById("long-sheet-selector-input").addEventListener("click", toggleSheetDropdown);
 document.getElementById("short-sheet-selector-input").addEventListener("click", toggleSheetDropdown);
 
-
+/**
+ * Updates the dropdown and sheet tabs on page load
+ */
 function handlePageLoad() {
     // Get the current page name
     let pageName = window.location.pathname.slice(window.location.pathname.lastIndexOf("/") + 1, window.location.pathname.indexOf(".html"));
@@ -519,3 +530,4 @@ function handlePageLoad() {
         console.log("ERROR: Could not find corresponding tab for loaded page");
     }
 }
+//#endregion SHEET_TABS

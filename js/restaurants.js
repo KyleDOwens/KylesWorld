@@ -113,9 +113,10 @@ let mockIsochrone = {
 }
 
 
-/********************************
-**** STARTUP / ON LOADING IN ****
-********************************/
+/*-- ================================================ --->
+<---                   INITIALIZATION                 --->
+<--- ================================================ --*/
+//#region INITIALIZATION
 /**
  * Creates and populates the map and table on load in
  */
@@ -254,6 +255,9 @@ function loadCache() {
     }
 }
 
+/**
+ * Creates all the HTML elements for the cuisine filters from the data in the restaurant table
+ */
 function initializeCuisineFilter() {
     let cuisineFilters = [];
 
@@ -280,11 +284,13 @@ function initializeCuisineFilter() {
         cuisineFilterMenu.appendChild(filterHtml);
     }
 }
+//#endregion INITIALIZATION
 
 
-/******************************
-**** APPLYING MENU FILTERS ****
-******************************/
+/*-- ================================================ --->
+<---                  APPLYING FILTERS                --->
+<--- ================================================ --*/
+//#region APPLYING_FILTERS
 /**
  * Callback function to show/hide an individual restaurant marker assocaited with the passed in checkbox, depending on if it is checked or not
  * @param {checkbox} checkbox The HTML checkbox
@@ -387,7 +393,7 @@ function applyFilters(skipManualSelections = false) {
         let shownCheckbox = row.cells[tableColNameToIndex("Show")].children[0];
 
         // Skip manually selected restaurants (only done on load in with URL parameters)
-        if (skipManualSelections || manualSelections.includes(name)) {
+        if (skipManualSelections && manualSelections.includes(name)) {
             continue;
         }
 
@@ -406,11 +412,13 @@ function applyFilters(skipManualSelections = false) {
         sortTable(currentSortIndex, currentSortFunc);
     }
 }
+//#endregion APPLYING_FILTERS
 
 
-/**********************************
-**** FILTER CHECKBOX LISTENERS ****
-**********************************/
+/*-- ================================================ --->
+<---                  FILTER CHECKBOXES               --->
+<--- ================================================ --*/
+//#region FILTER_CHECKBOXES
 /**
  * Check every box in the filter menus, since all restaurants should be shown initially
  */
@@ -419,6 +427,10 @@ function initializeFilters() {
     allCheckboxes.forEach(checkbox => {
         checkbox.checked = true;
     });
+
+    allCheckboxes[allCheckboxes.length - 4].checked = false;
+    allCheckboxes[allCheckboxes.length - 3].checked = false;
+    allCheckboxes[allCheckboxes.length - 2].checked = false;
 }
 
 /**
@@ -514,11 +526,13 @@ function addListenerToFilters() {
         updateAllMarkersShown();
     }));
 }
+//#endregion FILTER_CHECKBOXES
 
 
-/**************************************
-**** URL SHARING & FILTER ENCODING ****
-**************************************/
+/*-- ================================================ --->
+<---               URL SHARING & ENCODING             --->
+<--- ================================================ --*/
+//#region URL_SHARING
 /**
  * Encode a bit string as base62
  * @param {string} bitString 
@@ -783,11 +797,13 @@ function parseUrl() {
         decodeAndSetManualSelections(manualSelectionsBitString);
     }
 }
+//#endregion URL_SHARING
 
 
-/**********************************
-**** DISTANCE ISOCHRONE FILTER ****
-**********************************/
+/*-- ================================================ --->
+<---                   DISTANCE FILTER                --->
+<--- ================================================ --*/
+//#region DISTANCE_FILTER
 /**
  * When distance filter add button clicked, set state that next map click will draw isochrone
  */
@@ -1015,11 +1031,13 @@ map.on("click", (event) => {
         drawDistanceIsochrone(lat, long, range, true);
     }
 })
+//#endregion DISTANCE_FILTER
 
 
-/*************************
-**** RANDOM SELECTION ****
-*************************/
+/*-- ================================================ --->
+<---                  RANDOM SELECTION                --->
+<--- ================================================ --*/
+//#region RANDOM_SELECTION
 /**
  * Stop the highlight/unhighlight timer and reset the marker to its original state
  */
@@ -1084,11 +1102,13 @@ document.getElementById("random-button").addEventListener("click", function() {
         }
     }, 750);
 });
+//#endregion RANDOM_SELECTION
 
 
-/**********************
-**** SORTING TABLE ****
-**********************/
+/*-- ================================================ --->
+<---                   SORTING TABLE                  --->
+<--- ================================================ --*/
+//#region SORTING_TABLE
 /**
  * Updates the classes for each table sorting button, depending on which button is "active"
  */
@@ -1106,6 +1126,11 @@ function updateActiveSortButton(activeButton) {
     }
 }
 
+/**
+ * Converts the a table column header string into the integer index of that column
+ * @param {*} colName the table column header string
+ * @returns index value of that column
+ */
 function tableColNameToIndex(colName) {
     let tableHeader = document.getElementById("restaurant-table-header");
     let index = 0;
@@ -1120,75 +1145,76 @@ function tableColNameToIndex(colName) {
     return -1;
 }
 
+/**
+ * Sorting functions used to sort the table
+ */
 function alphaSort(a, b) { return (normalizeName(a.innerHTML) > normalizeName(b.innerHTML)); };
-function reverseAlphaSort(a, b) { return !alphaSort(a, b) };
-
 function visitSort(a, b) { return (!a.innerHTML && b.innerHTML); };
-function reverseVisitSort(a, b) { return !visitSort(a, b); };
-
 function checkboxSort(a, b) { return (!a.children[0].checked && b.children[0].checked); };
-function reverseCheckboxSort(a, b) { return !checkboxSort(a, b); };
 
+/**
+ * Listeners to apply the correct sorting function to the table
+ */
 document.getElementById("sort-name-button").addEventListener("click", function() {
     this.classList.toggle("up-button");
     this.classList.toggle("down-button");
     
     // Sort the table to match button
-    let sortingFunc = (this.classList.contains("up-button")) ? alphaSort : reverseAlphaSort;
-    sortTable(tableColNameToIndex("Name"), sortingFunc);
+    let reverse = !this.classList.contains("up-button");
+    sortTable(tableColNameToIndex("Name"), alphaSort, reverse);
 
     // Update all sorting buttons for the table
     updateActiveSortButton(this);
 });
-
 document.getElementById("sort-cuisine-button").addEventListener("click", function() {
     this.classList.toggle("up-button");
     this.classList.toggle("down-button");
     
     // Sort the table to match button
-    let sortingFunc = (this.classList.contains("up-button")) ? alphaSort : reverseAlphaSort;
-    sortTable(tableColNameToIndex("Cuisine"), sortingFunc);
+    let reverse = !this.classList.contains("up-button");
+    sortTable(tableColNameToIndex("Cuisine"), alphaSort, reverse);
 
     // Update all sorting buttons for the table
     updateActiveSortButton(this);
 });
-
 document.getElementById("sort-visited-button").addEventListener("click", function() {
     this.classList.toggle("up-button");
     this.classList.toggle("down-button");
     
-    // First sort alphabetically by name
-    let sortingFunc = (this.classList.contains("up-button")) ? alphaSort : reverseAlphaSort;
-    sortTable(tableColNameToIndex("Name"), sortingFunc);
-    
-    // Then sort by visited or not
-    let sortingFunc2 = (this.classList.contains("up-button")) ? visitSort : reverseVisitSort;
-    sortTable(tableColNameToIndex("Visited?"), sortingFunc2);
+    // First sort alphabetically by name, then sort by visited or not
+    let reverse = !this.classList.contains("up-button");
+    sortTable(tableColNameToIndex("Name"), alphaSort, reverse);
+    sortTable(tableColNameToIndex("Visited?"), visitSort, reverse);
 
     // Update all sorting buttons for the table
     updateActiveSortButton(this);
 });
-
 document.getElementById("sort-shown-button").addEventListener("click", function() {
     this.classList.toggle("up-button");
     this.classList.toggle("down-button");
 
-    // First sort alphabetically by name
-    let sortingFunc = (this.classList.contains("up-button")) ? alphaSort : reverseAlphaSort;
-    sortTable(tableColNameToIndex("Name"), sortingFunc);
-    
-    // Then sort by visited or not
-    let sortingFunc2 = (this.classList.contains("up-button")) ? checkboxSort : reverseCheckboxSort;
-    sortTable(tableColNameToIndex("Show"), sortingFunc2);
+    // First sort alphabetically by name, then sort by shown or not
+    let reverse = !this.classList.contains("up-button");
+    sortTable(tableColNameToIndex("Name"), alphaSort, reverse);
+    sortTable(tableColNameToIndex("Show"), checkboxSort, reverse);
 
     // Update all sorting buttons for the table
     updateActiveSortButton(this);
 });
 
+/**
+ * Store the last used sorting values so the sorting can be automatically reapplied when applying new filters
+ */
 let currentSortIndex ;
 let currentSortFunc;
 
-function sortTable(sortIndex, sortFunc) {
+/**
+ * Sort the restaurant table according to the sorting function
+ * @param {*} sortIndex the index of the column to sort
+ * @param {*} sortFunc the comparison function between two elements to use when sorting
+ * @param {*} reverse boolean of if the result should be in reverse order or not
+ */
+function sortTable(sortIndex, sortFunc, reverse = false) {
     currentSortIndex = sortIndex;
     currentSortFunc = sortFunc;
 
@@ -1208,5 +1234,10 @@ function sortTable(sortIndex, sortFunc) {
         rows[j + 1] = keyRow;
     }
     
+    if (reverse) {
+        rows = rows.reverse();
+    }
+
     rows.forEach(row => table.appendChild(row));
 }
+//#endregion SORTING_TABLE

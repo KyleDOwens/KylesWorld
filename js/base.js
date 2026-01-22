@@ -36,11 +36,16 @@ function initializeSheet() {
 
     // Add row headers
     let mockVerticalHeader = document.getElementById("mock-vheader");
-    for (let i = 0; i <= 99; i++) {
+    for (let i = 0; i <= 125; i++) {
         let headerCell = document.createElement("span");
         headerCell.classList.add("vertical-header");
         headerCell.id = `_${i}`;
         headerCell.innerHTML = `${i}`;
+
+        if (i > 99) {
+            headerCell.classList.add("extension-header");
+        }
+
         mockVerticalHeader.appendChild(headerCell);
     }
 }

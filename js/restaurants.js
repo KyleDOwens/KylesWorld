@@ -995,7 +995,7 @@ map.on("click", (event) => {
         let range = document.getElementById("distance-filter-input").value;
 
         let infoOutput = document.getElementById("distance-info");
-        infoOutput.innerText = "&nbsp;";
+        infoOutput.innerHTML = "&nbsp;";
         
         drawDistanceIsochrone(lat, long, range, true);
     }

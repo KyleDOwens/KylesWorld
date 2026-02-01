@@ -156,7 +156,7 @@
 .small-album-block {
     vertical-align: top;
     width: calc(10% - 30px);
-    min-width: 150px;
+    min-width: 165px;
 
     text-align: center;
     font-size: 10pt;

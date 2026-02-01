@@ -29,6 +29,10 @@
 # RESTAURANTS
 * [-] Reduce # of markers on map or add marker clustering
 * [-] Refactor completely into non-absolute divs, using horizontal-groups and vertical-groups
+* https://stadiamaps.com/build-a-map/#map=9.78/29.461/-98.584&style=outdoors
+* https://github.com/Leaflet/Leaflet.markercluster
+
+
 
 # RECIPES
 * [-] Make embedded window look like a big book that you flip through?

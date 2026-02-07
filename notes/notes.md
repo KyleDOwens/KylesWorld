@@ -11,13 +11,13 @@ This document contains all of my notes for this entire project.
 
 # How-Tos
 ## How to export locations from Google Maps:
-    * Use [ExportGoogleMaps](https://exportgooglemaps.com/) tool
-    * Follow the directions on the webpage to export you Google Maps data from [Google Takeout](https://takeout.google.com/settings/takeout)
-    * Upload the CSV of the list you want to upload to the website
-    * Once you recieve the confirmation email, follow the confirmation link to start the task
-    * Do this well ahead of time, you may have to wait hours/days for the task to complete
-    * The resulting CSV should contain lat/long information for all locations
-    * Any locations that errored will need to ve fixed manually
+* Use [ExportGoogleMaps](https://exportgooglemaps.com/) tool
+* Follow the directions on the webpage to export you Google Maps data from [Google Takeout](https://takeout.google.com/settings/takeout)
+* Upload the CSV of the list you want to upload to the website
+* Once you recieve the confirmation email, follow the confirmation link to start the task
+* Do this well ahead of time, you may have to wait hours/days for the task to complete
+* The resulting CSV should contain lat/long information for all locations
+* Any locations that errored will need to ve fixed manually
 
 
 
@@ -49,7 +49,7 @@ Rather than dynamically load the data from these CSVs (which takes a significant
 This is done in a separate step *after* combining the base base and page files in step 1. To do this I load in the CSV data, format it into an HTML string, then perform a simple string replace in the destination html file. 
 
 
-## Albums scripts
+## Music scripts
 
 
 
@@ -62,6 +62,7 @@ This is done in a separate step *after* combining the base base and page files i
 * [Get shades/hues of a color](https://colorkit.co/color-picker/)
 * [GIF tools](https://onlinegiftools.com/#tools)
 * [Search for gifs](https://gifcities.org/search?)
+* [Word art creator](https://cooltext.com/)
 
 ## "Go Build a Personal Website" Inspiration
 * [Motivation for building a personal website](https://localghost.dev/blog/building-a-website-like-it-s-1999-in-2022/)

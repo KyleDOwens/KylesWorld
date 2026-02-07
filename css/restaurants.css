@@ -60,14 +60,6 @@
     cursor: url('../images/spots_20.png'), pointer !important;
 }
 
-.inactive-button {
-    background-color: gray;
-}
-
-.hidden {
-    display: none !important;
-}
-
 ul {
     margin: 0;
 }
@@ -77,8 +69,29 @@ button:disabled {
 }
 
 #sheet-canvas {
-    height: calc(20px + 20px*77);
+    /* height: calc(20px + 20px*77); */
 }
+
+
+
+
+
+#sheet-overlay {
+    display: flex;
+}
+.column {
+    width: 50%;
+    height: 100%;
+    flex: 1;
+    padding: 1% 0.5%;
+}
+.embedded-window {
+    margin-bottom: 1.5%;
+}
+
+
+
+
 /*#endregion CONSTANTS */
 
 
@@ -87,16 +100,12 @@ button:disabled {
 <--- ================================================ --*/
 /*#region MAP_PANEL */
 #map-window {
-    position: absolute;
-    top: 1%;
-    left: 2%;
-    width: 52%;
-    height: 40%;
+    height: 44%;
 }
 
 #map {
     margin: 10px;
-    height: 79%;
+    height: calc(78% + 1px);
     border: inset;
 
     border-top: 3px solid #808080;
@@ -108,15 +117,93 @@ button:disabled {
 
 
 /*-- ================================================ --->
+<---                     LIST PANEL                   --->
+<--- ================================================ --*/
+/*#region LIST_PANEL */
+#list-window {
+    height: 40%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.scroll-and-content {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: flex;
+    position: relative;
+}
+
+#restaurant-scroll-container {
+    flex: 1;
+    overflow-y: scroll;
+    position: relative;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+#restaurant-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+/*#endregion LIST_PANEL */
+
+
+/*-- ================================================ --->
+<---                 RESTAURANT TABLE                 --->
+<--- ================================================ --*/
+/*#region RESTAURANT_TABLE */
+#restaurant-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Table header */
+#restaurant-table-header {
+    position: sticky;
+    z-index: 2;
+    top: -1px ;
+    background-color: #d5d3c6;
+    white-space: nowrap;
+}
+#restaurant-table-header button { /* TODO: replace with excel button*/
+    font-size: 10pt;
+    padding: 0;
+}
+
+/* Table body */
+#restaurant-table td, table th {
+    padding: 5px;
+    height: 2.5rem;
+
+    font-size: 12pt;
+    font-weight: normal;
+
+    border-bottom: 1px solid black;
+}
+
+.name,
+.cuisine {
+    text-align: left;
+}
+
+.visited {
+    text-align: center;
+}
+.shown input {
+    margin-left: auto;
+    margin-right: auto;
+}
+/*#endregion RESTAURANT_TABLE */
+
+
+/*-- ================================================ --->
 <---                   FILTER PANEL                   --->
 <--- ================================================ --*/
 /*#region FILTER_PANEL */
 #filter-window {
-    position: absolute;
-    top: 26.5%;
-    left: 56%;
-    width: 40%;
-    height: 28%;
+    width: 100%;
+    height: 32%;
 }
 
 #filter-container {
@@ -310,162 +397,22 @@ button:disabled {
 /*#endregion SHARE_SELECTIONS */
 
 
-/*-- ================================================ --->
-<---                     LIST PANEL                   --->
-<--- ================================================ --*/
-/*#region LIST_PANEL */
-#list-window {
-    position: absolute;
-    top: 0.5%;
-    left: 55.5%;
-    width: 43%;
-    height: 25.5%;
-
-    display: flex;
-    flex-direction: column;
-}
-
-.scroll-and-content {
-    overflow-x: hidden;
-    overflow-y: hidden;
-    display: flex;
-    position: relative;
-}
-
-#restaurant-scroll-container {
-    flex: 1;
-    overflow-y: scroll;
-    position: relative;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-}
-#restaurant-scroll-container::-webkit-scrollbar {
-    display: none;
-}
-/*#endregion LIST_PANEL */
-
-
-/*-- ================================================ --->
-<---                 RESTAURANT TABLE                 --->
-<--- ================================================ --*/
-/*#region RESTAURANT_TABLE */
-#restaurant-table {
-    /* table-layout: fixed; */
-    width: 100%;
-
-    border-collapse: separate;
-    border-spacing: 0;
-}
-
-/* Table header */
-#restaurant-table-header {
-    position: sticky;
-    z-index: 2;
-    top: -1px ;
-    background-color: #d5d3c6;
-    border-bottom: 1px solid red;
-    white-space: nowrap;
-}
-#restaurant-table-header button { /* TODO: replace with excel button*/
-    font-size: 10pt;
-    padding: 0;
-}
-
-/* Table body */
-#restaurant-table td, table th {
-    padding: 5px;
-    height: 2.5rem;
-
-    font-size: 12pt;
-    font-weight: normal;
-
-    border-bottom: 1px solid black;
-}
-
-.name,
-.cuisine {
-    text-align: left;
-}
-
-.visited {
-    text-align: center;
-}
-.shown input {
-    margin-left: auto;
-    margin-right: auto;
-}
-/*#endregion RESTAURANT_TABLE */
-
-
-/*-- ================================================ --->
-<---                    GIF WINDOWS                   --->
-<--- ================================================ --*/
-/*#region GIF_WINDOWS */
-#hamburger-window {
-    position: absolute;
-    top: 41.5%;
-    left: 1%;
-    width: 21%;
-    height: 12.75%;
-}
-#short-burger {
-    display: none;
-}
-
-#locket-window {
-    position: absolute;
-    top: 55%;
-    left: 53.5%;
-    width: 21%;
-    height: 12.75%;
-}
-#locket-window img {
-    border: inset;
-    width: 185px;
-}
-
-#sandwich-window {
-    position: absolute;
-    top: 55.25%;
-    left: 75.5%;
-    width: 21%;
-    height: 12.75%;
-}
-
-#foodfun-window {
-    position: absolute;
-    top: 68%;
-    left: 50.5%;
-    width: 48%;
-    height: 12.75%;
-}
-#foodfun-window img {
-    width: 650px;
-}
-/*#endregion GIF_WINDOWS */
-
 
 /*-- ================================================ --->
 <---                  CONTENT WINDOWS                 --->
 <--- ================================================ --*/
 /*#region CONTENT_WINDOWS */
 #favorites-window {
-    position: absolute;
-    top: 41.25%;
-    left: 23%;
-    width: 30%;
-    height: 14%;
+    min-width: 35%;
+    flex: 1;
+    height: fit-content;
 }
 #favorites-window .window-container {
     margin: 10px;
 }
 
 #guide-window {
-    position: absolute;
-    top: 55.5%;
-    left: 1.5%;
-    width: 48%;
+    width: 100%;
     height: fit-content;
 }
 /*#endregion CONTENT_WINDOWS */
@@ -475,18 +422,7 @@ button:disabled {
 <---           MEDIA QUERIES / RESPONSIVENES          --->
 <--- ================================================ --*/
 /*#region MEDIA */
-@media (max-width: 1400px) {
-    #distance-info {
-        display: none;
-    }
-    .filter-subheader {
-        display: none;
-    }
-    #favorites-window .faint-text {
-        display: none;
-    }
-}
-@media (max-width: 1265px) {
+@media (max-width: 1365px) {
     .visited {
         display: none;
     }
@@ -508,169 +444,40 @@ button:disabled {
     } 
 }
 @media (max-width: 1100px) { /* Switch to single column */
-    .window-container {
-        margin: 6px;
-    }
-    .extension-1 {
+    #sheet-overlay {
         display: block;
-        font-size: 8pt;
     }
-    #mock-grid {
-        height: calc(20px + 20px*125);
-    }
-    #map-window {
-        top: 0.25%;
-        left: 1%;
-        width: 97%;
-        height: 33%;
+    .column {
+        width: 98%;
+        margin: 0.5% 1%;
+        height: auto;
     }
     #map {
-        height: 70%;
-        margin-bottom: 10px;
-    }
-    .break {
-        width: 0%;
-    } 
-    #random-container {
-        display: flex;
-        justify-content: center;
-        gap: 5px;
+        height: 450px;
     }
     #list-window {
-        top: 34%;
-        left: 1%;
-        width: 97%;
-    }
-    #restaurant-table td, #restaurant-table th {
-        font-size: 10pt;
+        height: 555px;
     }
     .visited {
-        display: block;
-    }
-    #filter-window {
-        top: 60.25%;
-        left: 1%;
-        width: 97%;
-        height: 25%;
-    }
-    #attributes-container {
-        padding: 2px;
-    }
-    #random-container, #share-container, .filter-header, #filter-menus, #attributes-container {
-        font-size: 10pt;
-    }
-    #hamburger-window {
-        top: 86%;
-        left: 1%;
-        width: 47%;
-        height: 9%;
-    }
-    #long-burger {
-        display: none;
-    }
-    #short-burger {
-        display: block;
-    }
-    #hamburger-window img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-    }
-    #locket-window {
-        top: 86%;
-        left: 50%;
-        width: 47%;
-        height: 9%;
-    }
-    #locket-window img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-    }
-    #sandwich-window {
-        top: 154%;
-        left: 1%;
-        width: 97%;
-        height: 6.5%;
-    }
-    #sandwich-window img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-    }
-    #favorites-window {
-        top: 95.5%;
-        left: 1%;
-        width: 97%;
-        height: 10.25%;
-        font-size: 10pt;
-    }
-    #foodfun-window {
-        top: 106.5%;
-        left: 1%;
-        width: 97%;
-        height: 6.5%;
-    }
-    #foodfun-window img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-    }
-    #guide-window {
-        top: 113.5%;
-        left: 1%;
-        width: 97%;
-        height: 41%;
-        height: fit-content;
-        font-size: 10pt;
+        display: table-cell;
     }
 }
-@media (max-width: 670px) {
-    #random-container {
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: 4px;
-    }
-    .break {
-        width: 100%;
-    } 
-}
-@media (max-width: 545px) {
-    #map-window,
-    #list-window,
-    #filter-window,
-    #sandwich-window,
-    #favorites-window,
-    #foodfun-window,
-    #guide-window {
-        left: -2%;
-        width: 98%;
-    }
-    #hamburger-window {
-        left: -2%;
+@media (max-width: 545px) { /* shrink sheet headers */
+    .column {
+        margin: -0.5% -1.5%;
+        width: 99.5%;
     }
     .visited {
         display: none;
-    }   
-}
-@media (max-width: 670px) {
-    #map {
-        margin-bottom: 4px;
-        height: 69%;
     }
+
 }
 @media (max-width: 410px) {
     #cuisine-vertical-scrollbar {
         display: none;
     }
 }
-@media (max-width: 380px) {
-    #sandwich-window {
-        display: none;
-    }
-}
+
 @media (max-width: 370px) {
     #filter-menus {
         gap: 0;
@@ -687,18 +494,6 @@ button:disabled {
     .multi-option input {
         width: 12px;
         height: 12px;
-    }
-    #locket-window {
-        display: none;
-    }
-    #hamburger-window {
-        width: 97%;
-    }
-    #long-burger {
-        display: block;
-    }
-    #short-burger {
-        display: none;
     }
 }
 /*#endregion MEDIA */

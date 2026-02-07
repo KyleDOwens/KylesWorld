@@ -1,256 +1,219 @@
-<!-- Restaurant Map -->
-<div class="embedded-window" id="map-window">
-    <div class="title-bar">
-        <div class="title-left">
-            Map Viewer
+<div class="column">
+    <!-- Restaurant Map -->
+    <div class="embedded-window" id="map-window">
+        <div class="title-bar">
+            <div class="title-left">
+                Map Viewer
+            </div>
+        </div>
+
+        <div id="map"></div>
+
+        <!-- Choose random restaurant from selected -->
+        <div id="random-container">
+            <button class="outset" id="random-button">Choose random</button>
+            <button class="outset" id="clear-random-button" disabled="true">Clear random</button>
+            <div class="break"></div> <!-- Used to separate the options container into two rows -->
+            <input class="inset" type="text" id="random-selection" readonly>
+            <input type="text" id="random-cuisine" readonly>
+        </div>
+        
+        <!-- Export Sharable URL -->
+        <div id="share-container">
+            <div><button id="share-button">Share selections!</button></div>
+            <div id="share-subheader">&nbsp;</div>
         </div>
     </div>
 
-    <div id="map"></div>
-
-    <!-- Choose random restaurant from selected -->
-    <div id="random-container">
-        <button class="outset" id="random-button">Choose random</button>
-        <button class="outset" id="clear-random-button" disabled="true">Clear random</button>
-        <div class="break"></div> <!-- Used to separate the options container into two rows -->
-        <input class="inset" type="text" id="random-selection" readonly>
-        <input type="text" id="random-cuisine" readonly>
-    </div>
-    
-    <!-- Export Sharable URL -->
-    <div id="share-container">
-        <div><button id="share-button">Share selections!</button></div>
-        <div id="share-subheader">&nbsp;</div>
-    </div>
-</div>
-
-<!-- Filters -->
-<section class="embedded-window" id="filter-window">
-    <div class="title-bar">
-        <div class="title-left">
-            Filter Options
-        </div>
-    </div>
-
-    <!-- Filtering Options -->
-    <div id="filter-container">
-        <!-- Isochrone filtering -->
-        <div id="distance-filter">
-            <div class="filter-header">Distance filter!</div>
-            <div class="filter-subheader faint-text">(Places within X minutes from clicked location)</div>
-            <input id="distance-filter-input" placeholder="Time (minutes)">
-            <button class="outset" id="distance-filter-add-button">Add isochrone</button>
-            <button class="outset" id="distance-filter-remove-button" disabled>Remove isochrone</button>
-            <div class="faint-text" id="distance-info">&nbsp;</div>
+    <!-- Filters -->
+    <div class="embedded-window" id="filter-window">
+        <div class="title-bar">
+            <div class="title-left">
+                Filter Options
+            </div>
         </div>
 
-        <!-- Attribute filter menus -->
-        <div id="attributes-container">
-            <div id="filter-header">Attribute filters!</div>
-            <div class="filter-subheader faint-text">(Select from restaurant qualities)</div>
-            <div id="filter-menus">
-                <!-- Visited filter -->
-                <div class="multi-select" id="visited-filter">
-                    <div class="multi-option-header">Visited</div>
-                    <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
-                    <div class="multi-option"><label><input type="checkbox">Visited</label></div>
-                    <div class="multi-option"><label><input type="checkbox">Unvisited</label></div>
-                </div>
-                <!-- Cuisine filter -->
-                <div class="scroll-and-content">
-                    <div class="scroll-container multi-select" id="cuisine-scroll-container">
-                        <div id="cuisine-filter">
-                            <div class="multi-option-header">Cuisine</div>
-                            <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
-                            REPLACEME_CUISINEROWS
+        <!-- Filtering Options -->
+        <div id="filter-container">
+            <!-- Isochrone filtering -->
+            <div id="distance-filter">
+                <div class="filter-header">Distance filter!</div>
+                <div class="filter-subheader faint-text">(Places within X minutes from clicked location)</div>
+                <input id="distance-filter-input" placeholder="Time (minutes)">
+                <button class="outset" id="distance-filter-add-button">Add isochrone</button>
+                <button class="outset" id="distance-filter-remove-button" disabled>Remove isochrone</button>
+                <div class="faint-text" id="distance-info">&nbsp;</div>
+            </div>
+
+            <!-- Attribute filter menus -->
+            <div id="attributes-container">
+                <div id="filter-header">Attribute filters!</div>
+                <div class="filter-subheader faint-text">(Select from restaurant qualities)</div>
+                <div id="filter-menus">
+                    <!-- Visited filter -->
+                    <div class="multi-select" id="visited-filter">
+                        <div class="multi-option-header">Visited</div>
+                        <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
+                        <div class="multi-option"><label><input type="checkbox">Visited</label></div>
+                        <div class="multi-option"><label><input type="checkbox">Unvisited</label></div>
+                    </div>
+                    <!-- Cuisine filter -->
+                    <div class="scroll-and-content">
+                        <div class="scroll-container multi-select" id="cuisine-scroll-container">
+                            <div id="cuisine-filter">
+                                <div class="multi-option-header">Cuisine</div>
+                                <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
+                                REPLACEME_CUISINEROWS
+                            </div>
+                        </div>
+
+                        <!-- Vertical scrollbar -->
+                        <div class="vertical-scrollbar" data-prefix="cuisine" id="cuisine-vertical-scrollbar">
+                            <button class="square-button up-button" id="cuisine-up-scroll-button"></button>
+                            <div class="scroll-track" id="cuisine-vertical-scroll-track">
+                                <div class="scroll-thumb" id="cuisine-vertical-scroll-thumb"></div>
+                            </div>
+                            <button class="square-button down-button" id="cuisine-down-scroll-button"></button>
                         </div>
                     </div>
-
-                    <!-- Vertical scrollbar -->
-                    <div class="vertical-scrollbar" data-prefix="cuisine" id="cuisine-vertical-scrollbar">
-                        <button class="square-button up-button" id="cuisine-up-scroll-button"></button>
-                        <div class="scroll-track" id="cuisine-vertical-scroll-track">
-                            <div class="scroll-thumb" id="cuisine-vertical-scroll-thumb"></div>
-                        </div>
-                        <button class="square-button down-button" id="cuisine-down-scroll-button"></button>
+                    <!-- Rating filter -->
+                    <div class="multi-select" id="rating-filter">
+                        <div class="multi-option-header">Rating</div>
+                        <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
+                        <div class="multi-option"><label><input type="checkbox">Low</label></div>
+                        <div class="multi-option"><label><input type="checkbox">Medium</label></div>
+                        <div class="multi-option"><label><input type="checkbox">High</label></div>
                     </div>
-                </div>
-                <!-- Rating filter -->
-                <div class="multi-select" id="rating-filter">
-                    <div class="multi-option-header">Rating</div>
-                    <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
-                    <div class="multi-option"><label><input type="checkbox">Low</label></div>
-                    <div class="multi-option"><label><input type="checkbox">Medium</label></div>
-                    <div class="multi-option"><label><input type="checkbox">High</label></div>
                 </div>
             </div>
         </div>
     </div>
-</section>
 
-<!-- List -->
-<div class="embedded-window" id="list-window">
-    <div class="title-bar">
-        <div class="title-left">
-            Table Viewer
-        </div>
-    </div>
+    <!-- Food & Fun Gif -->
+    <img src="/images/restaurants/food_&_fun.gif" alt="Food and Fun" width="100%" height="auto" style="margin: 0;">
 
-    <div class="scroll-and-content">
-        <!-- Restaurant Table -->
-        <div class="scroll-container" id="restaurant-scroll-container">
-            <table id="restaurant-table">
-                <thead id="restaurant-table-header">
-                    <tr>
-                        <th class="name">Name <button id="sort-name-button" class="table-sort-button square-button down-button"></button></th>
-                        <th class="cuisine">Cuisine <button id="sort-cuisine-button" class="table-sort-button square-button down-button"></button></th>
-                        <th class="visited">Visited <button id="sort-visited-button" class="table-sort-button square-button down-button"></button></th>
-                        <th class="shown">Show <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                        <th class="rating hidden">Rating <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                        <th class="notes hidden">Notes <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                        <th class="gps hidden">Gps <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                        <th class="originalUrl hidden">OriginalUrl <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
-                    </tr>
-                </thead>
-                <tbody id="restaurant-table-body">
-                    REPLACEME_RESTAURANTROWS
-                </tbody>
-            </table>
-        </div>
+    <!-- Locket Gif -->
+    <img src="/images/restaurants/locket.gif" alt="Zito's Serious Sandwich Locket Gif" width="31.5%" height="auto">
 
-        <!-- Vertical scrollbar -->
-        <div class="vertical-scrollbar" data-prefix="restaurant" id="restaurant-vertical-scrollbar">
-            <button class="square-button up-button" id="restaurant-up-scroll-button"></button>
-            <div class="scroll-track" id="restaurant-vertical-scroll-track">
-                <div class="scroll-thumb" id="restaurant-vertical-scroll-thumb"></div>
+    <!-- Sandwich Gif -->
+    <img src="/images/restaurants/sandwich.gif" alt="Sandwich Dancing Gif" width="31.5%" height="auto">
+
+    <!-- Hotdog Gif -->
+    <img src="/images/restaurants/hotdog.gif" alt="Hotdog Gif" width="31.5%" height="auto">
+
+</div>
+
+
+<div class="column">
+    <!-- List -->
+    <div class="embedded-window" id="list-window">
+        <div class="title-bar">
+            <div class="title-left">
+                Table Viewer
             </div>
-            <button class="square-button down-button" id="restaurant-down-scroll-button"></button>
         </div>
-    </div>
-</div>
 
-<!-- Hamburger Gif -->
-<div class="embedded-window" id="hamburger-window">
-    <div class="title-bar">
-        <div class="title-left">
-            <div id="long-burger">hamburger.gif</div>
-            <div id="short-burger">burger.gif</div>
-        </div>
-    </div>
+        <div class="scroll-and-content">
+            <!-- Restaurant Table -->
+            <div class="scroll-container" id="restaurant-scroll-container">
+                <table id="restaurant-table">
+                    <thead id="restaurant-table-header">
+                        <tr>
+                            <th class="name">Name <button id="sort-name-button" class="table-sort-button square-button down-button"></button></th>
+                            <th class="cuisine">Cuisine <button id="sort-cuisine-button" class="table-sort-button square-button down-button"></button></th>
+                            <th class="visited">Visited <button id="sort-visited-button" class="table-sort-button square-button down-button"></button></th>
+                            <th class="shown">Show <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                            <th class="rating hidden">Rating <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                            <th class="notes hidden">Notes <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                            <th class="gps hidden">Gps <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                            <th class="originalUrl hidden">OriginalUrl <button id="sort-shown-button" class="table-sort-button square-button down-button"></button></th>
+                        </tr>
+                    </thead>
+                    <tbody id="restaurant-table-body">
+                        REPLACEME_RESTAURANTROWS
+                    </tbody>
+                </table>
+            </div>
 
-    <div class="gif-container">
-        <img src="/images/restaurants/hamburger_spin.gif" alt="Spinning Hamburger Gif" width="150px">
-    </div>
-</div>
-
-<!-- Personal Favorites -->
-<div class="embedded-window" id="favorites-window">
-    <div class="title-bar">
-        <div class="title-left">
-            Favorites
-        </div>
-    </div>
-
-    <div class="window-container">
-        Some of my personal favorites!
-        <ul>
-            <li>Mina & Dimi's <span class="faint-text"> - (greek)</span></li>
-            <li>Zito's Deli <span class="faint-text"> - (deli)</span></li>
-            <li>Stixs & Stone <span class="faint-text"> - (mexican/asian fusion)</span></li>
-            <li>PRESS Coffee @ Boardwalk <span class="faint-text"> - (coffee)</span></li>
-            <li>The Shack <span class="faint-text"> - (burgers)</span></li>
-            <li>Tokyo Cowboy <span class="faint-text"> - (mexican/asian fusion)</span></li>
-            <li>Grey Moss Inn <span class="faint-text"> - (mexican)</span></li>
-        </ul>
-    </div>
-
-</div>
-
-<!-- Locket Gif -->
-<div class="embedded-window" id="locket-window">
-    <div class="title-bar">
-        <div class="title-left">
-            locket.gif
+            <!-- Vertical scrollbar -->
+            <div class="vertical-scrollbar" data-prefix="restaurant" id="restaurant-vertical-scrollbar">
+                <button class="square-button up-button" id="restaurant-up-scroll-button"></button>
+                <div class="scroll-track" id="restaurant-vertical-scroll-track">
+                    <div class="scroll-thumb" id="restaurant-vertical-scroll-thumb"></div>
+                </div>
+                <button class="square-button down-button" id="restaurant-down-scroll-button"></button>
+            </div>
         </div>
     </div>
 
-    <div class="gif-container">
-        <img src="/images/restaurants/serious_locket.gif" alt="Zito's Serious Sandwich Locket Gif" width="150px">
-    </div>
-</div>
+    <!-- Hamburger Gif -->
+    <img src="/images/restaurants/hamburger_spin.gif" alt="Spinning Hamburger Gif" width="31.5%" height="auto">
+    <img src="/images/restaurants/hamburger_spin.gif" alt="Spinning Hamburger Gif" width="31.5%" height="auto">
+    <img src="/images/restaurants/hamburger_spin.gif" alt="Spinning Hamburger Gif" width="31.5%" height="auto">
 
-<!-- Sandwich Gif -->
-<div class="embedded-window" id="sandwich-window">
-    <div class="title-bar">
-        <div class="title-left">
-            sandwich.gif
+    <!-- Personal Favorites -->
+    <div class="embedded-window" id="favorites-window">
+        <div class="title-bar">
+            <div class="title-left">
+                Favorites
+            </div>
+        </div>
+
+        <div class="window-container">
+            Some of my personal favorites!
+            <ul>
+                <li>Mina & Dimi's <span class="faint-text"> - (greek)</span></li>
+                <li>Zito's Deli <span class="faint-text"> - (deli)</span></li>
+                <li>Stixs & Stone <span class="faint-text"> - (mexican/asian fusion)</span></li>
+                <li>PRESS Coffee @ Boardwalk <span class="faint-text"> - (coffee)</span></li>
+                <li>The Shack <span class="faint-text"> - (burgers)</span></li>
+                <li>Tokyo Cowboy <span class="faint-text"> - (mexican/asian fusion)</span></li>
+                <li>Grey Moss Inn <span class="faint-text"> - (mexican)</span></li>
+            </ul>
         </div>
     </div>
 
-    <div class="gif-container">
-        <img src="/images/restaurants/sandwich.gif" alt="Sandwich Dancing Gif" width="150px">
-    </div>
-</div>
-
-<!-- Food & Fun Gif -->
-<div class="embedded-window" id="foodfun-window">
-    <div class="title-bar">
-        <div class="title-left">
-            food_&_fun.gif
+    <!-- Guide -->
+    <div class="embedded-window" id="guide-window">
+        <div class="title-bar">
+            <div class="title-left">
+                Guide
+            </div>
         </div>
-    </div>
 
-    <div class="gif-container">
-        <img src="/images/restaurants/food_&_fun.gif" alt="Sandwich Dancing Gif" width="150px">
-    </div>
-</div>
-
-<!-- Guide -->
-<div class="embedded-window" id="guide-window">
-    <div class="title-bar">
-        <div class="title-left">
-            Guide
+        <div class="window-container">
+            <p>
+                This page holds all the restaurants in San Antonio that I have been to, or want to go to!
+            </p>
+            <p>
+                There is a <b>Map View</b> which shows the physical locations of each restaurant, and a <b>Table View</b> which lists out each restaurant individually.
+            </p>
+            <p>
+                Each marker on the map represents a restaurant!
+                Clicking a marker will bring up more information about the restaurant, including a link to it on Google!
+                Places I have visited are colored <span class="visited-high" style="filter: none">green</span>,
+                    with the shade determining how much I enjoyed it:
+                    <span class="visited-low" style="filter: none">low</span> ->
+                    <span class="visited-medium" style="filter: none">meidum</span> ->
+                    <span class="visited-high" style="filter: none">high</span>.
+                Places I want to go are colored <span class="unvisited-high" style="filter: none">blue</span>,
+                    with the shade determining how badly I want to go:
+                    <span class="unvisited-low" style="filter: none">low</span> ->
+                    <span class="unvisited-medium" style="filter: none">meidum</span> ->
+                    <span class="unvisited-high" style="filter: none">high</span>.
+            </p>
+            <p>
+                Select filters to limit which restaurants are shown!
+                You can add a <b>Distance Filter</b> to only show restaurants that are within a certain distance (of time) from a starting point
+                (fun fact, the map drawn by doing this is called an <i>isochrone</i>). To do this,
+                (1) enter in the the max travel time in minutes
+                (2) click the <b>Add Isochrone</b> button
+                (3) click on the map at your starting location.
+            </p>
+            <p>
+                Clicking the <b>Share Selections</b> button will create a custom URL that leads to your exact map!
+                It will be automatically copied to your clipboard.
+            </p>
         </div>
-    </div>
-
-    <div class="window-container">
-        <p>
-            This page holds all the restaurants in San Antonio that I have been to, or want to go to!
-        </p>
-        <p>
-            There is a <b>Map View</b> which shows the physical locations of each restaurant, and a <b>Table View</b> which lists out each restaurant individually.
-        </p>
-        <p>
-            Each <b>marker</b> on the map represents a restaurant.
-            Clicking a marker will bring up its information, including a link to it on Google.
-            Places I have visited are colored <span class="visited-high" style="filter: none">green</span>.
-                I give them ratings of how much I enjoyed it:
-                <span class="visited-low" style="filter: none">low</span>,
-                <span class="visited-medium" style="filter: none">meidum</span>, or
-                <span class="visited-high" style="filter: none">high</span>.
-            Places I want to go are colored <span class="unvisited-high" style="filter: none">blue</span>.
-                I give them ratings of how badly I want to go:
-                <span class="unvisited-low" style="filter: none">low</span>,
-                <span class="unvisited-medium" style="filter: none">meidum</span>, or
-                <span class="unvisited-high" style="filter: none">high</span>.
-        </p>
-        <p>
-            You can click the checkbox in the table to <b>show/hide</b> a restaurant on the map.
-            If you want to apply rules for which restaurants are shown, you can use the <b>Filter Options</b> window.
-        </p>
-        <p>
-            You can add a <b>Distance Filter</b> to only show restaurants that are within a certain distance (of time) from a starting point
-            (fun fact, the map drawn by doing this is called an <i>isochrone</i>). To do this,
-            (1) enter in the the max travel time in minutes.
-            (2) click the <b>Add Isochrone</b> button
-            (3) click on the map at your starting location.
-        </p>
-        <p>
-            If you click the <b>Choose Random</b> button, a random restaurant will be chosen from the restaurants shown on the map.
-        </p>
-        <p>
-            If you want to share your map with someone, click the <b>Share Selections</b> button.
-            This will create a custom URL that leads to your exact map and automatically copies it to your clipboard.
-        </p>
     </div>
 </div>

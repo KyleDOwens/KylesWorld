@@ -68,14 +68,6 @@ button:disabled {
     border: inset;
 }
 
-#sheet-canvas {
-    /* height: calc(20px + 20px*77); */
-}
-
-
-
-
-
 #sheet-overlay {
     display: flex;
 }
@@ -88,10 +80,6 @@ button:disabled {
 .embedded-window {
     margin-bottom: 1.5%;
 }
-
-
-
-
 /*#endregion CONSTANTS */
 
 
@@ -100,7 +88,7 @@ button:disabled {
 <--- ================================================ --*/
 /*#region MAP_PANEL */
 #map-window {
-    height: 44%;
+    height: 80%;
 }
 
 #map {
@@ -121,7 +109,7 @@ button:disabled {
 <--- ================================================ --*/
 /*#region LIST_PANEL */
 #list-window {
-    height: 40%;
+    height: 70%;
 
     display: flex;
     flex-direction: column;
@@ -204,6 +192,7 @@ button:disabled {
 #filter-window {
     width: 100%;
     height: 32%;
+    height: fit-content;
 }
 
 #filter-container {
@@ -470,7 +459,6 @@ button:disabled {
     .visited {
         display: none;
     }
-
 }
 @media (max-width: 410px) {
     #cuisine-vertical-scrollbar {

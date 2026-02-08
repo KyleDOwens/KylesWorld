@@ -1,13 +1,16 @@
 #recipe-book-window {
     margin: 0.5% 6%;
+    min-width: 88%;
     min-height: 33%;
-    width: 88%;
+    display: flex;
+    flex-direction: column;
 }
 
 #book-container {
     background-image: url("../images/recipes/bigbook_crop_static.png");
     background-size: 100% 100%;
     min-height: 600px;
+    /* height: calc(100% - 75px); */
     margin: 0 2%;
     padding: 6%;
 }
@@ -15,13 +18,13 @@
     width: 100%;
     min-height: 100%;
     height: fit-content;
+    padding: 1% 0;
 
     box-sizing: border-box;
 
     column-count: 2;
     column-width: 50%;
     column-gap: 7%;
-
     column-fill: auto;
 }
 
@@ -40,11 +43,16 @@ ul {
     margin-top: 0;
     padding-left: 20px;
 }
-li {
+ul li {
     margin-bottom: 2px;
+}
+ol li {
+    margin-bottom: 8px;
 }
 .note {
     font-size: 10pt;
+    margin-top: -8px;
+    margin-bottom: 8px;
 }
 .ingredient {
     /* text-decoration: underline; */
@@ -54,10 +62,9 @@ li {
 
 #button-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
     width: 100%;
-    gap: 20%;
     padding-bottom: 2%;
 }
 #button-container button {
@@ -73,14 +80,54 @@ li {
 
 /*#region CONTENT_WINDOWS */
 #guide-window {
-    min-width: 47%;
     width: 44%;
     height: fit-content;
-
-    margin: 0.5% 2%;
+    margin: 0.5% 6%;
 }
 
 #chef-window {
     
 }
 /*#endregion CONTENT_WINDOWS */
+
+
+/*-- ================================================ --->
+<---           MEDIA QUERIES / RESPONSIVENES          --->
+<--- ================================================ --*/
+/*#region MEDIA */
+@media (max-width: 1150px) {
+    #recipe-book-window {
+        margin: 0.5% 1%;
+        width: 98%;
+    }
+}
+@media (max-width: 1000px) { /* SWITCH TO NON-BOOK DISPLAY*/
+    #recipe-book-window {
+        min-height: 0;
+        height: fit-content;
+    }
+    #book-container {
+        background-image: none;
+        min-height: 0;
+        height: fit-content;
+        margin: 1% 2%;
+        padding: 1% 2%;
+    }
+    .recipe {
+        width: 100%;
+        height: fit-content;
+        column-count: 1;
+    }
+    #guide-window {
+        margin: 0.5% 1%;
+        width: 98%;
+    }
+}
+@media (max-width: 545px) { /* shrink sheet headers */
+    #recipe-book-window,
+    #guide-window {
+        margin: -0.5% -1.5%;
+        width: 99.5%;
+    }
+}
+/*#endregion MEDIA */

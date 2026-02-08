@@ -30,7 +30,6 @@ const PRECISION = 5; // Precision for how many decimals to include in lat/long u
 
 let restaurants = {}; // Will be list of dictionaries with keys {name, type, visited, notes, gps, googleUrl, originalUrl}
 let markers = {} // Dictionary containing the map markers accessed by the restaurant name (e.g., {name : markerObj})
-
 let manualSelections = []; // Stores which of the current restaurants were selected manually (not with a filter menu) 
 
 let placingIsochrone = false; // Stores if the user is currently placing an isochrone on their next map click
@@ -40,7 +39,6 @@ let doIsochroneFiltering = false // Boolean if the isochrone layer should be use
 let randomTimerId = null; // Stores the ID of the timer repeated highlighting/unhighlighting the randomly selected marker
 let randomTimerMarker = null; // Stores the marker object the randomly selected marker
 let randomOldZOffset = null; // Stores the old Z-Offset the randomly selected marker
-let randomStartTime = null; // Stores the time that the random restaurant is first displayed, used to determine when to stop flashing
 
 let errorTimerId = null; // Stores the ID of the timer used for displaying an error
 let errorStartTime = null; // Stores the time that the error is first displayed, used to determine when to stop displaying error
@@ -149,28 +147,9 @@ function normalizeName(name) {
  * Adds a tile layer to the map
  */
 function initializeMap() {
-    if (debug) {
-        // Add free tile layer
-        // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        // attribution: "&copy; OpenStreetMap contributors",
-        // maxZoom: 19,
-        // }).addTo(map);
-
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(map);
-    }
-    else {
-        // Add rate limited tile layer (OpenStreetMap)
-        // L.tileLayer("https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=" + OSM_API_KEY, {
-        //     maxZoom: 18,
-        //     attribution: "© MapTiler © OpenStreetMap contributors"
-        // }).addTo(map);
-
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(map);
-    }
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 }
 
 /**
@@ -1063,7 +1042,6 @@ function startHighlightTimer(randName) {
     
     // Save values needed to stop the timer, then start the timer
     randomTimerMarker = marker;
-    randomStartTime = Date.now();
     marker._icon.classList.add("highlight");
     randomTimerId = setInterval(() => {
         randomTimerMarker._icon.classList.toggle("highlight");
@@ -1089,7 +1067,6 @@ function stopHighlightTimer() {
     randomTimerId = null;
     randomTimerMarker = null;
     randomOldZOffset = null;
-    randomStartTime = null;
 }
 
 /**

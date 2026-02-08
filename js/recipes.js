@@ -1,5 +1,4 @@
 let recipeIndex = 0;
-let recipeHeights = {};
 
 /*-- ================================================ --->
 <---                  INITIALIZATION                  --->
@@ -8,15 +7,20 @@ let recipeHeights = {};
  * Initializes the page on load
  */
 document.addEventListener("DOMContentLoaded", () => {
-    initializeBook();
+    initialize()
     updatePageButtons();
-    updateBookHeight()
+    updateBookHeight();
+
+    // Dispatch a 'resize' event so the base javascript will resize the scrollbar
+    window.dispatchEvent(new Event('resize'));
 });
 
-function initializeBook() {
+/**
+ * Initialize the page by hiding all recipes
+ */
+function initialize() {
     let recipes = document.querySelectorAll(".recipe");
     recipes.forEach((recipeElement) => {
-        recipeHeights[recipeElement.id] = recipeElement.scrollHeight;
         recipeElement.style.display = "none";
     });
 
@@ -27,6 +31,9 @@ function initializeBook() {
 /*-- ================================================ --->
 <---                  FLIP BOOK PAGE                  --->
 <--- ================================================ --*/
+/**
+ * Update if the next, previous, or table of contents buttons should be disabled
+ */
 function updatePageButtons() {
     let recipes = document.querySelectorAll(".recipe");
     document.getElementById("previous-recipe-button").disabled = (recipeIndex == 0);
@@ -34,17 +41,35 @@ function updatePageButtons() {
     document.getElementById("table-contents-button").disabled = (recipeIndex == 0);
 }
 
-function updateBookHeight() {
+/**
+ * Resize the recipe book to fit the size of the recipe
+ */
+window.addEventListener("resize", () => {
+    let width = window.innerWidth;
     let bookContainer = document.getElementById("book-container");
-    let recipes = document.querySelectorAll(".recipe");
-    bookContainer.style.height = `calc( ${recipeHeights[recipes[recipeIndex].id] / 2}px + 150px )`;
-    recipes[recipeIndex].style.height = `${recipeHeights[recipes[recipeIndex].id] / 2}px`
+    if (width > 1000) {
+        updateBookHeight();
+        bookContainer.style.backgroundImage = 'url("../images/recipes/bigbook_crop_static.png")';
+    }
+    else {
+        bookContainer.style.backgroundImage = 'none';
+    }
+});
+function updateBookHeight() {
+    let recipe = document.querySelectorAll(".recipe")[recipeIndex];
+    recipe.style.height = "fit-content";
+    let recipeHeight = recipe.scrollHeight;
 
-    // Dispatch a 'resize' event so the base javascript will resize the scrollbar
-    window.dispatchEvent(new Event('resize'));
-
+    if (recipeHeight >= 600) {
+        let newHeight = Math.max(recipeHeight / 2 + 25, 470) ;
+        recipe.style.height = `${newHeight}px`;
+    }
 }
 
+/**
+ * Change the display to a new recipe, perform the page turn animation
+ * @param {*} newIndex the new index being flipped too
+ */
 function flipForwards(newIndex) {
     let recipes = document.querySelectorAll(".recipe");
     if (newIndex >= recipes.length || newIndex <= recipeIndex) {
@@ -55,6 +80,15 @@ function flipForwards(newIndex) {
     recipes.forEach((recipeElement) => {
         recipeElement.style.display = "none";
     });
+
+    // If too narrow, don't do the book animation
+    let width = window.innerWidth;
+    if (width <= 1000) {
+        recipes[newIndex].style.display = "block";
+        recipeIndex = newIndex;
+        updatePageButtons();
+        return;
+    }
 
     // Change background to show animation
     let bookContainer = document.getElementById("book-container");
@@ -80,6 +114,15 @@ function flipBackwards(newIndex) {
         recipeElement.style.display = "none";
     });
 
+    // If too narrow, don't do the book animation
+    let width = window.innerWidth;
+    if (width <= 1000) {
+        recipes[newIndex].style.display = "block";
+        recipeIndex = newIndex;
+        updatePageButtons();
+        return;
+    }
+
     // Change background to show animation
     let bookContainer = document.getElementById("book-container");
     bookContainer.style.backgroundImage = 'url("../images/recipes/bigbook_crop_reverse.gif")';
@@ -94,6 +137,9 @@ function flipBackwards(newIndex) {
     }, 1250);
 }
 
+/**
+ * Listeners for navigation buttons
+ */
 document.getElementById("previous-recipe-button").addEventListener("click", function() {
     flipBackwards(recipeIndex - 1);
 });
@@ -104,6 +150,10 @@ document.getElementById("table-contents-button").addEventListener("click", funct
     flipBackwards(0);
 });
 
+/**
+ * Go directly to a new page, rather than moving one forward/backward
+ * @param {*} newIndex 
+ */
 function goToPage(newIndex) {
     // Play the book animation
     if (newIndex > recipeIndex) {
@@ -122,7 +172,6 @@ function goToPageFromId(id) {
         }
     }
 }
-
 document.querySelectorAll(".recipe-link").forEach((recipeLink, i) => {
     recipeLink.addEventListener("click", function() {
         goToPageFromId(recipeLink.dataset.linkTo);

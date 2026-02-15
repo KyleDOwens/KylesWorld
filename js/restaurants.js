@@ -1,5 +1,4 @@
-import { OSM_API_KEY } from "./config.js";
-import { ORS_API_KEY } from "./config.js";
+// import { ORS_API_KEY } from "./config.js";
 
 const map = L.map("map", {
         center:
@@ -7,7 +6,7 @@ const map = L.map("map", {
             -98.50546763124163],
         zoom: 11,
         zoomControl: false,
-        minZoom: 9,
+        minZoom: 10,
         maxZoom: 18,
         inertia: false,
         maxBounds: [
@@ -952,7 +951,7 @@ async function drawDistanceIsochrone(lat, long, range, alsoApply = false) {
             {
                 method: "POST",
                 headers: {
-                    "Authorization": ORS_API_KEY,
+                    // "Authorization": ORS_API_KEY,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({

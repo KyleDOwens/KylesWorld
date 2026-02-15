@@ -13,13 +13,17 @@
     margin: 16px 0;
 }
 
+#sheet-overlay .horizontal-group {
+    margin: 0.5% 1%;
+}
+
 
 /*-- ================================================ --->
 <---                     WELCOME                      --->
 <--- ================================================ --*/
 #welcome-window {
     margin: 0.5% 0.5%;
-    width: 65%;
+    width: 68%;
     height: 100%;
 }
 

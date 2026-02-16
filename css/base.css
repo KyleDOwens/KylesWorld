@@ -28,6 +28,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100dvh
 }
 
 #excel-window {
@@ -35,7 +36,6 @@ body {
     width: 70%;
     display: grid;
     border: 1px solid #c0c0c0;
-    padding-bottom: env(safe-area-inset-bottom);
 }
 #excel-window > * {
   min-width: 0;

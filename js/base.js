@@ -383,6 +383,11 @@ function addScrollbarListeners() {
             startContainerTouch = null;
             touchContainer = null;
         }, { passive: false});
+        document.getElementById(`${prefix}-scroll-container`).addEventListener("touchcancel", (e) => {
+            startTouch = null;
+            startContainerTouch = null;
+            touchContainer = null;
+        }, { passive: false});
     }    
 }
 window.addEventListener("mouseup", (e) => {

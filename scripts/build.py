@@ -38,6 +38,7 @@ for file in os.listdir(os.fsencode("./pages")):
         combined_html = combined_html.replace("<!-- REPLACEME_SCRIPT -->", script)
     
     # Save html to output
+    page_name = "index" if (page_name == "homepage") else page_name # change the output name to index.html if the homepage 
     with open(f"{BUILD_DIR}/{page_name}.html", "w") as output_file:
         output_file.write(combined_html)
 

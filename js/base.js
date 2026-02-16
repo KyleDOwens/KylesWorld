@@ -803,5 +803,5 @@ document.querySelectorAll(".dropdown").forEach((dropdown) => {
 <---                   MENU BUTTONS                   --->
 <--- ================================================ --*/
 document.getElementById("main-title-left").addEventListener("click", () => {
-    window.location.href = "homepage.html";
+    window.location.href = "/";
 });

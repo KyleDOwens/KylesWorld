@@ -1150,9 +1150,6 @@ nav#sheet-tabs {
     .vertical-header{
         width: 18px;
     }
-    #A0 {
-        margin-left: 18px;
-    }
     #corner-header {
         height: 14px;
         width: 18px;
@@ -1162,6 +1159,7 @@ nav#sheet-tabs {
         left: -14px;
     }
     #mock-hheader {
+        margin-left: 18px;
         left: 14px;
     }
     #mock-grid {

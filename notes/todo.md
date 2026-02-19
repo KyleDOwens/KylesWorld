@@ -17,6 +17,7 @@
     * [-] Snowglobe button? Celebration button (with balloons and confetti?)
     * [-] Add MIDI music and replace button with volume control
 
+* [-] allow scrollbars to be touched and dragged on mobile
 
 # MOBILE
 * [-] Button text is blue?

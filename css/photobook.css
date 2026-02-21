@@ -1,10 +1,13 @@
 #photobook-wrapper {
-    column-count: 4;
-    column-gap: 20px;
+    /* column-count: 4; */
+    column-width: 284px;
+    column-gap: 10px;
 
     width: calc(100% - 18px);
     margin: 10px;
     box-sizing: border-box;
+
+    /* column-rule: 4px double #ff00ff; */
 }
 
 .photo-window {

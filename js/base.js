@@ -17,6 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     handlePageLoad();
     fitSheetToHeight();
+
+    // resize the sheet after a small delay just in case content still needs to load
+    window.dispatchEvent(new Event('resize'));
+    setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+    }, 200);
+    setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+    }, 500);
 });
 
 
@@ -36,7 +45,7 @@ function initializeSheet() {
 
     // Add row headers
     let mockVerticalHeader = document.getElementById("mock-vheader");
-    for (let i = 0; i <= 300; i++) {
+    for (let i = 0; i <= 999; i++) {
         let headerCell = document.createElement("span");
         headerCell.classList.add("vertical-header");
         headerCell.id = `_${i}`;
@@ -373,8 +382,6 @@ function addScrollbarListeners() {
         document.getElementById(`${prefix}-scroll-container`).addEventListener("touchmove", (e) => {
             e.preventDefault();
             let deltaY = e.touches[0].clientY - startTouch;
-            console.log(startContainerTouch);
-            console.log(deltaY);
             touchContainer.scrollTop = startContainerTouch - deltaY;
             updateThumbPositions(getPrefixFromId(e.target.id));
         }, { passive: false});

@@ -1,8 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Dispatch a 'resize' event to: (1) resize the mock grid, (2) resize the scrollbars, (3) resize the book container
-    window.dispatchEvent(new Event('resize'));
-
-    setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-    }, 200);
+    randomizeMargins();
 });
+
+/**
+ * Apply a randomized margin to each photo window to make them not perfectly aligned
+ */
+function randomizeMargins() {
+    let photos = document.querySelectorAll(".photo-window");
+    photos.forEach(photo => {
+        let hmin = -6;
+        let hmax = 6;
+        let hmargin = Math.floor(Math.random() * (hmax - hmin + 1) + hmin);
+
+        let vmin = 10 - 6;
+        let vmax = 10 + 6;
+        let vmargin = Math.floor(Math.random() * (vmax - vmin + 1) + vmin);
+
+        photo.style.margin = `${vmargin}px ${hmargin}px`;
+    });
+}

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="css/photobook.css">
     <!-- REPLACEME_EXTRALINK -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <link rel="icon" href="images/favicons/photobook_favicon.gif">
+    <link rel="icon" href="images/favicon.gif">
+    
 </head>
 
 <body>
@@ -65,29 +66,13 @@
                 <!-- Theme selector -->
                 <div class="dropdown" id="theme-selector">
                     <div class="dropdown-display">
-                        <!-- theme -->.
+                        space
                         <button class="square-button down-button"></button>
                     </div>
                     <div class="dropdown-options hidden">
-                        <div class="dropdown-item dropdown-selected"><i class="faint-text">coming soon</i></div>
-                        <!-- <div class="dropdown-item dropdown-selected">blue</div>
-                        <div class="dropdown-item">green</div>
-                        <div class="dropdown-item">red</div>
-                        <div class="dropdown-item">rainbow</div> -->
-                    </div>
-                </div>
-
-                <!-- Background selector -->
-                <div class="dropdown" id="background-selector">
-                    <div class="dropdown-display">
-                        <!-- background -->.
-                        <button class="square-button down-button"></button>
-                    </div>
-                    <div class="dropdown-options hidden">
-                        <div class="dropdown-item dropdown-selected"><i class="faint-text">coming soon</i></div>
-                        <!-- <div class="dropdown-item dropdown-selected">space (twinkle)</div>
-                        <div class="dropdown-item">space (static)</div>
-                        <div class="dropdown-item">background3</div> -->
+                        <!-- <div class="dropdown-item dropdown-selected"><i class="faint-text">coming soon</i></div> -->
+                        <div class="dropdown-item dropdown-selected">space</div>
+                        <div class="dropdown-item">underwater</div>
                     </div>
                 </div>
 
@@ -106,21 +91,21 @@
                 </div>
 
                 <!-- Bold, italic, underline -->
-                <div class="horizontal-group">
+                <div class="horizontal-group" id="font-button-wrapper">
                     <button class="square-button font-button" id="bold-button"><b>B</b></button>
                     <button class="square-button font-button" id="italic-button"><i>I</i></button>
                     <button class="square-button font-button" id="underline-button"><u>U</u></button>
                 </div>
 
                 <!-- Left, center, right align -->
-                <div class="horizontal-group">
+                <div class="horizontal-group" id="align-button-wrapper">
                     <button class="square-button align-button" id="left-align-button"></button>
                     <button class="square-button align-button" id="center-align-button"></button>
                     <button class="square-button align-button" id="right-align-button"></button>
                 </div>
 
                 <!-- Readonly -->
-                <div class="horizontal-group">
+                <div class="horizontal-group" id="readonly-wrapper">
                     <span class="faint-text" id="readonly-mode">*READONLY MODE*</span>
                 </div>
             </nav>
@@ -225,16 +210,16 @@ TODO: dynamically calculate the # of columns
             <ul>
                 <li>china + taiwan</li>
                 <ul>
-                    <li><a href="#taipei-start">taipei</a></li>
-                    <li><a href="#beijing-start">beijing</a></li>
-                    <li><a href="#suzhou-start">suzhou</a></li>
-                    <li><a href="#shanghai-start">shanghai</a></li>
+                    <li><a href="#taipei-top">taipei</a></li>
+                    <li><a href="#beijing-top">beijing</a></li>
+                    <li><a href="#suzhou-top">suzhou</a></li>
+                    <li><a href="#shanghai-top">shanghai</a></li>
                 </ul>
                 <li>camino frances</li>
                 <ul>
                     <li><a href="#camino-middle">camino midpoint</a></li>
-                    <li><a href="#camino-start">camino start</a></li>
-                    <li><a href="#geneva-start">geneva</a></li>
+                    <li><a href="#camino-top">camino start</a></li>
+                    <li><a href="#geneva-top">geneva</a></li>
                 </ul>
                 <!-- <li>greece <div class="faint-text">(coming soon)</div></li>
                 <li>spain <div class="faint-text">(coming soon)</div></li> -->
@@ -252,7 +237,7 @@ TODO: dynamically calculate the # of columns
 
     <!-- #region TAIPEI -->
     <div class="photo-window">
-        <div class="photo-title" id="taipei-start">Squid Games??!?</div>
+        <div class="photo-title" id="taipei-top">Squid Games??!?</div>
         <img src="/images/photobook/china/squid_games.JPEG" alt="Squid Games">
         <div class="caption">squid game event happening outside the chiang kai-shek memorial</div>
     </div>
@@ -308,13 +293,13 @@ TODO: dynamically calculate the # of columns
     <div class="photo-window">
         <div class="photo-title">7/11</div>
         <img src="/images/photobook/china/711.JPEG" alt="7/11">
-        <div class="caption">the goat 7/11 right across the stree from our taipei hotel</div>
+        <div class="caption">the goat 7/11 right across the street from our taipei hotel</div>
     </div>
 
     <div class="photo-window">
         <div class="photo-title">Durian</div>
         <img src="/images/photobook/china/taipei_durian.JPEG" alt="Durian">
-        <div class="caption">some durian i got to try fresh for the first time ever at the night market (i give it a thumbs up)</div>
+        <div class="caption">got to check off trying fresh durian from my bucket list at a taipei night market (i give it a thumbs up)</div>
     </div>
 
     <div class="photo-window">
@@ -359,15 +344,15 @@ TODO: dynamically calculate the # of columns
         <div class="caption">got caught playing pokemon go soon after arriving in taipei (i could not play in china)</div>
     </div>
 
-    <div class="photo-window" id="taipei-end">
+    <div class="photo-window" id="taipei-bottom">
         <div class="photo-title">Airplane</div>
         <img src="/images/photobook/china/big_back.JPEG" alt="Airplane">
-        <div class="caption">sydney with two meals while grant is passed out</div>
+        <div class="caption">big back behavior on the plane</div>
     </div>
     <!-- #endregion TAIPEI -->
 
     <!-- #region BEIJING -->
-    <div class="photo-window" id="beijing-start">
+    <div class="photo-window" id="beijing-top">
         <div class="photo-title">Temple of Heaven</div>
         <img src="/images/photobook/china/temple_of_heaven.JPEG" alt="Temple of Heaven">
         <div class="caption">temple of heaven in beijing (visited by the emperor for prayer ceremonies)</div>
@@ -487,7 +472,7 @@ TODO: dynamically calculate the # of columns
         <div class="caption">sleeping cat on a car spotted on a beijing walk</div>
     </div>
 
-    <div class="photo-window" id="beijing-end">
+    <div class="photo-window" id="beijing-bottom">
         <div class="photo-title">Beijing Station</div>
         <img src="/images/photobook/china/beijing_station.JPEG" alt="Beijing Station">
         <div class="caption">station in beijing where we arrived by train</div>
@@ -495,7 +480,7 @@ TODO: dynamically calculate the # of columns
     <!-- #endregion BEIJING -->
 
     <!-- #region SUZHOU -->
-     <div class="photo-window" id="suzhou-start">
+     <div class="photo-window" id="suzhou-top">
         <div class="photo-title">Suzhou Street</div>
         <img src="/images/photobook/china/suzhou_street_1.JPEG" alt="Suzhou Street">
         <div class="caption">street in suzhou</div>
@@ -537,7 +522,7 @@ TODO: dynamically calculate the # of columns
         <div class="caption">pretty looking shop on a suzhou street</div>
     </div>
 
-    <div class="photo-window" id="suzhou-end">
+    <div class="photo-window" id="suzhou-bottom">
         <div class="photo-title">Suzhou Canal</div>
         <img src="/images/photobook/china/suzhou_canal.JPEG" alt="Suzhou Canal">
         <div class="caption">one of the many canals in suzhou</div>
@@ -545,7 +530,7 @@ TODO: dynamically calculate the # of columns
     <!-- #endregion SUZHOU -->
 
     <!-- #region SHANGHAI -->
-    <div class="photo-window" id="shanghai-start">
+    <div class="photo-window" id="shanghai-top">
         <div class="photo-title">Hot Pot</div>
         <img src="/images/photobook/china/hot_pot.JPEG" alt="Hot Pot">
         <div class="caption">very tasty and very cheap hot pot</div>
@@ -743,7 +728,7 @@ TODO: dynamically calculate the # of columns
         <div class="caption">skyline of shanghai from the bund</div>
     </div>
 
-    <div class="photo-window" id="shanghai-end">
+    <div class="photo-window" id="shanghai-bottom">
         <div class="photo-title">Afraid Pillow</div>
         <img src="/images/photobook/china/afraid_pillow.JPG" alt="Afraid Pillow">
         <div class="caption">i'm afraid of what might happen if i relax...</div>
@@ -752,7 +737,7 @@ TODO: dynamically calculate the # of columns
 
 
     <!-- #region CAMINO_DAY13 -->
-    <div class="photo-window" id="camino-start">
+    <div class="photo-window" id="camino-top">
         <div class="photo-title">Performance</div>
         <img src="/images/photobook/camino/day13_performance.JPEG" alt="Performance">
         <div class="caption">performance we got to see inside the cathedral in conques</div>
@@ -1246,7 +1231,7 @@ TODO: dynamically calculate the # of columns
         <div class="caption">train ride from geneva to le puy-en-velay</div>
     </div>
 
-    <div class="photo-window" id="camino-end">
+    <div class="photo-window" id="camino-bottom">
         <div class="photo-title">Train</div>
         <img src="/images/photobook/camino/day3_train.JPEG" alt="Train">
         <div class="caption">train ride from geneva to le puy-en-velay</div>
@@ -1316,7 +1301,7 @@ TODO: dynamically calculate the # of columns
         <div class="caption">geneva</div>
     </div>
 
-    <div class="photo-window" id="geneva">
+    <div class="photo-window" id="geneva-top">
         <div class="photo-title">Airplane</div>
         <img src="/images/photobook/camino/day1_flight.JPEG" alt="Airplane">
         <div class="caption">flying into geneva</div>
@@ -1374,6 +1359,21 @@ TODO: dynamically calculate the # of columns
             </div>
         </footer>
 
+        <!-- <div class="theme-extra" id="underwater-gifs" style="display: none;">
+            <div style="height: 67px; width: 100%; background-image: url('images/underwater/reef.gif'); background-repeat: repeat-x; position: absolute; bottom: 0; left: 0;"></div>
+            
+            <img src="images/underwater/rubber_duck.gif" style="position: absolute; left: 6%; top: 10%;">
+            <img src="images/underwater/fish1.gif" style="position: absolute; left: 2%; top: 33%;">
+            <img src="images/underwater/fish4.gif" style="position: absolute; left: 2%; top: 66%; width: 200px;">
+            <img src="images/underwater/poliwhirl.gif" style="position: absolute; left: 2%; bottom: 5px; width: 200px;">
+            
+            <img src="images/underwater/fish2.gif" style="position: absolute; right: 4%; top: 15%;">
+            <img src="images/underwater/shark.gif" style="position: absolute; right: 1%; top: 50%;">
+            <img src="images/underwater/octopus.gif" style="position: absolute; right: 2%; top: 75%;">
+            <img src="images/underwater/clam.gif" style="position: absolute; right: 10%; bottom: 1px;">
+            <img src="images/underwater/crab.gif" style="position: absolute; right: 0%; bottom: 5px;">
+        </div> -->
+
 
     </div>
 
@@ -1381,7 +1381,7 @@ TODO: dynamically calculate the # of columns
         These pages were last updated on the <u>18th of January 2025</u>
     </div> -->
 
-    <script src="js/base.js"></script>
+    <script type="module" src="js/base.js"></script>
     <script type="module" src="js/photobook.js"></script>
     <!-- REPLACEME_EXTRASCRIPT -->
 </body>

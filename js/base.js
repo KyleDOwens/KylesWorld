@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     fitSheetToHeight();
 });
 
-window.onload = function() {
+window.addEventListener("load", () =>
     // resize the excel sheet once all content is loaded (mostly needed for photobook)
-    window.dispatchEvent(new Event('resize'));
-};
+    window.dispatchEvent(new Event("resize"))
+);
 
 
 /**
@@ -822,13 +822,84 @@ function toggleDropdown(dropdown) {
     openDropdown = (openDropdown == null) ? dropdown : null;
 }
 window.addEventListener("mouseup", function(e) {
-    if ((openDropdown != null) && (e.target.closest(".dropdown") == null)) {
+    if ((openDropdown != null) && ((e.target.closest(".dropdown") == null) || e.target.closest(".dropdown") != openDropdown)) {
         toggleDropdown(openDropdown);
     }
 });
 document.querySelectorAll(".dropdown").forEach((dropdown) => {
     dropdown.querySelector(".dropdown-display").addEventListener("click", function() {
         toggleDropdown(dropdown);
+    });
+});
+
+function updateDropdownDisplay(dropdown, toDisplay) {
+    // TODO: replace with select tag? can i customize it for what i want?
+    dropdown.querySelector(".dropdown-display").innerHTML = toDisplay;
+    dropdown.querySelector(".dropdown-display").innerHTML += `\n<button class="square-button down-button"></button>`;
+    dropdown.querySelectorAll(".dropdown-item").forEach(item => {
+        if (item.innerText == toDisplay) {
+            item.classList.add("dropdown-selected");
+        }
+        else {
+            item.classList.remove("dropdown-selected");
+        }
+    });
+}
+
+
+import { BUBBLE_GRAPHIC } from "./graphics.js";
+let THEMES = {
+    "space" : {
+        "cursor" : null,
+        "graphic" : null,
+        "extras" : null
+    },
+    "underwater" : {
+        "cursor" : "../images/cursor_fish.png",
+        "graphic" : BUBBLE_GRAPHIC,
+        "extras" : null,
+    },
+}
+function updateTheme(postfix) {
+    // change background
+    document.body.style.backgroundImage = `url("../images/background_${postfix}.gif")`;
+
+    // (optional) update cursor
+    document.body.style.cursor = `auto`
+    if (THEMES[postfix]["cursor"]) {
+        document.body.style.cursor = `url(${THEMES[postfix]["cursor"]}), auto`;
+    }
+
+    // remove old graphic(s)
+    let oldScript = document.getElementById("graphic-script");
+    if (oldScript) {
+        oldScript.remove();
+        document.querySelectorAll(".graphic").forEach(graphic => graphic.remove());
+    }
+
+    // (optional) add graphic
+    if (THEMES[postfix]["graphic"]) {
+        let newScript = document.createElement('script')
+        newScript.id = "graphic-script";
+        newScript.textContent = THEMES[postfix]["graphic"];
+        document.head.appendChild(newScript);
+    }
+
+    // remove old extra content
+    document.querySelectorAll(".theme-extra").forEach(extra => extra.style.display = "none");
+
+    // (optional) add extra content
+    if (THEMES[postfix]["extras"]) {
+        document.getElementById(`${THEMES[postfix]["extras"]}`).style.display = "block";
+    }
+}
+
+document.getElementById("theme-selector").querySelectorAll(".dropdown-item").forEach((themeOption) => {
+    themeOption.addEventListener("click", () => {
+        let themeSelector = document.getElementById("theme-selector");
+        updateTheme(themeOption.innerHTML);
+        toggleDropdown(themeSelector);
+        updateDropdownDisplay(themeSelector, themeOption.innerHTML);
     });
 });
 //#endregion DROPDOWN
@@ -840,3 +911,5 @@ document.querySelectorAll(".dropdown").forEach((dropdown) => {
 document.getElementById("main-title-left").addEventListener("click", () => {
     window.location.href = "/";
 });
+
+

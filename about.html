@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="css/about.css">
     <!-- REPLACEME_EXTRALINK -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <link rel="icon" href="images/favicons/about_favicon.gif">
+    <link rel="icon" href="images/favicon.gif">
+    
 </head>
 
 <body>
@@ -65,29 +66,13 @@
                 <!-- Theme selector -->
                 <div class="dropdown" id="theme-selector">
                     <div class="dropdown-display">
-                        <!-- theme -->.
+                        space
                         <button class="square-button down-button"></button>
                     </div>
                     <div class="dropdown-options hidden">
-                        <div class="dropdown-item dropdown-selected"><i class="faint-text">coming soon</i></div>
-                        <!-- <div class="dropdown-item dropdown-selected">blue</div>
-                        <div class="dropdown-item">green</div>
-                        <div class="dropdown-item">red</div>
-                        <div class="dropdown-item">rainbow</div> -->
-                    </div>
-                </div>
-
-                <!-- Background selector -->
-                <div class="dropdown" id="background-selector">
-                    <div class="dropdown-display">
-                        <!-- background -->.
-                        <button class="square-button down-button"></button>
-                    </div>
-                    <div class="dropdown-options hidden">
-                        <div class="dropdown-item dropdown-selected"><i class="faint-text">coming soon</i></div>
-                        <!-- <div class="dropdown-item dropdown-selected">space (twinkle)</div>
-                        <div class="dropdown-item">space (static)</div>
-                        <div class="dropdown-item">background3</div> -->
+                        <!-- <div class="dropdown-item dropdown-selected"><i class="faint-text">coming soon</i></div> -->
+                        <div class="dropdown-item dropdown-selected">space</div>
+                        <div class="dropdown-item">underwater</div>
                     </div>
                 </div>
 
@@ -106,21 +91,21 @@
                 </div>
 
                 <!-- Bold, italic, underline -->
-                <div class="horizontal-group">
+                <div class="horizontal-group" id="font-button-wrapper">
                     <button class="square-button font-button" id="bold-button"><b>B</b></button>
                     <button class="square-button font-button" id="italic-button"><i>I</i></button>
                     <button class="square-button font-button" id="underline-button"><u>U</u></button>
                 </div>
 
                 <!-- Left, center, right align -->
-                <div class="horizontal-group">
+                <div class="horizontal-group" id="align-button-wrapper">
                     <button class="square-button align-button" id="left-align-button"></button>
                     <button class="square-button align-button" id="center-align-button"></button>
                     <button class="square-button align-button" id="right-align-button"></button>
                 </div>
 
                 <!-- Readonly -->
-                <div class="horizontal-group">
+                <div class="horizontal-group" id="readonly-wrapper">
                     <span class="faint-text" id="readonly-mode">*READONLY MODE*</span>
                 </div>
             </nav>
@@ -380,6 +365,21 @@
             </div>
         </footer>
 
+        <!-- <div class="theme-extra" id="underwater-gifs" style="display: none;">
+            <div style="height: 67px; width: 100%; background-image: url('images/underwater/reef.gif'); background-repeat: repeat-x; position: absolute; bottom: 0; left: 0;"></div>
+            
+            <img src="images/underwater/rubber_duck.gif" style="position: absolute; left: 6%; top: 10%;">
+            <img src="images/underwater/fish1.gif" style="position: absolute; left: 2%; top: 33%;">
+            <img src="images/underwater/fish4.gif" style="position: absolute; left: 2%; top: 66%; width: 200px;">
+            <img src="images/underwater/poliwhirl.gif" style="position: absolute; left: 2%; bottom: 5px; width: 200px;">
+            
+            <img src="images/underwater/fish2.gif" style="position: absolute; right: 4%; top: 15%;">
+            <img src="images/underwater/shark.gif" style="position: absolute; right: 1%; top: 50%;">
+            <img src="images/underwater/octopus.gif" style="position: absolute; right: 2%; top: 75%;">
+            <img src="images/underwater/clam.gif" style="position: absolute; right: 10%; bottom: 1px;">
+            <img src="images/underwater/crab.gif" style="position: absolute; right: 0%; bottom: 5px;">
+        </div> -->
+
 
     </div>
 
@@ -387,7 +387,7 @@
         These pages were last updated on the <u>18th of January 2025</u>
     </div> -->
 
-    <script src="js/base.js"></script>
+    <script type="module" src="js/base.js"></script>
     <!-- REPLACEME_SCRIPT -->
     <!-- REPLACEME_EXTRASCRIPT -->
 </body>

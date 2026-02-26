@@ -40,7 +40,6 @@ body {
     flex-direction: column;
     border: 1px solid #c0c0c0;
     padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
 }
 #excel-window > * {
   min-width: 0;

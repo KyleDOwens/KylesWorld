@@ -1,6 +1,7 @@
 window.addEventListener("load", () => {
     reorganizeMasonry();
     randomizeMargins();
+    window.dispatchEvent(new Event('resize'));
 });
 
 /**

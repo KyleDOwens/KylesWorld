@@ -18,9 +18,6 @@
     * [-] Add MIDI music and replace button with volume control
     * ASCII art generator? collage maker? cryptography algorithms?
 
-* [-] allow scrollbars to be touched and dragged on mobile
-* [-] look back into if styling scrollbars is possible??? (https://romydemers.neocities.org/)
-
 # MOBILE
 * [-] Change ratio, since top and bottom of page are being cut off?
 
@@ -35,6 +32,7 @@
     * https://stadiamaps.com/build-a-map/#map=9.78/29.461/-98.584&style=outdoors
     * https://github.com/Leaflet/Leaflet.markercluster
 * [-] Create custom map viewer and remove LeafletJS
+* [-] Create image for each color (no more color shifting)
 
 # RECIPES
 * [-] Add pictures for missing recipes

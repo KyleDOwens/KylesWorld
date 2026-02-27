@@ -178,7 +178,7 @@
         <!-- ================================================ --->
         <!--                      SHEET                       --->
         <!-- ================================================ --->
-        <main class="scroll-and-content">
+        <main>
             <div id="corner-header"><!-- Corner header of the mock grid - needed on outside level so it can be absolutely positioned within container --></div> 
             <div class="scroll-container" id="sheet-scroll-container">
                 <div id="sheet-canvas">
@@ -1312,16 +1312,6 @@ TODO: dynamically calculate the # of columns
                     </div>
                 </div>
             </div>
-            
-
-            <!-- Vertical scrollbar for the mock sheet -->
-            <div class="vertical-scrollbar" data-prefix="sheet" id="sheet-vertical-scrollbar">
-                <button class="square-button up-button" id="sheet-up-scroll-button"></button>
-                <div class="scroll-track" id="sheet-vertical-scroll-track">
-                    <div class="scroll-thumb" id="sheet-vertical-scroll-thumb"></div>
-                </div>
-                <button class="square-button down-button" id="sheet-down-scroll-button"></button>
-            </div>
         </main>
 
         <!-- ================================================ --->
@@ -1349,13 +1339,10 @@ TODO: dynamically calculate the # of columns
                 </nav>
 
                 <!-- Horizontal scrollbar -->
-                <div class="horizontal-scrollbar" data-prefix="sheet" id="sheet-horizontal-scrollbar">
-                    <button class="square-button left-button" id="sheet-left-scroll-button"></button>
-                    <div class="scroll-track" id="sheet-horizontal-scroll-track">
-                        <div class="scroll-thumb" id="sheet-horizontal-scroll-thumb"></div>
-                    </div>
-                    <button class="square-button right-button" id="sheet-right-scroll-button"></button>
-                    <button class="square-button" disabled></button>
+                <div class="horizontal-group" id="horizontal-scrollbar">
+                    <button class="square-button left-button"></button>
+                    <div class="scroll-track"><div class="scroll-thumb"></div></div>
+                    <button class="square-button right-button"></button>
                 </div>
             </div>
         </footer>

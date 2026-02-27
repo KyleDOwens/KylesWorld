@@ -130,9 +130,6 @@ button:disabled {
     margin-right: 5px;
     margin-bottom: 5px;
 }
-#restaurant-scroll-container::-webkit-scrollbar {
-    display: none;
-}
 /*#endregion LIST_PANEL */
 
 
@@ -278,9 +275,6 @@ button:disabled {
     overflow-y: scroll;
     position: relative;
     max-height: 200px;
-}
-#cuisine-scroll-container::-webkit-scrollbar {
-    display: none;
 }
 #rating-filter {
     grid-area: rating;
@@ -461,7 +455,7 @@ button:disabled {
     }
 }
 @media (max-width: 410px) {
-    #cuisine-vertical-scrollbar {
+    #cuisine-scroll-container::-webkit-scrollbar {
         display: none;
     }
 }

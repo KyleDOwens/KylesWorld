@@ -11,7 +11,7 @@
 #music-window {
     margin: 0.5% 1%;
     min-width: 98%;
-    height: 75vh;
+    height: 70vh;
 }
 
 #music-scroll-and-content {
@@ -19,12 +19,9 @@
     height: calc(100% - 2rem);
 }
 #music-scroll-container {
-    overflow-x: scroll;
+    overflow-x: hidden;
     overflow-y: scroll;
     width: 100%;
-}
-#music-scroll-container::-webkit-scrollbar {
-    display: none;
 }
 
 #sheet-overlay .horizontal-group {

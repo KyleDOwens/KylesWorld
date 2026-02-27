@@ -178,7 +178,7 @@
         <!-- ================================================ --->
         <!--                      SHEET                       --->
         <!-- ================================================ --->
-        <main class="scroll-and-content">
+        <main>
             <div id="corner-header"><!-- Corner header of the mock grid - needed on outside level so it can be absolutely positioned within container --></div> 
             <div class="scroll-container" id="sheet-scroll-container">
                 <div id="sheet-canvas">
@@ -256,15 +256,6 @@
                                 <div class="multi-option multi-any"><label><input type="checkbox">Any</label></div>
                                 <div class="multi-option"><label><input type="checkbox">Afghan</label></div><div class="multi-option"><label><input type="checkbox">African</label></div><div class="multi-option"><label><input type="checkbox">American</label></div><div class="multi-option"><label><input type="checkbox">Argentinian</label></div><div class="multi-option"><label><input type="checkbox">BBQ</label></div><div class="multi-option"><label><input type="checkbox">Bakery</label></div><div class="multi-option"><label><input type="checkbox">Bar</label></div><div class="multi-option"><label><input type="checkbox">Belgian</label></div><div class="multi-option"><label><input type="checkbox">Brazilian Steakhouse</label></div><div class="multi-option"><label><input type="checkbox">Brunch</label></div><div class="multi-option"><label><input type="checkbox">Caribbean</label></div><div class="multi-option"><label><input type="checkbox">Central American</label></div><div class="multi-option"><label><input type="checkbox">Chinese</label></div><div class="multi-option"><label><input type="checkbox">Coffee</label></div><div class="multi-option"><label><input type="checkbox">Cuban</label></div><div class="multi-option"><label><input type="checkbox">Dessert</label></div><div class="multi-option"><label><input type="checkbox">Donuts</label></div><div class="multi-option"><label><input type="checkbox">Filipino</label></div><div class="multi-option"><label><input type="checkbox">French</label></div><div class="multi-option"><label><input type="checkbox">Fusion</label></div><div class="multi-option"><label><input type="checkbox">German</label></div><div class="multi-option"><label><input type="checkbox">Hamburger</label></div><div class="multi-option"><label><input type="checkbox">Hawaiian</label></div><div class="multi-option"><label><input type="checkbox">Ice Cream</label></div><div class="multi-option"><label><input type="checkbox">Indian</label></div><div class="multi-option"><label><input type="checkbox">Italian</label></div><div class="multi-option"><label><input type="checkbox">Japanese</label></div><div class="multi-option"><label><input type="checkbox">Korean</label></div><div class="multi-option"><label><input type="checkbox">Korean BBQ</label></div><div class="multi-option"><label><input type="checkbox">Kosher</label></div><div class="multi-option"><label><input type="checkbox">Mediterranean</label></div><div class="multi-option"><label><input type="checkbox">Mexican</label></div><div class="multi-option"><label><input type="checkbox">Middle Eastern</label></div><div class="multi-option"><label><input type="checkbox">Moroccan</label></div><div class="multi-option"><label><input type="checkbox">Peruvian</label></div><div class="multi-option"><label><input type="checkbox">Pizza</label></div><div class="multi-option"><label><input type="checkbox">Puerto Rican</label></div><div class="multi-option"><label><input type="checkbox">Ramen</label></div><div class="multi-option"><label><input type="checkbox">Sandwich</label></div><div class="multi-option"><label><input type="checkbox">Seafood</label></div><div class="multi-option"><label><input type="checkbox">Soul</label></div><div class="multi-option"><label><input type="checkbox">Spanish</label></div><div class="multi-option"><label><input type="checkbox">Steak</label></div><div class="multi-option"><label><input type="checkbox">Sushi</label></div><div class="multi-option"><label><input type="checkbox">Sweets</label></div><div class="multi-option"><label><input type="checkbox">Taiwanese</label></div><div class="multi-option"><label><input type="checkbox">Tex-Mex</label></div><div class="multi-option"><label><input type="checkbox">Thai</label></div><div class="multi-option"><label><input type="checkbox">Turkish</label></div><div class="multi-option"><label><input type="checkbox">Ukrainian</label></div><div class="multi-option"><label><input type="checkbox">Uzbek</label></div><div class="multi-option"><label><input type="checkbox">Vegan</label></div><div class="multi-option"><label><input type="checkbox">Venezuelan</label></div><div class="multi-option"><label><input type="checkbox">Vietnamese</label></div>
                             </div>
-                        </div>
-
-                        <!-- Vertical scrollbar -->
-                        <div class="vertical-scrollbar" data-prefix="cuisine" id="cuisine-vertical-scrollbar">
-                            <button class="square-button up-button" id="cuisine-up-scroll-button"></button>
-                            <div class="scroll-track" id="cuisine-vertical-scroll-track">
-                                <div class="scroll-thumb" id="cuisine-vertical-scroll-thumb"></div>
-                            </div>
-                            <button class="square-button down-button" id="cuisine-down-scroll-button"></button>
                         </div>
                     </div>
                     <!-- Rating filter -->
@@ -696,15 +687,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <!-- Vertical scrollbar -->
-            <div class="vertical-scrollbar" data-prefix="restaurant" id="restaurant-vertical-scrollbar">
-                <button class="square-button up-button" id="restaurant-up-scroll-button"></button>
-                <div class="scroll-track" id="restaurant-vertical-scroll-track">
-                    <div class="scroll-thumb" id="restaurant-vertical-scroll-thumb"></div>
-                </div>
-                <button class="square-button down-button" id="restaurant-down-scroll-button"></button>
-            </div>
         </div>
     </div>
 
@@ -779,16 +761,6 @@
                     </div>
                 </div>
             </div>
-            
-
-            <!-- Vertical scrollbar for the mock sheet -->
-            <div class="vertical-scrollbar" data-prefix="sheet" id="sheet-vertical-scrollbar">
-                <button class="square-button up-button" id="sheet-up-scroll-button"></button>
-                <div class="scroll-track" id="sheet-vertical-scroll-track">
-                    <div class="scroll-thumb" id="sheet-vertical-scroll-thumb"></div>
-                </div>
-                <button class="square-button down-button" id="sheet-down-scroll-button"></button>
-            </div>
         </main>
 
         <!-- ================================================ --->
@@ -816,13 +788,10 @@
                 </nav>
 
                 <!-- Horizontal scrollbar -->
-                <div class="horizontal-scrollbar" data-prefix="sheet" id="sheet-horizontal-scrollbar">
-                    <button class="square-button left-button" id="sheet-left-scroll-button"></button>
-                    <div class="scroll-track" id="sheet-horizontal-scroll-track">
-                        <div class="scroll-thumb" id="sheet-horizontal-scroll-thumb"></div>
-                    </div>
-                    <button class="square-button right-button" id="sheet-right-scroll-button"></button>
-                    <button class="square-button" disabled></button>
+                <div class="horizontal-group" id="horizontal-scrollbar">
+                    <button class="square-button left-button"></button>
+                    <div class="scroll-track"><div class="scroll-thumb"></div></div>
+                    <button class="square-button right-button"></button>
                 </div>
             </div>
         </footer>

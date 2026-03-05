@@ -857,14 +857,14 @@ footer {
     border-right: 2px solid black;
 }
 
-#sheets-and-scrollbar {
+footer {
     display: flex;
     overflow: hidden;
     scrollbar-width: none;
     
     /* border-top: 2px solid #808080; */
 }
-#sheets-and-scrollbar::-webkit-scrollbar {
+footer::-webkit-scrollbar {
     display: none;
 }
 
@@ -1130,7 +1130,7 @@ nav#sheet-tabs {
     font-size: 18pt;
 }
 .window-container {
-    margin: 15px;
+    margin: 10px;
 }
 /*#endregion EMBEDWINDOWS*/
 

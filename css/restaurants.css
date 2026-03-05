@@ -355,9 +355,6 @@ button:disabled {
     flex: 1;
     height: fit-content;
 }
-#favorites-window .window-container {
-    margin: 10px;
-}
 
 #guide-window {
     width: 100%;

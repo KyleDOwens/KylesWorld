@@ -17,10 +17,22 @@
     * [-] Add MIDI music and replace button with volume control
     * ASCII art generator? collage maker? cryptography algorithms?
 
-* [-] can select tag replace my custom dropdowns?
+* File -> opens page dropdown?
+* Edit -> small pop-up saying "not allowed"?
+* View -> cycles through zoom levels? 100 -> 150 -> 200 -> 250 -> 50 -> 100
+* Insert -> small pop-up saying "not allowed"?
+* Help -> links to about page?
+
+* when you press "enter" in the insert formula input, clear the input text?
+
+* [x] can select tag replace my custom dropdowns?
+    * think support for styling select may have just been added a few months ago? will check back on this later, my custom dropdowns are good enough for now
+
+* [-] find replacement for skipping world gif without random sparkle
 
 ## MUSIC
 * [x] Add one line descriptions for favorites that pop up on click (maybe shake the album when you hover it?)
+    * don't think i should do this - would feel weird to just have reviews for those
 
 # RESTAURANTS
 * [-] Reduce # of markers on map or add marker clustering
@@ -31,3 +43,6 @@
 
 # RECIPES
 * [-] Add pictures for missing recipes
+
+# PHOTOBOOK
+* Add 2024 boston photos?

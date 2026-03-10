@@ -123,13 +123,13 @@ function applyMarkerColor(marker, visited, rating) {
  * @param {string} originalUrl Google Maps URL to the restaurant
  */
 function addRestaurantMarker(name, lat, long, cuisine, visited, rating, notes, originalUrl) {
-    markers[name] = L.marker([lat, long], {icon: newIcon}).addTo(map)
+    markers[normalizeName(name)] = L.marker([lat, long], {icon: newIcon}).addTo(map)
         .bindPopup(`<b>${name}</b><br>
             ${cuisine}<br>
             <a href="${originalUrl}" target=_blank>View on Google</a><br>
             <i>${notes}</i>`);
     
-    applyMarkerColor(markers[name], visited, rating);
+    applyMarkerColor(markers[normalizeName(name)], visited, rating);
 }
 
 /**
@@ -138,7 +138,7 @@ function loadCache() {
     // Load the restaurant data from HTML table into local cache
     let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
-        let name = getRowNormalizedName(row);
+        let name = row.cells[tableColNameToIndex("Name")].textContent;
         let cuisine = row.cells[tableColNameToIndex("Cuisine")].textContent;
         let visited = row.cells[tableColNameToIndex("Visited")].textContent;
         let show = row.cells[tableColNameToIndex("Show")].children[0].checked;
@@ -147,7 +147,7 @@ function loadCache() {
         let gps = row.cells[tableColNameToIndex("Gps")].textContent;
         let originalUrl = row.cells[tableColNameToIndex("OriginalUrl")].textContent;
 
-        restaurants[name] = {
+        restaurants[normalizeName(name)] = {
             "name": name,
             "cuisine" : cuisine,
             "visited" : visited,

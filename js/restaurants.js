@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addListenerToFilters();
     initializeFilters();
     parseUrl();
+    applyFilters(true);
 
     // Sort the table in ascending alphabetical order (by simulating a click on the table sort button)
     document.getElementById("sort-name-button").dispatchEvent(new Event("click"));
@@ -68,6 +69,15 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function normalizeName(name) {
     return name.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+}
+
+/**
+ * Returns the normalized name from the passed in HTML table row object
+ * @param {*} row The HTML to get the restaurant name from
+ */
+function getRowNormalizedName(row) {
+    let name = row.cells[tableColNameToIndex("Name")].innerText;
+    return normalizeName(name);
 }
 
 /**
@@ -113,13 +123,13 @@ function applyMarkerColor(marker, visited, rating) {
  * @param {string} originalUrl Google Maps URL to the restaurant
  */
 function addRestaurantMarker(name, lat, long, cuisine, visited, rating, notes, originalUrl) {
-    markers[normalizeName(name)] = L.marker([lat, long], {icon: newIcon}).addTo(map)
+    markers[name] = L.marker([lat, long], {icon: newIcon}).addTo(map)
         .bindPopup(`<b>${name}</b><br>
             ${cuisine}<br>
             <a href="${originalUrl}" target=_blank>View on Google</a><br>
             <i>${notes}</i>`);
     
-    applyMarkerColor(markers[normalizeName(name)], visited, rating);
+    applyMarkerColor(markers[name], visited, rating);
 }
 
 /**
@@ -128,7 +138,7 @@ function loadCache() {
     // Load the restaurant data from HTML table into local cache
     let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
-        let name = row.cells[tableColNameToIndex("Name")].textContent;
+        let name = getRowNormalizedName(row);
         let cuisine = row.cells[tableColNameToIndex("Cuisine")].textContent;
         let visited = row.cells[tableColNameToIndex("Visited")].textContent;
         let show = row.cells[tableColNameToIndex("Show")].children[0].checked;
@@ -137,7 +147,7 @@ function loadCache() {
         let gps = row.cells[tableColNameToIndex("Gps")].textContent;
         let originalUrl = row.cells[tableColNameToIndex("OriginalUrl")].textContent;
 
-        restaurants[normalizeName(name)] = {
+        restaurants[name] = {
             "name": name,
             "cuisine" : cuisine,
             "visited" : visited,
@@ -172,15 +182,15 @@ function loadCache() {
  */
 window.updateMarkerShown = function(checkbox) {
     let row = checkbox.closest("tr");
-    let name = row.cells[tableColNameToIndex("Name")].innerText;
+    let name = getRowNormalizedName(row);
     let shouldBeShown = checkbox.checked;
 
     // Check the checkbox in the "Hide?" column to see if the marker should be shown
     if (shouldBeShown) {
-        markers[normalizeName(name)]._icon.classList.remove("hidden");
+        markers[name]._icon.classList.remove("hidden");
     }
-    else if (!markers[normalizeName(name)]._icon.classList.contains("hidden")) {
-        markers[normalizeName(name)]._icon.classList.add("hidden");
+    else if (!markers[name]._icon.classList.contains("hidden")) {
+        markers[name]._icon.classList.add("hidden");
     }
 }
 
@@ -192,13 +202,13 @@ function updateAllMarkersShown() {
     let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
         // Check the checkbox in the "Hide?" column to see if the marker should be shown
-        let name = row.cells[tableColNameToIndex("Name")].innerText;
+        let name = getRowNormalizedName(row);
         let shouldBeShown = row.cells[tableColNameToIndex("Show")].children[0].checked;
         if (shouldBeShown) {
-            markers[normalizeName(name)]._icon.classList.remove("hidden");
+            markers[name]._icon.classList.remove("hidden");
         }
-        else if (!markers[normalizeName(name)]._icon.classList.contains("hidden")) {
-            markers[normalizeName(name)]._icon.classList.add("hidden");
+        else if (!markers[name]._icon.classList.contains("hidden")) {
+            markers[name]._icon.classList.add("hidden");
         }
     }
 }
@@ -235,9 +245,9 @@ function passesMenuFilters(name) {
     let ratingFilters = extractFilters(document.getElementById("rating-filter"));
 
     // Get values of restaurant
-    let visited = (restaurants[normalizeName(name)]["visited"] === "") ? "unvisited" : "visited";
-    let cuisines = restaurants[normalizeName(name)]["cuisine"].split(" / ");
-    let rating = restaurants[normalizeName(name)]["rating"];
+    let visited = (restaurants[name]["visited"] === "") ? "unvisited" : "visited";
+    let cuisines = restaurants[name]["cuisine"].split(" / ");
+    let rating = restaurants[name]["rating"];
 
     // Check if filter criteria are met
     let passVisitedFilter = (visitedFilters[0] === "any") || (visitedFilters.includes(visited));
@@ -264,7 +274,7 @@ function applyFilters(initialCall = false) {
     // Check if each restaurant passes the filters
     let table = document.getElementById("restaurant-table-body");
     for (let row of table.rows) {
-        let name = row.cells[tableColNameToIndex("Name")].innerText;
+        let name = getRowNormalizedName(row);
         let shownCheckbox = row.cells[tableColNameToIndex("Show")].children[0];
 
         // Skip manually selected restaurants (only done on load in with URL parameters)
@@ -314,16 +324,16 @@ function initializeFilters() {
  */
 window.manuallySelectRestaurant = function(checkbox) {
     let row = checkbox.closest("tr");
-    let name = row.cells[tableColNameToIndex("Name")].innerText;
+    let name = getRowNormalizedName(row);
 
     // If an option is already manually selected, then selecting it again "undoes" the manual selection, so remove it
-    if (manualSelections.includes(normalizeName(name))) {
-        let index = manualSelections.indexOf(normalizeName(name));
+    if (manualSelections.includes(name)) {
+        let index = manualSelections.indexOf(name);
         manualSelections.splice(index, 1);
     }
     // Otherwise, add it to the manualSelections list
     else {
-        manualSelections.push(normalizeName(name));
+        manualSelections.push(name);
     }
 
     updateMarkerShown(checkbox);
@@ -550,7 +560,7 @@ function decodeAndSetFilters(bitString) {
         filterCheckbox.checked = (bitString[i] == "1") ? true : false;
     }
 
-    applyFilters();
+    applyFilters(true);
 }
 
 /**
@@ -571,7 +581,7 @@ function decodeAndSetManualSelections(bitString) {
         // Flip the shown/hidden for the manually selected restaurant
         let table = document.getElementById("restaurant-table-body");
         for (let row of table.rows) {
-            if (name == normalizeName(row.cells[tableColNameToIndex("Name")].innerText)) {
+            if (name == getRowNormalizedName(row)) {
                 let checkbox = row.cells[tableColNameToIndex("Show")].children[0];
                 checkbox.checked = !checkbox.checked;
                 updateMarkerShown(checkbox);
@@ -598,7 +608,8 @@ function decodeAndSetRandom(bitString) {
 }
 
 /**
- * Parses the current URL and updates the map/table state to match the information in the URL
+ * Parses the current URL and updates the map/table state to match the information in the URL.
+ * This DOES NOT apply any filtering, it simply sets the checkbox states to the appropriate value
  */
 function parseUrl() {
     let urlParams = new URLSearchParams(window.location.search);
@@ -607,11 +618,6 @@ function parseUrl() {
     let encodedFilters = urlParams.get("f");
     let encodedManualSelections = urlParams.get("m");
     let encodedRandom = urlParams.get("r");
-
-    // If no parameters, nothing to do
-    if (!(encodedFilters || encodedManualSelections || encodedRandom)) {
-        return;
-    }
 
     // Apply all passed in state information
     if (encodedFilters) {

@@ -60,7 +60,7 @@ function updateBookHeight() {
     let recipeHeight = recipe.scrollHeight;
 
     if (recipeHeight >= 600) {
-        let newHeight = Math.max(recipeHeight / 2 + 25, 470) ;
+        let newHeight = Math.max(recipeHeight / 2 + 75, 470) ;
         recipe.style.height = `${newHeight}px`;
     }
 }

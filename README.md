@@ -14,7 +14,6 @@ The repository structure is pretty self-explanatory, but here is a quick rundown
 * `csv/` all the CSVs of of data loaded into my website
 * `images/` all the images used on the website
 * `js/` the JavaScript backend of the website
-* `notes/` markdown files with my notes, plans, todo lists, etc.
 * `pages/` the individual page HTML files
 * `scripts/` python scripts which are used by me to help during development
 

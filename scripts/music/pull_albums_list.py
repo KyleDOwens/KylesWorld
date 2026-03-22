@@ -77,7 +77,7 @@ def group_songs_by_album(tracks, preserved_genres, preserved_ratings):
         release = "1/1/" + YEAR # Could be pulled automatically, but would require reformatting the date string, which I don't want to do
         genre = ""
         songs = ", ".join([track["name"] for track in chunk])
-        rating = -1
+        rating = ""
 
         # Use the preserved data to update the values set by me
         key = (album_name, artists)
@@ -86,8 +86,8 @@ def group_songs_by_album(tracks, preserved_genres, preserved_ratings):
         if key in preserved_ratings:
             rating = preserved_ratings[key]
 
-        if rating == -1:
-            rating = groups[-1]["Rating"] if groups and groups[-1] else 9 # Adds default rating for album if there is nothing above it in the list
+        if rating == "":
+            rating = groups[-1]["Rating"] if groups and groups[-1] else "g" # Adds default rating for album if there is nothing above it in the list
             print(f"[INFO] Added album \"{album_name}\" by \"{artists}\"")
             print(f"       Setting rating to {rating}, update if needed")
             print(f"       Make sure to manually update the genre information\n")
@@ -101,7 +101,6 @@ def group_songs_by_album(tracks, preserved_genres, preserved_ratings):
             "Listened On": "",
             "Favorite Songs": songs,
             "Rating": rating,
-            "Hidden Ranking": 999
         })
 
         
@@ -115,7 +114,7 @@ tracks = get_playlist_tracks(PLAYLIST_ID)
 album_groups = group_songs_by_album(tracks, preserved_genres, preserved_ratings)
 
 with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as csvfile:
-    fieldnames = ["Album", "Artist", "Genre", "Release Date", "Listened On", "Favorite Songs", "Rating", "Hidden Ranking"]
+    fieldnames = ["Album", "Artist", "Genre", "Release Date", "Listened On", "Favorite Songs", "Rating"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
 

@@ -126,13 +126,13 @@ for year in range(NEWEST_YEAR, OLDEST_ALBUM_YEAR - 1, -1):
     with open(f"./csv/music/{year}.csv", "r") as albums_file:
         reader = csv.DictReader(albums_file, delimiter=",")
         for row in reader:
-            color = "gold" if (float(row["Rating"]) >= 9) else "silver" if (float(row["Rating"]) >= 8) else "bronze" if (float(row["Rating"]) >= 7) else ""
+            rating_color = "gold" if (row["Rating"] == "g") else "silver" if (row["Rating"] == "s") else "bronze" if (row["Rating"] == "b") else ""
             normalized_album = "".join(c for c in row["Album"] if c.isalnum()).lower()
             normalized_artist = "".join(c for c in row["Artist"].split(",")[0] if c.isalnum()).lower()
             img_path = f"images/music/{year}/{normalized_artist}_{normalized_album}.jpg"
 
             albums_html += ('\t'
-                f'<div class="album-block {color}">'
+                f'<div class="album-block {rating_color}">'
                     f'<img class="album-img" src="{img_path}" width="135px" height="135px">'
                     f'<div class="album-name"><i>{row["Album"]}</i></div>'
                     f'<div class="album-artist"><b>By: </b><u>{row["Artist"]}</u></div>'

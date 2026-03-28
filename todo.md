@@ -27,7 +27,6 @@
 ## MUSIC
 * [x] Add one line descriptions for favorites that pop up on click (maybe shake the album when you hover it?)
     * don't think i should do this - would feel weird to just have reviews for those
-* [-] Convert old remnants of number scores to {"g" "s" "b" "u"} (representing {"gold" "silver" "bronze" "uncolored"})
 
 # RESTAURANTS
 * [-] Reduce # of markers on map or add marker clustering

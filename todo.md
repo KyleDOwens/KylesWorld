@@ -18,11 +18,9 @@
     * Insert -> small pop-up saying "not allowed"?
     * Help -> links to about page?
 
-* ! add theme for "nondescript sheet app" and make excel themed - background is famous windows XP background, cursor is excel, change title colors to excel green
+* [-] ! add theme for "nondescript sheet app" and make excel themed - background is famous windows XP background, cursor is excel, change title colors to excel green
 
-* when you press "enter" in the insert formula input, clear the input text?
-
-* [-] find replacement for skipping world gif without random sparkle
+* [-] when you press "enter" in the insert formula input, clear the input text?
 
 ## MUSIC
 * [x] Add one line descriptions for favorites that pop up on click (maybe shake the album when you hover it?)
@@ -39,4 +37,4 @@
 * [-] Add pictures for missing recipes
 
 # PHOTOBOOK
-* Add 2024 boston photos?
+* [-] Add 2024 boston photos?

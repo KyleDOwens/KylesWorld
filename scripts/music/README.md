@@ -7,23 +7,26 @@ This section contains scripts that aid me in organizing my music. These mostly u
 * Edit `download_album_art.py` to make sure it is referencing the correct year and playlist ID. This only needs to be done once per year
 * Edit `create_organized_playlist.py` to make sure it is referencing the correct year and playlist ID. This only needs to be done once per year
 * Edit `pull_songs_list.py` to make sure it is referencing the correct year and playlist ID 
+* Edit `NEWEST_YEAR` in `scipts/build.py` to match the new year
 
 
 ## Update the albums list
 Use `auto_pull_albums.sh`. This pulls from my "Organized Playlist 20XX" playlist on Spotify and updates the website to match that.
-1) Run `./auto_pull_albums.sh`
-2) On the locally hosted version of the website, go into developer tools and copy the entire `album-grids` element, and replace the existing element in `index.html`
-3) Press 'enter' to finish the script
+1) Make sure you are in `kyles_world/scripts`
+2) Run `./music/auto_pull_albums.sh`
 
 
 ## Update the songs list
 Use `pull_songs_list.py`. This will pull all the songs from my Spotify "Songs 20XX" playlist and put them in the year's song CSV
-1) Run `powershell.exe -Command "python '\\\\wsl$\\Ubuntu\\home\\kyledowens\\projects\\kyles_world\\scripts\\music\\pull_songs_list.py'" && rm .cache`
+1) Make sure you are in `kyles_world/scripts`
+2) Run `./music/auto_pull_songs.sh`
+
 
 
 
 <!-- ---------------------------------------------------------------------------------------- -->
-
+<!-- EVERYTHING BELOW THIS POINT IS OUT OF DATE AND HAS NOT BEEN UPDATED SINCE THE MIGRATION TO THE NEW WEBSITE -->
+<!-- ---------------------------------------------------------------------------------------- -->
 
 # Individual scripts documentation
 ## create_organized_playlist.py

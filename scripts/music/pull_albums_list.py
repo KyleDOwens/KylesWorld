@@ -13,11 +13,11 @@ CLIENT_SECRET = ""
 REDIRECT_URI = "http://127.0.0.1:8888/callback"
 SCOPE = "playlist-read-private playlist-modify-public playlist-modify-private"
 
-PLAYLIST_ID = "0Q6k70RNa5yfCzR7FoWZJT"                    # EDIT HERE
-YEAR = "2025"                                             # EDIT HERE
+PLAYLIST_ID = "6se2lLsSrl34AzP1u4DOE8"                    # EDIT HERE
+YEAR = "2026"                                             # EDIT HERE
 OUTPUT_CSV = "../csv/music/" + YEAR + ".csv"
 
-with open("./client_secret.txt", "r") as file:
+with open("./music/client_secret.txt", "r") as file:
     CLIENT_SECRET = file.read().strip()
 
 
@@ -64,11 +64,15 @@ def group_songs_by_album(tracks, preserved_genres, preserved_ratings):
 
         if len(chunk) != 3:
             print(f"[ERROR] Playlist is not a multiple of 3! Some album must be missing songs")
-            exit()
+            user_input = input("Type 'q' to quit, or any other key to ignore and continue: ")
+            if (user_input == 'q'):
+                exit()
 
         if not (chunk[0]["artists"][0]["name"] == chunk[1]["artists"][0]["name"] == chunk[2]["artists"][0]["name"]):
             print(f"[ERROR] Album \"{chunk[0]['album']['name']}\" does not have 3 songs! Make sure there are 3 songs from each album on the playlist")
-            exit()
+            user_input = input("Type 'q' to quit, or any other key to ignore and continue: ")
+            if (user_input == 'q'):
+                exit()
 
         # Read in values from the spotify data
         album = chunk[0]["album"]

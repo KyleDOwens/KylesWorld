@@ -10,8 +10,8 @@ CLIENT_SECRET = ""
 REDIRECT_URI = 'http://127.0.0.1:8888/callback'
 SCOPE = 'playlist-read-private'
 
-PLAYLIST_ID = "0Q6k70RNa5yfCzR7FoWZJT"                      # EDIT HERE
-YEAR = "2025"                                               # EDIT HERE
+PLAYLIST_ID = "6se2lLsSrl34AzP1u4DOE8"                      # EDIT HERE
+YEAR = "2026"                                               # EDIT HERE
 OUTPUT_DIR = "../images/music/" + YEAR
 
 with open("./music/client_secret.txt", 'r') as file:

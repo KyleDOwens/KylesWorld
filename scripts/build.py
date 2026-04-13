@@ -112,7 +112,7 @@ with open(f"{BUILD_DIR}/restaurants.html", "w") as output_file:
 # <--- ================================================ --*/
 OLDEST_ALBUM_YEAR = 2018
 OLDEST_SONG_YEAR = 2022
-NEWEST_YEAR = 2025
+NEWEST_YEAR = 2026
 
 albums_html = ""
 

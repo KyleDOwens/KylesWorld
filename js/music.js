@@ -1,12 +1,14 @@
 const OLDEST_YEAR = 2018;
-const NEWEST_YEAR = 2025;
-const DEFAULT_YEAR = 2025;
+const NEWEST_YEAR = 2026;
+const DEFAULT_YEAR = 2026;
 
 let currentYear = DEFAULT_YEAR;
 let currentList = "Albums"
 
 // Spotify playlist links (note not all years/lists combos have playlists)
 const PLAYLIST_LINKS = {
+    "Albums 2026" : "https://open.spotify.com/playlist/6se2lLsSrl34AzP1u4DOE8?si=ae87c42e14dc4d91",
+    "Songs 2026" : "https://open.spotify.com/playlist/3KALPD2NcwsyIoasBa3Mnh?si=b454fdd08cfd4a22",
     "Albums 2025" : "https://open.spotify.com/playlist/0Q6k70RNa5yfCzR7FoWZJT?si=088be65e8d3d4ad1",
     "Songs 2025" : "https://open.spotify.com/playlist/78N72f5j0mTbZOkbTlPAJH?si=18c024ca5f964778",
     "Albums 2024" : "https://open.spotify.com/playlist/0MATwTyjzRLJT9rhMKwM6S?si=5e28ec4d25564422",
@@ -30,6 +32,7 @@ const PLAYLIST_LINKS = {
  */
 document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => { updateDisplay(); }, 10); // Add a small delay so this starts initializing after the base
+    moveToCurrentYear();
     setActiveYearButton();
     grayOutYearButtons();
     updateYearIncDecButtons();
@@ -37,6 +40,25 @@ document.addEventListener("DOMContentLoaded", () => {
     setActiveListButton();
     grayOutListButtons();
 });
+
+/**
+ * Moves the year selector to contain the current year
+ */
+function moveToCurrentYear() {
+    let yearButtons = document.querySelectorAll(".year-button");
+    let leftYear = yearButtons[0].innerHTML;
+    let rightYear = yearButtons[yearButtons.length - 1].innerHTML;
+    
+    while (!(leftYear <= currentYear && currentYear <= rightYear)) {
+        let sign = (currentYear < leftYear) ? -1 : 1;
+        changeListedYears(sign);
+        leftYear = yearButtons[0].innerHTML;
+        rightYear = yearButtons[yearButtons.length - 1].innerHTML;
+
+        console.log("moving years");
+        console.log(sign);
+    }
+}
 
 /**
  * Update the page to display the correct data for the selected year and selected list

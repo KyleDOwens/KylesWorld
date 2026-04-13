@@ -13,11 +13,11 @@ CLIENT_SECRET = ""
 REDIRECT_URI = "http://127.0.0.1:8888/callback"
 SCOPE = "playlist-read-private playlist-modify-public playlist-modify-private"
 
-PLAYLIST_ID = "78N72f5j0mTbZOkbTlPAJH"                    # EDIT HERE
-YEAR = "2025"                                             # EDIT HERE
+PLAYLIST_ID = "3KALPD2NcwsyIoasBa3Mnh"                    # EDIT HERE
+YEAR = "2026"                                             # EDIT HERE
 OUTPUT_CSV = "../csv/music/" + YEAR + "_songs.csv"
 
-with open("./client_secret.txt", "r") as file:
+with open("./music/client_secret.txt", "r") as file:
     CLIENT_SECRET = file.read().strip()
 
 

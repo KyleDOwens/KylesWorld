@@ -32,10 +32,11 @@ dirs = [
     # ("images/music/2023", 13),
     # ("images/music/2024", 13),
     # ("images/music/2025", 13),
+    ("images/music/2026", 13),
     # ("images/music/favorites", 13),
     # ("images/photobook/china", 8),
     # ("images/photobook/camino", 8),
-    ("images/recipes", 8),
+    # ("images/recipes", 8),
 ]
 
 for d, q in dirs:

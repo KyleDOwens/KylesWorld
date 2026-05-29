@@ -54,9 +54,6 @@ function moveToCurrentYear() {
         changeListedYears(sign);
         leftYear = yearButtons[0].innerHTML;
         rightYear = yearButtons[yearButtons.length - 1].innerHTML;
-
-        console.log("moving years");
-        console.log(sign);
     }
 }
 

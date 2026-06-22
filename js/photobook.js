@@ -43,20 +43,19 @@ function reorganizeMasonry() {
     let columnGap = parseFloat(window.getComputedStyle(photobook).columnGap);
     let numColumns = Math.floor(wrapperWidth / (columnWidth + columnGap));
 
+    // skip reordering if the number of columns has not changed
+    if (previousNumColumns == numColumns || numColumns == 0) {
+        return;
+    }
+    previousNumColumns = numColumns;
+
+    console.log("REORDERING MASONRY");
     console.log("======================")
     console.log(`wrapperWidth = ${wrapperWidth}`);
     console.log(`columnWidth = ${columnWidth}`);
     console.log(`columnGap = ${columnGap}`);
     console.log(`wrapperWidth / (columnWidth + columnGap) = ${(wrapperWidth) / (columnWidth + columnGap)}`);
     console.log(`numColumns = ${numColumns}`);
-
-
-    // skip reordering if the number of columns has not changed
-    if (previousNumColumns == numColumns || numColumns == 0) {
-        return;
-    }
-    console.log("REORDERING MASONRY");
-    previousNumColumns = numColumns;
 
     // create a "desired column" list for each column
     let colStacks = [];

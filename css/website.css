@@ -1,0 +1,92 @@
+#sheet-overlay .embedded-window {
+    margin: 1% 10%;
+}
+#sheet-overlay .window-container {
+    padding: 0 5%;
+}
+
+h1 {
+    margin-top: 45px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid black;
+}
+
+h2 {
+    margin-top: 25px;
+    margin-bottom: -5px;
+    text-decoration: underline;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.html-block,
+.css-block {
+    background: #1F1F1F;
+    white-space: pre;
+    font-weight: normal;
+    color: #CCCCCC;
+    border: inset;
+    padding-left: 4lh;
+    padding-right: 1lh;
+    tab-size: 4;
+}
+.css-block {
+    color: #B5CEA8
+}
+.rendering {
+    all: unset;
+    background: #ffffff;
+    color: black;
+    display: block;
+    border: inset;
+    padding: 2lh 4lh;
+}
+
+span {
+    margin-left: calc(var(--tab) * 4ch);
+    --tab: 0;
+}
+
+.html-block .tag {
+    color: #569CD6;
+}
+.tag {
+    color: #0000FF;
+}
+.html-block .attr,
+.css-block .attr {
+    color: #9CDCFE;
+}
+.attr {
+    color: #6a74ff
+}
+.str {
+    color: #CE9178;
+    /* color: #FFDB1F; */
+}
+.comm {
+    color: #6A9955;
+    /* color: #00C747; */
+}
+.elem {
+    color: #D7BA7D;
+}
+.media {
+    color: #C586C0;
+}
+
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+    padding: 5px 10px;
+}
+thead {
+    background-color: #d5d2c0;
+}

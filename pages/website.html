@@ -28,6 +28,8 @@
                 <li>Part 4 - <a href="#intro-js">Into to JavaScript</a><span class="faint-text"> (not started)</span></li>
                 <li>Part 5 - In-Depth Example<a href="#"></a><span class="faint-text"> (not started)</span></li>
                 <li>Part 6 - <a href="#putting-on-internet">Putting Your Website on the Internet</a></li>
+                <li>Part 7 - <a href="#intro-git">Intro to Git</a></li>
+                <li>Part 8 - <a href="#github-pages">Setting up GitHub Pages</a></li>
                 <!-- <li><a href="#tips">Tips for Making Websites</a></li> -->
             </ul></li>
         </ul>
@@ -2097,6 +2099,276 @@
         ...
         -->
 
+
+
+        <!-- ================================================ --->
+        <!--                   INTRO TO GIT                   --->
+        <!-- ================================================ --->
+
+        <h1 id="intro-git">Super Intro to Git</h1>
+        <p>
+            Because I recommend using GitHub Pages for hosting, I want to give a quick into how to set it up and talk about git.
+            If you do not plan to use GitHub Pages, you can skip the rest of this guide.
+
+            This will be an extremely high-level overview intended for someone whose never used it, and doesn't intend to ever do any software development in their life (outside of their personal website of course).
+            The goal will be to cover some of the lingo used, and make you familiar with the process of uploading your code online with git.
+
+            Git is hard to learn, and can be confusing at first.
+            I will do my best to make it as simple as I can.
+        </p>
+
+        <h2>What is Git</h2>
+        <p>
+            First let's talk about what git is.
+            Git is the name of a tool that is used to track changes you make to files.
+
+            Why is this useful?
+            When you work on a project, it can be extraordinarily useful to track what changes you have made over time.
+            <ul>
+                <li>You to track progress easily</li>
+                <li>You can recover things that were deleted</li>
+                <li>You can go back to previous versions</li>
+                <li>and more...</li>
+            </ul>
+        </p>
+        <p>
+            So, how do we start using git?
+            The first thing you'll do is declare that you want your folder (and all files in it) to be tracked by git.
+            In our case, this will be the folder with all our website code.
+            The fancy git terminology for the collection of files you are tracking is called the git <b>repository</b>.
+        </p>
+        <p>
+            When you do this, you can think of git as creating a copy of all your files and storing them somewhere else in a safe place (typically not on your computer).
+            These "copied" versions of your files are called the <b>remote</b> files (remote because they are far away somewhere else).
+            The original files that are still on your computer are called the <b>local</b> files (local because they are close to you).
+        </p>
+        <p>
+            Okay, so now we know that there are two versions of our files: local files on our computer, and remote files managed by git.
+            The fact that there are now two versions of all your files is important!
+            This means you can make changes on your local files on your computer all you want, and it won't affect the remote files stored by git.
+            One benefit to this is that git can compare our local files to our remote files to detect any changes we have made!
+        </p>
+        <p>
+            From here on out, the <i>remote</i> files are what are most important.
+            The remote files will be considered the "real"/"official" files for your project, and your local files will be considered the "draft" versions of the project.
+        </p>
+        <p>
+            Tracking your changes is a good reason by itself to use git.
+            But git can also be used to allow other people to easily access your files too!
+            You can do this by having git store your remote files somewhere online (basically telling git "make XYZ-website the far away place you are storing my files").
+        </p>
+        <p>
+            This is actually super useful, because if anyone wants to view your files or download them, you can just give them a link to where the remote files are stored, and they can download them whenever they want!
+            We'll never have to send someone files manually ever again :)
+            This process of downloading a git repository from the remote, is called <b>cloning</b> the git repository.
+            Additionally, if we ever make changes those remote files, the link to the files stays the same, so people can easily go and download the new versions without us having to do anything!
+        </p>
+        <p>
+            This is super super useful, and one of the main reasons git it used.
+            However, this mostly applies to big projects with big teams of people working on it.
+            There are a bunch of tools git provides that give ways for teams to manage project files collaboratively, but I won't be going into them much here since for a personal website we don't really need to use those.
+        </p>
+
+        <h2>The Commit Process - How to Update Remote Files</h2>
+        <p>
+            Ok great so now we know the difference between local and remote files, and that having these two separate versions of the files allows us to easily detect changes and share our files with others.
+            But recall that I mentioned that changing our local files doesn't affect the remote files at all.
+            So what are we supposed to do when we want to change/update the remote files?
+        </p>
+        <p>
+            Well remember that git tracks the differences between our local and remote files.
+            So we can spend as much time making local changes as we want.
+            And whenever we're ready, we can tell git "update the remote files to have the same changes as my local files."
+            This will make the local file and the remote file the same!
+            This is how we update the remote files.
+        </p>
+        <p>
+            The way git does this is through a process called <b>committing</b>.
+        </p>
+        <p>
+            A good way to think about committing, is to think of it as sending a package that contains all of the changes you want git to make to the remote git.
+            The first thing we have to do is put the changes we want into the package.
+            Then when we've added everything we want to update, we wrap up the package in preparation for sending it.
+            Then once the package is all wrapped up, we actually send it off to git.
+            Once git receives the package, it automatically unwraps it, and applies all the changes you put inside the package.
+        </p>
+        <p>
+            Let's look a bit deeper at each stage of this process.
+        </p>
+        <p>
+            The first step of "putting the changes for a file into the package" is called <b>staging</b>.
+            So, we make all the edits we want, then we stage the changes for the files we want to update on the remote.
+            Note that we do not have to stage changes for every file!
+            We can pick and choose which files we want to stage/update.
+            We could update just one file, or a combination of files, or every single file.
+            Doesn't matter.
+        </p>
+        <p>
+            The next step is "wrapping up the package".
+            This process of packaging up and sending the changes is called creating a <b>commit</b>.
+            This essentially you finalizing the changes you want to be in the update, and adding extra into the package (such as a message describing what it is doing, the current date/time, etc.).
+            Another benefit of git is that git automatically keeps track of every commit you ever make!
+            This allows you to easily go back and see what changes you made for each commit, and when you made them.
+        </p>
+        <p>
+            The last step is "sending the package to the remote git".
+            This is called <b>pushing</b> (as in, you are pushing the changes from your local git, up to the far away remote git).
+            Git will then receive and automatically open the package, and apply whatever changes are in it to the remote files.
+            After it has done that, the remote files will be updated!
+        </p>
+
+
+        <h2>What is GitHub</h2>
+        <p>
+            So now we know most of the theory we need for git.
+            We know there are local and remote versions of our files.
+            We know we must go through the commit process to change/update the remote files.
+            We know that git keeps track of the changes we make in each commit.
+        </p>
+        <p>
+            Now that we know what git is, lets talk about GitHub.
+        </p>
+        <p>
+            Recall that I mentioned that you can instruct git to upload your remote files to a specific website so other people can easily access it.
+            GitHub is one such website.
+            GitHub allows people to upload their git code to it, and gives an easy way for other people to find, access, and download the git repositories of other people.
+        </p>
+        <p>
+            Note that GitHub is not the same thing as git!
+            GitHub is a company that allows people to store git files online. 
+            Git is a free tool available to anyone, and is owned by no one.
+            GitHub had no role in creating git, nor do they own git in any way, nor do they have anything to do with git as a tool.
+            All they do is provide a location for people to store their remote git files.
+        </p>
+        <p>
+            However, GitHub does provide some nice features for their users that are separate from git.
+            Once such feature is called GitHub Pages.
+            GitHub Pages is basically GitHub saying "if you upload a git repository of website files, we will automatically host that website for you for free."
+            Obviously this is a very good thing for people wanting to have a personal website.
+            So, let's set up a GitHub account and upload our code there so we can use GitHub Pages!
+        </p>
+        <p>
+            First, lets create a GitHub account.
+            Go to <a href="https://github.com/">github.com</a> and click "sign up" in the top right.
+            Follow the instructions for creating your account.
+            Once you create your account, you should be taken to your dashboard.
+        </p>
+        <p>
+            Now that we have a GitHub account, we need to create and upload a git repository to it.
+            So, let's get git set up on our computer so we can create a new repository.
+        </p>
+
+        <h2>Creating Git Repository in VS Code</h2>
+        <p>
+            There are many different ways to create a git repository.
+            But for this demo, I'll teach you how to use git in VS Code (since that should be what you are using to code your website).
+        </p>
+        <p>
+            First, you will need to download git.
+            You can download the latest version from the git website, <a href="https://git-scm.com/install/windows">here</a>.
+            Follow the installer instructions.
+        </p>
+        <p>
+            Once you have git installed, restart/open VS Code.
+            Make sure you open the folder that contains all the website code.
+            (You can do this by clicking 'File' > 'Open Folder', and then navigate to and select the folder for your website.)
+        </p>
+        <p>
+            Next, in the left side menu, click the third icon down (it looks like 3 circles connected by lines, right below the search icon).
+            This is the "source control" tab.
+            There you should see a big button that says "Initialize Repository".
+            Click that.
+            You should now see all of your files listed under "Changes" in the source control menu.
+        </p>
+        <p>
+            At this point, you have created your remote git repository!
+            However, there are a few important things to note.
+        </p>
+        <p>
+            First of all, when you create a repository, the remote repository will be empty initially.
+            So, we need to add all our files to it.
+            To do this, we will need to create our first commit to add our current version of the files to the remote repository.
+        </p>
+        <p>
+            Second, we haven't instructed git where it should store our remote files.
+            By default, it just stores them on your computer in a different location.
+            So, we will eventually need to move our remote files onto GitHub so we can use GitHub Pages.
+        </p>
+        <p>
+            Let's tackle the problem of the remote repository being empty first.
+            This is fortunately easy to fix - we just need to create a commit that contains all of our files.
+            If you remember the commit process, the firs thing we must do is stage each file for our commit.
+            In the "Changes" section, hover over each file and click the plus sign (+) next to it.
+            This will stage the file for the commit!
+            You should see it now appear under the "Staged Changes" section.
+            Do this for each file.
+        </p>
+        <p>
+            Once all the files are stages, we must create the commit.
+            You should see a text box for "Message" above the section for staged changes.
+            In that box, add whatever message you want for this commit (whatever helps your remember what this commit's purpose is, something like "Initial commit").
+            Then, click the blue "Commit" button below the message box.
+            And tada!
+            You have made your first commit.
+        </p>
+        <p>
+            At the very bottom of the source control menu, you should see a section for "Graph".
+            If you click that, you should see a single entry with your commit message.
+            If you click that entry, it should display every file that was changed/updated in your commit.
+            You can use this area to track what changes you have made over time.
+        </p>
+        <p>
+            However, you may have noticed that we never pushed our commit.
+            That is because we don't have anywhere to push out commit to!
+            This conveniently leads into us solving the second problem of needing to set up our remote repository on GitHub.
+        </p>
+        <p>
+            So, let's set up our remote repository.
+            In the source control menu of VS code, you should now see a big blue button that says "Publish Branch".
+            Click that.
+            A pop up menu should appear asking to sign in to GitHub.
+            Click "Allow", and it should take you to GitHub to sign in.
+            Sign in, and another pop up should appear asking to open VS Code.
+            Click "Open".
+            VS Code should open, and one final pop up menu should appear asking to open a GitHub URL.
+            Click "Open".
+        </p>
+        <p>
+            Now in the top middle of the screen, VS Code will ask you what privacy setting you want for your repository.
+            You should select "Publish to GitHub <b>public</b> repository".
+            (This public/private refers to who can view the code - in either case your are the only person who can edit it.)
+            After that, a notification should appear in the bottom right saying that your GitHub repository has been created.
+            You can click the "Open on GitHub" to view the remote files on GitHub!
+        </p>
+        <p>
+            This automatically pushes the commit for.
+            But in the future you will have to push your commits manually.
+            To do that, click the three dots next to the "Changes" dropdown section.
+            Then click "Push".
+            And that's it!
+        </p>
+        <p>
+            We have officially created our remote repository for this project.
+            Now we have our local files stored on our computer, and remote files stored on GitHub.
+            If you ever want to share your website code with someone, you can just give them the link to this GitHub remote repository.
+        </p>
+        
+        <h2>Commits in VS Code Cheatsheet</h2>
+        <p>
+            At this point you're mostly done with all the git configuration.
+            Whenever you want to make a commit, follow the same steps as above:
+            <ul>
+                <li>Go to the source control menu</li>
+                <li>Click the "+" sign next to files you want to stage for the commit</li>
+                <li>Type the commit message and click "Commit" to create the commit</li>
+                <li>Click the three dots next to "Changes" and click "Push" to push the commit</li>
+            </ul>
+        </p>
+
+        <h1 id="github-pages">Setting Up GitHub Pages</h1>
+        <p>
+            Coming soon...
+        </p>
         
 
         <!-- ================================================ --->
@@ -2226,11 +2498,14 @@
         <h2>helpful tools I used for my website</h2>
         <ul>
             <li><a href="https://www.cameronsworld.net/">cameronsworld.net</a> - archive of old gifs/web designs</li>
+            <li><a href="https://geocities.restorativland.org/">geocities.restorativland.org</a> - archive of geocities websites organized by theme</li>
             <li><a href="https://cooltext.com/">cooltext.com</a> - word art maker</li>
             <!-- <li><a href="https://www.makewordart.com/">makewordart.com</a> - other word art maker</li> -->
             <li><a href="https://ezgif.com/">ezgif.com</a> - gif tools (resize, crop, remove background, etc.)</li>
             <li><a href="https://onlinegiftools.com/#tools">onlinegiftools.com</a> - more gif tools</li>
             <li><a href="https://gifcities.org/search?">gifcities.org</a> - place to find/search for gifs</li>
+            <li><a href="https://pixelmoondust.neocities.org/archives/archivedtiles">pixelmoondust.neocities.org</a> - background image tiles</li>
+            <!-- <li><a href="https://www.geocities.ws/krczm/backgrounds.html">geocities.ws/krczm/backgrounds</a> - more background image tiles</li> -->
             <li><a href="https://www.mf2fm.com/rv/">mf2fm.com/rv</a> - cursor and window effects</li>
             <li><a href="https://tholman.com/cursor-effects/">tholman.com/cursor-effects</a> - other cursor effects</li>
             <li><a href="https://pixelsafari.neocities.org/">pixelsafari.neocities.org</a> - favicons, dividers, and more</li>
@@ -2242,10 +2517,8 @@
         <ul>
             <li><a href="https://handsontable.com/blog/how-the-spreadsheet-ui-changed-over-the-years">handsontable.com/blog</a> - old excel ui reference</li>
             <li><a href="https://jdan.github.io/98.css/">jdan.github.io/98.css</a> - windows 98 ui designs</li>
-            <li><a href="https://isobelsweb.com/">isobelsweb.com</a> - example website (my #1 source of inspiration - she also makes good music, go listen)</li>
+            <li><a href="https://isobelsweb.com/">isobelsweb.com</a> - example website (one of my main sources of inspiration - she also makes good music, go listen)</li>
             <li><a href="https://beej.us/">beej.us</a> - example website (he has a great network programming guide btw)</li>
-            <li><a href="https://anlucas.neocities.org/">anlucas.neocities.org</a> - example website</li>
-            <li><a href="https://aphub.neocities.org/">aphub.neocities.org</a> - example website</li>
             <!-- <li><a href="https://makefrontendshitagain.party/">makefrontendshitagain.party</a> - archive of old font-end design</li> -->
             <!-- <li><a href="https://thoughts.melonking.net/guides/introduction-to-the-web-revival-1-what-is-the-web-revival">melonking.net/web-revival</a> - motivation for building a personal website</li> -->
             <li><a href="https://localghost.dev/blog/building-a-website-like-it-s-1999-in-2022/">localghost.dev</a> - motivation for building a personal website</li>

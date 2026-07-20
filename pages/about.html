@@ -1,122 +1,213 @@
-<style>
-    #construction-window {
-        width: 100%;
-        max-width: fit-content;
-        height: fit-content;
-        margin: 0;
-    }
-    .construction-wrapper {
-        position: relative;
-        margin: 10px;
-        margin-top: 0;
-        width: 787px;
-        height: 307px;
+<div class="horizontal-group" id="about-wrapper">
 
-        overflow: hidden;
-    }
-    #construction-window img {
-        position: absolute;
-        display: block;
-    }
-    @media (max-width: 545px) { /* shrink sheet headers */
-        #construction-window {
-            margin: -1.5% -3%;
-            width: 105%;
-        }
-    }
-</style>
-<div class="embedded-window" id="construction-window">
-    <div class="embedded-title">
-        Construction Zone!
+
+    <div class="column" id="column1">
+        <!-- Picture -->
+        <div class="embedded-window picture-window" id="picture-window1">
+            <div class="embedded-title">
+                Picture
+            </div>
+            <div class="window-container" id="me-photo-container">
+                <img id="me-picture" src="./images/about/me.jpeg">
+            </div>
+        </div>
+        <!-- <div class="embedded-window picture-window" id="picture-window2">
+            <div class="embedded-title">
+                Picture
+            </div>
+            <div class="window-container">
+                <img src="./images/photobook/china/minion_painting.JPEG">
+            </div>
+        </div> -->
     </div>
-    <div class="construction-wrapper">
-        <div class="construction">
-            <!-- Top Barrel chain -->
-            <img style="top: 35px; left: -10px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 20px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 50px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 80px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 110px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 140px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 170px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 200px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 260px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 290px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 320px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 350px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 380px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 410px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 440px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 470px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 500px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 530px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 560px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 590px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 620px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 650px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 680px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 710px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 35px; left: 740px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
 
-            <!-- Bottom Barrel chain -->
-            <img style="top: 225px; left: -10px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 20px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 50px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 80px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 110px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 140px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 170px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 200px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 230px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 260px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 290px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 320px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 350px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 380px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 410px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 440px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 470px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 500px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 530px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 560px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 590px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 620px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 650px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 680px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 710px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
-            <img style="top: 225px; left: 740px; width: auto;" src="images/construction/under_construction22.gif"><!-- barrel -->
 
-            <!-- Pikachu -->
-            <img style="top: 95px; left: -20px; width: 220px;" src="images/construction/under_construction17.gif"><!-- pikachu -->
-            <img style="top: 95px; left: 130px; width: 220px;" src="images/construction/under_construction17.gif"><!-- pikachu -->
-            <img style="top: 95px; left: 280px; width: 220px;" src="images/construction/under_construction17.gif"><!-- pikachu -->
-            <img style="top: 95px; left: 430px; width: 220px;" src="images/construction/under_construction17.gif"><!-- pikachu -->
-            <img style="top: 95px; left: 580px; width: 220px;" src="images/construction/under_construction17.gif"><!-- pikachu -->
 
-            <!-- Top Banner -->
-            <img style="top: 20px; left: 0; width: 106px; height:11px" src="images/construction/under_construction25.gif"><!-- banner -->
-            <img style="top: 0; left: 106px;"src="images/construction/under_construction5.gif"><!-- banner w/ text & gif -->
-            <img style="top: 20px; left: 681px; width: 106px; height:11px" src="images/construction/under_construction25.gif"><!-- banner -->
-            
-            <!-- Bottom Banner -->
-            <img style="top: 290px; left: 0; width: 106px; height:11px" src="images/construction/under_construction25.gif"><!-- banner -->
-            <img style="top: 270px; left: 106px;"src="images/construction/under_construction5.gif"><!-- banner w/ text & gif -->
-            <img style="top: 290px; left: 681px; width: 106px; height:11px" src="images/construction/under_construction25.gif"><!-- banner -->
+    <div class="column" id="column2">
+        <!-- About me -->
+         <div class="embedded-window" id="intro-window">
+            <div class="embedded-title">
+                About Me
+            </div>
+            <div class="window-container">
+                <p>
+                    im kyle.
+                    i like to do things.
+                    i also like to keep lists of the things i like to do.
+                    this is my website for me to put the lists of things that i do :)
+                </p>
+                <p>
+                    some other things about me:
+                    im 25 and work as a computer engineering researcher in san antonio.
+                    im also a part-time graduate student at UTSA.
+                    in my free time i like to engage with my hobbies, which rotate constantly.
+                    i am currently into
+                        baking,
+                        ice skating,
+                        ceramics,
+                        trying new restaurants,
+                        and traveling.
+                </p>
+            </div>
+        </div>
+
+        <!-- Page Overviews -->
+        <div class="embedded-window" id="overview-window">
+            <div class="embedded-title">
+                Page Overviews
+            </div>
+            <div class="window-container">
+                this website is made up of multiple different pages, each corresponding to a hobby of mine.
+
+                you can change pages in two ways:
+                <ol style="margin-top : 5px;">
+                    <li>using the dropdown menu in the top left (just under the File button)</li>
+                    <li>use the sheet tabs in the bottom left (click the arrow buttons to change which tabs are displayed).</li>
+                </ol>
+
+                an overview of each page:
+
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li><div class="overview">
+                        <b><a href="music.html">music:</a></b>
+                        lists of my favorite albums/songs that release each year
+                    </div></li>
+                    <li><div class="overview">
+                        <b><a href="restaurants.html">restaurants:</a></b>
+                        list of my favorite restaurants in san antonio, and the restaurants i want to try
+                    </div></li>
+                    <li><div class="overview">
+                        <b><a href="recipes.html">recipes:</a></b>
+                        lists my baking recipes
+                    </div></li>
+                    <li><div class="overview">
+                        <b><a href="photobook.html">photobook:</a></b>
+                        photos from trips i have taken
+                    </div></li>
+                    <li><div class="overview">
+                        <b><a href="art.html">art:</a></b>
+                        photos of art things i have made
+                    </div></li>
+                    <li><div class="overview">
+                        <b><a href="skating.html">skating:</a></b>
+                        checklist of figure skating moves i have learned and need to learn
+                    </div></li>
+                    <li><div class="overview">
+                        <b><a href="website.html">making a website:</a></b>
+                        guide on how you (yes you) can make a personal website
+                    </div></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="embedded-window" id="faq-window">
+            <div class="embedded-title">
+                FAQ
+            </div>
+            <div class="window-container">
+                <div class="question">
+                    <b>Q:</b>
+                    why did you make a website?
+                </div>
+                <div class="answer" style="display: flex;">
+                    <b>A:</b>
+                    <ol style="margin: 0px;">
+                        <li>i want a way to share my hobbies (people like to ask for my recipes)</li>
+                        <li>im not a big fan of social media in general, so a personal website allows me to still have an online presence/outlet</li>
+                        <li>making a website is fun</li>
+                    </ol>
+                </div>
+
+                <div class="question">
+                    <b>Q:</b>
+                    why is this website designed to look like a spreadsheet?
+                </div>
+                <div class="answer">
+                    <b>A:</b>
+                    before I created this website, i kept track of almost all the information on this website (plus much more) in a giant excel sheet on my computer.
+                    so when i decided to create this website as a place to share many of the things in that excel sheet, i felt it was fitting to keep the spreadsheet theme.
+                </div>
+
+                <div class="question">
+                    <b>Q:</b>
+                    what happened to your other music website?
+                </div>
+                <div class="answer">
+                    <b>A:</b>
+                    i used to have a different website (albumsfromkyle.github.io) that i used as a place to share my music lists.
+                    i wasn't happy with the design of that website and wanted to share more things than music, so i deleted it and created this website instead.
+                    but you can still find all my music lists on the "music" page here!
+                </div>
+
+                <div class="question">
+                    <b>Q:</b>
+                    how long did this take to make?
+                </div>
+                <div class="answer">
+                    <b>A:</b>
+                    majority of the work was done on-and-off over roughly 3 months.
+                    i still do infrequent updates to the site, but that amount of work is too hard to estimate.
+                </div>
+
+                <div class="question">
+                    <b>Q:</b>
+                    is there a way to comment or leave a message?
+                </div>
+                <div class="answer">
+                    <b>A:</b>
+                    unfortunately there is no chatbox or way to comment.
+                    but! you can send me an email at <a href="mailto:kyles-world@hotmail.com">kyles-world@hotmail.com</a> if you want to say hi :)
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+    <div class="column" id="column3">
+        <!-- Favorites -->
+         <div class="embedded-window" id="favorites-window">
+            <div class="embedded-title">
+                Favorites
+            </div>
+            <div class="window-container">
+                <div class="favorite"><u>artists:</u> - father john misty, the strokes, the shins</div>
+                <div class="favorite"><u>foods:</u> - gyros, shawarma, beef noodle soup, chicken alfredo, pomegranates</div>
+                <div class="favorite"><u>desserts:</u> - coconut cream pie, carrot cake, pavlova, apple pie</div>
+                <div class="favorite"><u>movies:</u> - good will hunting, the thing, the princess bride</div>
+                <div class="favorite"><u>tv shows:</u> - survivor, one piece</div>
+            </div>
+        </div>
+
+        <!-- Recent Obsession -->
+         <div class="embedded-window" id="obsession-window">
+            <div class="embedded-title">
+                Recent Music Obsession
+            </div>
+            <div class="window-container">
+                <u>portraits of tracy</u> - <i>drive home</i>
+                <br>
+                <img style="width: 100px; height: 100px;" src="./images/music/2023/portraitsoftracy_drivehome.jpg">
+            </div>
+        </div>
+
+        <!-- TODOs -->
+         <div class="embedded-window" id="todos-window">
+            <div class="embedded-title">
+                TODOs
+            </div>
+            <div class="window-container">
+                <label class="todo" style="pointer-events: none;"><input type="checkbox">add art page</label>
+                <label class="todo" style="pointer-events: none;"><input type="checkbox">make music page easier to scroll</label>
+                <label class="todo" style="pointer-events: none;"><input type="checkbox">remove "listened to" dates from music csv</label>
+                <label class="todo" style="pointer-events: none;"><input type="checkbox">add pictures to website guide</label>
+                <label class="todo" style="pointer-events: none;"><input type="checkbox">find way to pre-organize photobook</label>
+                <label class="todo" style="pointer-events: none;"><input type="checkbox">finish about page</label>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>

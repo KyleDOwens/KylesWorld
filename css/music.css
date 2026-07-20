@@ -371,7 +371,15 @@
     #playlists-window,
     #guide-window,
     #favorites-window {
-        margin-left: -2%;
+        margin-left: 0%;
+        min-width: 0px;
+        width: 96%;
+    }
+    #music-window,
+    #favorites-window {
+        width: 85%;
+        overflow: hidden;
+        margin: 0 auto;
     }
     #sheet-overlay .horizontal-group {
         gap: 0%;
@@ -380,7 +388,7 @@
 }
 @media (max-width: 500px) {
     #options-window {
-        height: 110px;
+        height: 138px;
     }
 }
 @media (max-width: 450px) {

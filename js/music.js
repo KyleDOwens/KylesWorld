@@ -109,8 +109,8 @@ function updateDisplay() {
 window.addEventListener("resize", () => {
     let width = window.innerWidth;
     let listTitle = document.getElementById("music-window-title");
-    if (width <= 375) {
-        listTitle.innerHTML = `${currentYear} ${currentList}`;
+    if (width <= 414) {
+        listTitle.innerHTML = `Favorite ${currentList}`;
     }
     else {
         listTitle.innerHTML = `${currentYear} Favorite ${currentList}`;

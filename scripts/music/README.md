@@ -12,14 +12,12 @@ This section contains scripts that aid me in organizing my music. These mostly u
 
 ## Update the albums list
 Use `auto_pull_albums.sh`. This pulls from my "Organized Playlist 20XX" playlist on Spotify and updates the website to match that.
-1) Make sure you are in `kyles_world/scripts`
-2) Run `./music/auto_pull_albums.sh`
+1) Run `./scripts/music/auto_pull_albums.sh`
 
 
 ## Update the songs list
 Use `pull_songs_list.py`. This will pull all the songs from my Spotify "Songs 20XX" playlist and put them in the year's song CSV
-1) Make sure you are in `kyles_world/scripts`
-2) Run `./music/auto_pull_songs.sh`
+1) Run `./scripts/music/auto_pull_songs.sh`
 
 
 

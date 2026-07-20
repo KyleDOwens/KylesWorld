@@ -12,9 +12,9 @@ SCOPE = 'playlist-read-private'
 
 PLAYLIST_ID = "6se2lLsSrl34AzP1u4DOE8"                      # EDIT HERE
 YEAR = "2026"                                               # EDIT HERE
-OUTPUT_DIR = "../images/music/" + YEAR
+OUTPUT_DIR = "./images/music/" + YEAR
 
-with open("./music/client_secret.txt", 'r') as file:
+with open("./scripts/music/client_secret.txt", 'r') as file:
     CLIENT_SECRET = file.read().strip()
 
 

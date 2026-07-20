@@ -15,9 +15,9 @@ SCOPE = "playlist-read-private playlist-modify-public playlist-modify-private"
 
 PLAYLIST_ID = "6se2lLsSrl34AzP1u4DOE8"                    # EDIT HERE
 YEAR = "2026"                                             # EDIT HERE
-OUTPUT_CSV = "../csv/music/" + YEAR + ".csv"
+OUTPUT_CSV = "./csv/music/" + YEAR + ".csv"
 
-with open("./music/client_secret.txt", "r") as file:
+with open("./scripts/music/client_secret.txt", "r") as file:
     CLIENT_SECRET = file.read().strip()
 
 

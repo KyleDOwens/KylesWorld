@@ -1795,52 +1795,39 @@
         </p>
         <p>
             Well, turns out hosting your website makes your website *technically* accessible, but it is very inconvenient to get to it.
-            To get there, you have to type in the exact IP address of where your code is stored on the hosting server.
-            (An IP address is a big number that tells you where something is located on the internet
-            - it is equivalent to how a street address tells you where a building is located in your city.)
-            This is yucky and gross.
-            IP addresses are hard to type, hard to remember, not memorable, and don't tell you anything about the website itself.
-            For example, the IP address of Google is something like 142.251.116.138.
-            (heavily oversimplifying).
-            Imagine if you had to type that number in each time you wanted to get to Google.
+            To get there, you have to type in the IP address to where your code is stored on the hosting server.
+            (An IP address is a basically a big number (like 142.251.116.138) that tells you where something is located on the internet - think of it like on line street address.)
+            But this is yuck and gross because IP addresses are hard to type, hard to remember, not memorable, and don't tell you anything about the website itself.
         </p>
         <p>
-            Instead of typing in IP addresses to get places on the internet, we'd like to use some easy to remember website name that will automatically take us to the correct IP address.
-            For example, "google.com".
-            We'd like it so that when we type in "google.com", we should be automatically taken to 142.251.116.138 (where Google's website code is).
-            This is a super convenient solution and is much much easier than remembering a bunch of IP addresses.
+            Instead of typing in IP addresses to get places on the internet, it would be great if we could use an easy-to-remember website name instead.
+            Typing in the website name should then automatically take us to the correct IP address.
+            This is a super convenient solution, and is what we use on the internet!
         </p>
         <p>
-            This website name is called also called a domain name.
+            This easy-to-remember website name is called also called a domain name.
         </p>
         <p>
-            Now, you may be wondering how this automatic redirection is done.
-            After all, how does your computer know to go to 142.251.116.138 when you type in "google.com"?
-            This is where the domain name system (DNS) service comes in.
-        </p>
-        <p>
-            DNS is an online service that is essentially a giant phonebook.
-            It lets you look up a website name, and will tell your what IP address is associated with that website name.
-            This is a great design for many reasons.
-            Most applicably, this is great since now all you have to do put your website in this single DNS server, and then anyone who uses that DNS will be able to find your website.
-            Anyone with internet access can just ask the DNS "I want to go to this website name, can you give me the IP address where than name leads to", and then be taken to your website.
-            This is done automatically by your computer!
+            Now, we don't really need to talk about how this automatic linking between an IP address and website name is done.
+            All you really need to know is that it's essentially a giant phonebook (called the DNS). 
+            The phonebook lets you look up a website name, and will tell your what IP address is associated with that website name.
+            So all we need to do in get a website name and put it in the phonebook.
+            Then, anyone with internet access can look up our website in the phonebook!
         </p>
 
         <h2>Getting a Domain Name</h2>
         <p>
-            So we know what domain names are, and how DNS works, but how do we get our own custom domain name to use?
-            And once we have it, how can we add it to DNS so it can tell people where to go?
+            So we know what domain names are, but how do we get our own custom domain name to use?
+            And once we have it, how can we add it to the phonebook?
         </p>
         <p>
-            First off, we can't just create whatever name we want and add it to DNS ourselves.
-            Regular people shouldn't be able to add whatever they want to the DNS, that would be bad.
-            (Imagine if a random person said "ok DNS, I now own "google.com" so redirect all people who type it to my personal website", that would be not good.)
-            So, the DNS can only be modified by trusted companies.
-            We give these companies permission to add/edit the DNS for us when we do business with them.
+            First off, we can't just create whatever website name we want and add it to phonebook ourselves.
+            Regular people shouldn't be able to add whatever they want to the phonebook willy-nilly, that would be bad.
+            So, the phonebook can only be modified by trusted companies.
+            We pay these companies to add/edit the phonebook for us, and in exchange they make sure the phonebook stays running safely.
         </p>
-            So if you want to add your website to the DNS phonebook, you just ask a trusted company to add it for you.
-            You tell them, "hey I want this domain name to use for my website".
+            So if you want to add your website to the phonebook, you first ask a trusted company to add it for you.
+            You tell them, "I want this domain name to use for my website".
             The company will go check that no one is using that domain name (if they are, they won't let you have it).
             If no one is using it, they will then give it to you and add it to the DNS phonebook for you (for a small fee).
             Then you can link the website domain you own to the IP address where your website is hosted.
@@ -1849,11 +1836,6 @@
             Tada!
             Once this is done, you have an official website!
             Now anyone who types in your domain name will be taken to your website!
-        </p>
-        <p>
-            (This is just to give you the conceptual understanding of what is happening.
-            I am HEAVILY simplifying this all and glossing over soooo many details.
-            But you don't need to know those details to create your own website)
         </p>
 
         <h1 id="purchasing-options">Purchasing Hosting & Domain Name</h1>
@@ -1868,23 +1850,17 @@
             First is hosting.
             There are free options and paid options for hosting.
             The free options usually come with some small restrictions for your website.
-            These restrictions typically include limiting what your website is allowed to do.
-            Specifically, they will likely limit your website to being "static", which means that everyone who visits the website will see the exact same thing.
-            For example, this means a static website cannot have user profiles people can log into, or have forum posts that allow people to post new content to the website, etc.
-            The website must be completely unchanging to be static.
+            These restrictions typically include limiting what your website is allowed to do (e.g., you can't have user profiles, or you can't have comment sections).
         </p>
         <p>
-            These restrictions mostly effect business/product-focused websites,
+            These restrictions mostly affect business/product-focused websites,
             I find that for almost all personal websites these restrictions are not an issue.
-            So, free hosting is often the best option.
+            So, free hosting is often the best option (in my opinion).
         </p>
         <p>
             There are also paid hosting services.
             If you want a website where people can create/log into accounts, or users can purchase things from you, then you will likely need a paid hosting service that does not place any restrictions on you.
-        </p>
-        <p>
-            Hosting typically costs a few dollar a month.
-            I personally think the free options are the best for personal websites, but can understand using a paid service if you would rather not spend the time figuring how to use the free services.
+            These will typically cost a few dollar a month.
         </p>
         <p>
             Here are two free hosting services that I have dabbled with:
@@ -1895,6 +1871,24 @@
                     <th>pros</th>
                     <th>cons</th>
                 </thead>
+                <tr>
+                    <td>GitHub Pages</td>
+                    <td>Free</td>
+                    <td>
+                        <ul>
+                            <li>Gives a free (limited) domain name</li>
+                            <li>Allows you to link a custom domain name for free (if you own one)</li>
+                            <li>Keeps track of your changes over time</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>Limits your free domain name to username.github.io</li>
+                            <li>Requires you to learn the basics of how to use git</li>
+                            <li>Website must be static</li>
+                        </ul>
+                    </td>
+                </tr>
                 <tr>
                     <td>Neocities</td>
                     <td>Free</td>
@@ -1908,25 +1902,8 @@
                     <td>
                         <ul>
                             <li>Limits your domain name to username.neocities.net</li>
-                            <li>Website must be static</li>
                             <li>Have to pay $5 a month to link a custom domain name</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>GitHub Pages</td>
-                    <td>Free</td>
-                    <td>
-                        <ul>
-                            <li>Gives a free (limited) domain name</li>
-                            <li>Allows you to link a custom domain name for free (if you own one)</li>
-                            <li>Integrated with git (a software development tool to keep track of your code changes over time)</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>Limits your free domain name to username.github.io</li>
-                            <li>Requires you to learn the basics of how to use git</li>
+                            <li>Website must be static</li>
                         </ul>
                     </td>
                 </tr>
@@ -1940,7 +1917,7 @@
             If so, you just create an account and buy it.
         </p>
         <p>
-            Actually, it is more akin to renting the domain name.
+            Actually, you're more like renting the domain name rather than purchasing it.
             You select how many years you want to own the domain, and then pay a flat amount for each year you want to own it.
             And the end of this time period, you will be given the option to renew your domain name.
             So, it doesn't really matter how long you buy it for, since you'll have the option to renew.
@@ -1972,10 +1949,14 @@
 
         <h2>Linking Hosting and Domain Name</h2>
         <p>
-            There are many companies that will provide you hosting and a domain name for you at the same time!
+            Once you have your website hosted and you have a domain name, you will need to link them together.
+            That way your domain name takes people to the correct IP address.
+        </p>
+        <p>
+            There are many companies that will provide you hosting and a domain name for you at the same time.
+            The combined hosting and domain name option is convenient since you don't have to link anything.
             Free hosting websites typically give you a free domain name, but put restrictions on what your domain name is allowed to be.
-            For example, they may require you to have ".squarespace" or ".github.io" or ".neocities" at the end of your website name, rather than ".com".
-            The combined hosting and domain name option is convenient since everything can be done at once, but it may cost a bit more.
+            For example, they may require you to have ".squarespace" or ".neocities" at the end of your website name, rather than something like ".com".
         </p>
         <p>
             Some free hosting services may let you use your own domain name if you own one.
@@ -1984,21 +1965,20 @@
         </p>
         <p>
             If you are using separate hosting and web domain services, you will have to link them together.
-            The  company you purchased your web domain from should have instructions for how to link it to your hosting service.
-            If not, just Google it.
+            The company you purchased your web domain from should have instructions for how to link it to your hosting service.
+            If not, there are bound to be resources on Google to help you.
             There are far too many combinations for me to go through here.
         </p>
         <p>
-            My suggestion is to use GitHub Pages for hosting (free), and then buy a custom domain name to link to GitHub Pages (also free).
-            I personally bought my domain name from NameCheap.
-            They are the only domain name seller I have experience with, but my experience was good so I would recommend them.
-            But I have also heard very good things about SquareSpace and PorkBun.
+            My suggestion is to use GitHub Pages for hosting (free), and then buy a custom domain name to link to GitHub Pages (free to link).
+            You can see my guide to setting up a GitHub Page website <a href="#intro-git">below</a>.
+            I personally bought my domain name from NameCheap ($12 a year).
             If you choose to use GitHub Pages and a name from NameCheap, <a href="https://gist.github.com/plembo/84f80c920bb5ac6f19e53fe6f8db1ff7">this</a> is a great guide for linking them together,
             or <a href="https://www.namecheap.com/support/knowledgebase/article.aspx/9645/2208/how-do-i-link-my-domain-to-github-pages/">this</a> guide from NameCheap themselves.
         </p>
         <p>
             Lastly, you <i>do not</i> need to purchase hosting or a domain name as you are still developing your website.
-            You can build and test your entire website on your personal computer without needing hosting or a domain name.
+            You can code and test your entire website on your personal computer without needing hosting or a domain name.
             So, it is best to save any buying until your website is ready to be uploaded to the internet, or you are willing to commit to a domain name.
         </p>
 

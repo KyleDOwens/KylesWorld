@@ -408,10 +408,6 @@ button:disabled {
     }
 }
 @media (max-width: 545px) { /* shrink sheet headers */
-    .column {
-        margin: -0.5% -1.5%;
-        width: 99.5%;
-    }
     .visited {
         display: none;
     }

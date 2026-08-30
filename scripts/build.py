@@ -133,7 +133,7 @@ for year in range(NEWEST_YEAR, OLDEST_ALBUM_YEAR - 1, -1):
 
             albums_html += ('\t'
                 f'<div class="album-block {rating_color}">'
-                    f'<img class="album-img" src="{img_path}" width="135px" height="135px">'
+                    f'<img class="album-img" src="{img_path}" width="135px" height="135px" loading="lazy" decoding="async">'
                     f'<div class="album-name"><i>{row["Album"]}</i></div>'
                     f'<div class="album-artist"><b>By: </b><u>{row["Artist"]}</u></div>'
                     f'<div class="album-genre"><b>Genre: </b>{row["Genre"]}</div>'

@@ -141,15 +141,4 @@ h1 {
         flex-wrap: wrap;
     }
 }
-@media (max-width: 545px) { /* decrease header sizes */
-    #welcome-window,
-    #sitemap-window,
-    #email-window {
-        margin-left: -2%;
-        width: 101%;
-    }
-    #sheet-overlay .horizontal-group {
-        margin-top: -1%;
-    }
-}
 /*#endregion MEDIA */

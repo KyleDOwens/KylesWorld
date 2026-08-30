@@ -78,10 +78,10 @@ p {
     }
     #column1, #column2, #column3 {
         width: 98%;
+        margin: 0 auto;
     }
     #column1 {
         max-width: 350px;
-        margin: 0 auto;
     }
     #picture-window2 {
         display: none;

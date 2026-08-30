@@ -3,6 +3,7 @@
     src: url("fonts/fixedsys.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 /* Apply to everything */
@@ -126,6 +127,11 @@ button {
     --background-gray-dark2: #89868a;
 
     --background-beige: #ece9d8;
+
+    --row-header-width: 32px;
+    --row-header-height: 20px;
+    --col-header-width: 64px;
+    --col-header-height: 20px;
 }
 
 /*-- ================================================ --->
@@ -747,8 +753,8 @@ input:focus{
     background-image:
         linear-gradient(#d4d4d4 1px, transparent 1px),
         linear-gradient(90deg, #d4d4d4 1px, transparent 1px);
-    background-size: 64px 20px;
-    background-position: 31px 19px;
+    background-size: var(--col-header-width) var(--row-header-height);
+    background-position: calc(var(--row-header-width) - 1) calc(var(--row-header-height) - 1);
 }
 
 #corner-header {
@@ -760,8 +766,8 @@ input:focus{
     background-color: var(--background-gray);
     border: 1px solid #2C2C2C;
 
-    height: 20px;
-    width: 32px;
+    width: var(--row-header-width);
+    height: var(--col-header-height);
 }
 
 #mock-hheader {
@@ -771,7 +777,7 @@ input:focus{
     
     width: 100%; /* Remove for horizontal scroll */
     overflow: clip; /* Remove for horizontal scroll */
-    margin-left: 32px;
+    margin-left: var(--row-header-width);
 
     position: absolute;
     top: 0;
@@ -789,7 +795,7 @@ input:focus{
 
     width: 64px;
     min-width: 64px; /* Remove for horizontal scroll */
-    height: 20px;
+    height: var(--col-header-height);
 }
 
 #mock-vheader {
@@ -815,16 +821,16 @@ input:focus{
     border-right: 1px solid #2C2C2C;
     border-bottom: 1px solid #2C2C2C;
     
-    width: 32px;
-    height: 20px;
-    min-height: 20px;
+    width: var(--row-header-width);
+    height: var(--row-header-height);
+    min-height: var(--row-header-height);
 }
 
 #sheet-overlay {
     position: absolute;
     inset: 0;
-    margin-left: 32px;
-    margin-top: 20px;
+    margin-left: var(--row-header-width);
+    margin-top: var(--col-header-height);
     z-index: 2;
 }
 /*#endregion SHEET*/
@@ -1202,23 +1208,18 @@ nav#sheet-tabs {
     }
 }
 @media only screen and (max-width: 545px) {
+    :root {
+        --row-header-width: 18px;
+        --col-header-height: 14px;
+    }
     .horizontal-header {
         line-height: 12px;
-        height: 14px;
-    }
-    .vertical-header{
-        width: 18px;
-    }
-    #corner-header {
-        height: 14px;
-        width: 18px;
     }
     #mock-grid {
-        top: -6px;
-        left: -14px;
+        top: calc(var(--col-header-height) - 20px);
+        left: calc(var(--row-header-width) - 32px);
     }
     #mock-hheader {
-        margin-left: 18px;
         left: 14px;
     }
     #mock-grid {

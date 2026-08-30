@@ -66,8 +66,3 @@ h2 {
         width: 5%
     }
 }
-@media (max-width: 545px) { /* shrink sheet headers */
-    #skating-window {
-        margin: -0.5% -1.5%;
-    } 
-}

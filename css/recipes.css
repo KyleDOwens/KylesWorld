@@ -198,12 +198,4 @@ ol li ul li { /* note bullet */
         min-width: 325px;
     }
 }
-@media (max-width: 545px) { /* shrink sheet headers */
-    #recipe-book-window,
-    #guide-window,
-    #chef-window {
-        margin-left: -2.5%;
-        width: 99.5%;
-    }
-}
 /*#endregion MEDIA */

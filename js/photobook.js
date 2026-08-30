@@ -1,6 +1,9 @@
+let marginsRandomized = false;
+
 window.addEventListener("load", () => {
-    reorganizeMasonry();
     randomizeMargins();
+    marginsRandomized = true;
+    reorganizeMasonry();
     window.dispatchEvent(new Event('resize'));
 });
 
@@ -36,6 +39,10 @@ window.addEventListener("resize", () => {
     reorganizeMasonry();
 });
 function reorganizeMasonry() {
+    if (!marginsRandomized) {
+        return;
+    }
+
     // calculate the number of columns in the masonry grid
     let photobook = document.getElementById("photobook-wrapper");
     let wrapperWidth = parseFloat(window.getComputedStyle(photobook).width) + 10;
@@ -49,37 +56,44 @@ function reorganizeMasonry() {
     }
     previousNumColumns = numColumns;
 
-    console.log("REORDERING MASONRY");
-    console.log("======================")
-    console.log(`wrapperWidth = ${wrapperWidth}`);
-    console.log(`columnWidth = ${columnWidth}`);
-    console.log(`columnGap = ${columnGap}`);
-    console.log(`wrapperWidth / (columnWidth + columnGap) = ${(wrapperWidth) / (columnWidth + columnGap)}`);
-    console.log(`numColumns = ${numColumns}`);
-
     // create a "desired column" list for each column
+    let colHeights = [];
     let colStacks = [];
     for (let i = 0; i < numColumns; i++) {
+        colHeights.push(0);
         colStacks.push([]);
     }
 
     // store the original organization since it will need to be referenced when changing column count
     if (originalOrganization == null) {
-        let photosNodeList = document.querySelectorAll(".photo-window");
-        originalOrganization = [...photosNodeList];
+        originalOrganization = [...document.querySelectorAll(".photo-window")];
     }
 
-    // put each photo into the desired column
-    let photos = originalOrganization;
-    photos.forEach((photo, i) => {
-        colStacks[i % numColumns].push(photo.outerHTML);
+    // put each photo into the shortest column
+    originalOrganization.forEach((photo, i) => {
+        let shortest = colHeights.indexOf(Math.min(...colHeights));
+        colStacks[shortest].push(photo);
+        colHeights[shortest] += getPhotoFootprint(photo);
     });
 
     // replace the HTML content with the new columns
-    photobook.innerHTML = "";
+    let newPhotobookHtml = document.createDocumentFragment();
     for (let i = 0; i < numColumns; i++) {
-        colStacks[i].forEach((photoHtml) => {
-            photobook.innerHTML += photoHtml;
+        colStacks[i].forEach((photo) => {
+            newPhotobookHtml.appendChild(photo);
         });
     }
+    photobook.innerHTML = "";
+    photobook.appendChild(newPhotobookHtml);
+}
+
+function getPhotoFootprint(photo) {
+    let style = getComputedStyle(photo);
+    
+    console.log("=================================");
+    console.log( style.margin);
+    console.log( parseFloat(style.marginTop));
+    console.log( parseFloat(style.marginBottom));
+
+    return photo.getBoundingClientRect().height + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
 }

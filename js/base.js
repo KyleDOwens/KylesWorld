@@ -336,6 +336,7 @@ window.addEventListener("load", () =>
     window.dispatchEvent(new Event("resize"))
 );
 
+let rowHeaderPool = [];
 
 /**
  * Initializes the mock excel sheet by adding in header elements
@@ -353,12 +354,12 @@ function initializeSheet() {
 
     // Add row headers
     let mockVerticalHeader = document.getElementById("mock-vheader");
-    for (let i = 0; i <= 2000; i++) {
+    for (let i = 0; i <= 75; i++) {
         let headerCell = document.createElement("span");
         headerCell.classList.add("vertical-header");
-        headerCell.id = `_${i}`;
         headerCell.innerHTML = `${i}`;
 
+        headerCell.style.fontSize = "12pt";
         if (i >= 100) {
             headerCell.style.fontSize = "8pt";
         }
@@ -367,8 +368,33 @@ function initializeSheet() {
         }
 
         mockVerticalHeader.appendChild(headerCell);
+        rowHeaderPool.push(headerCell);
     }
 }
+
+function updateRowHeaders() {
+    let scrollTop = document.getElementById("sheet-scroll-container").scrollTop;
+    let startRow = Math.max(0, Math.floor(scrollTop / 20) - 10); // 20px is the height of each row, 10 is the number of buffer rows
+
+    rowHeaderPool.forEach((rowHeader, i) => {
+        let rowNum = startRow + i;
+        rowHeader.innerHTML = `${rowNum}`;
+        rowHeader.style.transform = `translateY(${(rowNum - i) * 20}px)`;
+
+        rowHeader.style.fontSize = "12pt";
+        if (rowNum >= 100) {
+            rowHeader.style.fontSize = "8pt";
+        }
+        if (rowNum >= 1000) {
+            rowHeader.style.fontSize = "6pt";
+        }
+    });
+}
+
+document.getElementById("sheet-scroll-container").addEventListener("scroll", () => {
+    requestAnimationFrame(updateRowHeaders);
+}, {passive: true});
+
 
 /**
  * Alter the height of the sheet overlay to fit all the content upon resize

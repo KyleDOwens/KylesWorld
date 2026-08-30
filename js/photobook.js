@@ -1,10 +1,10 @@
 let marginsRandomized = false;
+let firstLoad = true;
 
 window.addEventListener("load", () => {
     randomizeMargins();
     marginsRandomized = true;
     reorganizeMasonry();
-    window.dispatchEvent(new Event('resize'));
 });
 
 /**
@@ -85,6 +85,12 @@ function reorganizeMasonry() {
     }
     photobook.innerHTML = "";
     photobook.appendChild(newPhotobookHtml);
+
+    if (firstLoad) {
+        // dispatch resize event to update sheet background to new size
+        window.dispatchEvent(new Event('resize'));
+        firstLoad = false;
+    }
 }
 
 function getPhotoFootprint(photo) {

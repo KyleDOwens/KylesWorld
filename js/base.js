@@ -354,7 +354,7 @@ function initializeSheet() {
 
     // Add row headers
     let mockVerticalHeader = document.getElementById("mock-vheader");
-    for (let i = 0; i <= 75; i++) {
+    for (let i = 0; i <= 80; i++) {
         let headerCell = document.createElement("span");
         headerCell.classList.add("vertical-header");
         headerCell.innerHTML = `${i}`;
@@ -374,7 +374,7 @@ function initializeSheet() {
 
 function updateRowHeaders() {
     let scrollTop = document.getElementById("sheet-scroll-container").scrollTop;
-    let startRow = Math.max(0, Math.floor(scrollTop / 20) - 10); // 20px is the height of each row, 10 is the number of buffer rows
+    let startRow = Math.max(0, Math.floor(scrollTop / 20) - 20); // 20px is the height of each row, 10 is the number of buffer rows
 
     rowHeaderPool.forEach((rowHeader, i) => {
         let rowNum = startRow + i;

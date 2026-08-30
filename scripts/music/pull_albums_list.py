@@ -67,12 +67,14 @@ def group_songs_by_album(tracks, preserved_genres, preserved_ratings):
             user_input = input("Type 'q' to quit, or any other key to ignore and continue: ")
             if (user_input == 'q'):
                 exit()
+            print()
 
         if not (chunk[0]["artists"][0]["name"] == chunk[1]["artists"][0]["name"] == chunk[2]["artists"][0]["name"]):
             print(f"[ERROR] Album \"{chunk[0]['album']['name']}\" does not have 3 songs! Make sure there are 3 songs from each album on the playlist")
             user_input = input("Type 'q' to quit, or any other key to ignore and continue: ")
             if (user_input == 'q'):
                 exit()
+            print()
 
         # Read in values from the spotify data
         album = chunk[0]["album"]

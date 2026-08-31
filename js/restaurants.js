@@ -16,11 +16,43 @@ const map = L.map("map", {
         fadeAnimation: false,
     });
 
-const newIcon = L.icon({
-    iconUrl: "images/restaurants/marker.png",
-    iconSize: [24, 24],
-    // iconAnchor: []
+const unvisitedLowMarker = L.icon({
+    iconUrl: "images/restaurants/marker_unvisited_low.png",
+    iconSize: [24, 28],
+    iconAnchor: [12, 28],
 });
+const unvisitedMediumMarker = L.icon({
+    iconUrl: "images/restaurants/marker_unvisited_medium.png",
+    iconSize: [24, 28],
+    iconAnchor: [12, 28],
+});
+const unvisitedHighMarker = L.icon({
+    iconUrl: "images/restaurants/marker_unvisited_high.png",
+    iconSize: [24, 28],
+    iconAnchor: [12, 28],
+});
+const visitedLowMarker = L.icon({
+    iconUrl: "images/restaurants/marker_visited_low.png",
+    iconSize: [24, 28],
+    iconAnchor: [12, 28],
+});
+const visitedMediumMarker = L.icon({
+    iconUrl: "images/restaurants/marker_visited_medium.png",
+    iconSize: [24, 28],
+    iconAnchor: [12, 28],
+});
+const visitedHighMarker = L.icon({
+    iconUrl: "images/restaurants/marker_visited_high.png",
+    iconSize: [24, 28],
+    iconAnchor: [12, 28],
+});
+const highlightedMarker = L.icon({
+    iconUrl: "images/restaurants/marker_highlighted.png",
+    iconSize: [24, 28],
+    iconAnchor: [12, 28],
+});
+
+
 
 const BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 const PRECISION = 5; // Precision for how many decimals to include in lat/long url parsing
@@ -30,6 +62,7 @@ let markers = {} // Dictionary containing the map markers accessed by the restau
 let manualSelections = []; // Stores which of the current restaurants were selected manually (not with a filter menu) 
 
 let randomTimerId = null; // Stores the ID of the timer repeated highlighting/unhighlighting the randomly selected marker
+let randomTimerOldIcon = null; // Stores the marker object's icon before highlighting
 let randomTimerMarker = null; // Stores the marker object the randomly selected marker
 let randomOldZOffset = null; // Stores the old Z-Offset the randomly selected marker
 
@@ -51,11 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCache();
     addListenerToFilters();
     initializeFilters();
-    parseUrl();
-    applyFilters(true);
-
-    // Sort the table in ascending alphabetical order (by simulating a click on the table sort button)
-    document.getElementById("sort-name-button").dispatchEvent(new Event("click"));
+    // parseUrl();
+    // applyFilters(true);
 
     // Update map tiles since some may not load by this point
     map.invalidateSize();
@@ -90,25 +120,25 @@ function initializeMap() {
 }
 
 /**
- * Adds CSS classes to the marker object corresponding to what color it should be (based off rating and visited)
+ * Gets the icon image to use for the marker
  * @param {string} name The restaurant name
  * @param {string} visited Indication if the restaurant has been visited or not
  * @param {string} rating The restaurant rating, low/medium/high (indicates the priority if not visited)
  */
-function applyMarkerColor(marker, visited, rating) {
-    let colorClass = ""
+function getColoredMarker(marker, visited, rating) {
+    let markerIcon = null;
     switch (rating) {
         case "high":
-            colorClass = (visited) ? "visited-high" : "unvisited-high";
+            markerIcon = (visited) ? visitedHighMarker : unvisitedHighMarker;
             break;
         case "medium":
-            colorClass = (visited) ? "visited-medium" : "unvisited-medium";
+            markerIcon = (visited) ? visitedMediumMarker : unvisitedMediumMarker;
             break;
         default:
-            colorClass = (visited) ? "visited-low" : "unvisited-low";
+            markerIcon = (visited) ? visitedLowMarker : unvisitedLowMarker;
             break;
     }
-    marker._icon.classList.add(colorClass);
+    return markerIcon;
 }
 
 /**
@@ -123,17 +153,16 @@ function applyMarkerColor(marker, visited, rating) {
  * @param {string} originalUrl Google Maps URL to the restaurant
  */
 function addRestaurantMarker(name, lat, long, cuisine, visited, rating, notes, originalUrl) {
-    markers[normalizeName(name)] = L.marker([lat, long], {icon: newIcon}).addTo(map)
+    let markerIcon = getColoredMarker(markers[normalizeName(name)], visited, rating);
+    markers[normalizeName(name)] = L.marker([lat, long], {icon: markerIcon}).addTo(map)
         .bindPopup(`<b>${name}</b><br>
             ${cuisine}<br>
             <a href="${originalUrl}" target=_blank>View on Google</a><br>
             <i>${notes}</i>`);
-    
-    applyMarkerColor(markers[normalizeName(name)], visited, rating);
 }
 
 /**
- * Loads the list of restaurant information the HTML table into a local variable */
+ * Loads the list of restaurant information from the HTML table into a local variable */
 function loadCache() {
     // Load the restaurant data from HTML table into local cache
     let table = document.getElementById("restaurant-table-body");
@@ -160,8 +189,8 @@ function loadCache() {
 
         // Add marker on the map
         addRestaurantMarker(name,
-                gps.split(",")[0],
-                gps.split(",")[1],
+                parseFloat(gps.split(",")[0]),
+                parseFloat(gps.split(",")[1]) + 0.00255,
                 cuisine,
                 visited,
                 rating,
@@ -652,9 +681,10 @@ function startHighlightTimer(randName) {
     
     // Save values needed to stop the timer, then start the timer
     randomTimerMarker = marker;
-    marker._icon.classList.add("highlight");
+    randomTimerOldIcon = marker.options.icon;
+    marker.setIcon(highlightedMarker);
     randomTimerId = setInterval(() => {
-        randomTimerMarker._icon.classList.toggle("highlight");
+        randomTimerMarker.setIcon((randomTimerMarker.options.icon == highlightedMarker) ? randomTimerOldIcon : highlightedMarker);
     }, 750);
 
     // Enable the stop button
@@ -672,10 +702,12 @@ function stopHighlightTimer() {
         randomTimerMarker._icon.classList.remove("highlight");
     }
     randomTimerMarker.options.zIndexOffset = randomOldZOffset;
+    randomTimerMarker.setIcon(randomTimerOldIcon);
     randomTimerMarker.setLatLng(randomTimerMarker.getLatLng());
     
     randomTimerId = null;
     randomTimerMarker = null;
+    randomTimerOldIcon = null;
     randomOldZOffset = null;
 }
 

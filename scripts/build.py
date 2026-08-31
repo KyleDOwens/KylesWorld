@@ -1,4 +1,5 @@
 from html.parser import HTMLParser
+import operator
 import shutil
 import csv
 import os
@@ -53,8 +54,11 @@ with open(f"./csv/restaurants/san_antonio.csv", "r") as restaurants_file:
     reader = csv.DictReader(restaurants_file, delimiter=",")
     next(reader, None)
 
+    # Sort rows my alphabetical order
+    sorted_rows = sorted(reader, key=operator.itemgetter("name"), reverse=False)
+
     # Create row in the restaurant list table
-    for row in reader:
+    for row in sorted_rows:
         restaurant_rows += (
             '<tr>'
                 f'<td class="name">{row["name"]}</td>'
@@ -97,8 +101,8 @@ input_html = None
 with open(f"{BUILD_DIR}/restaurants.html", "r") as input_file:
     input_html = input_file.read()
 
-leaflet_script = '<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> <!-- TODO: -->'
-leaflet_link = '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/> <!-- TODO: eventually remove reliance on LeafletJS -->'
+leaflet_script = '<script src="js/leaflet.js"></script>'
+leaflet_link = '<link rel="stylesheet" href="css/leaflet.css"/>'
 output_html = input_html.replace("<!-- REPLACEME_EXTRASCRIPT -->", leaflet_script)
 output_html = output_html.replace("<!-- REPLACEME_EXTRALINK -->", leaflet_link)
 

@@ -132,6 +132,7 @@ document.getElementById("next-recipe-button").addEventListener("click", function
     flipForwards(recipeIndex + 1);
 });
 document.getElementById("table-contents-button").addEventListener("click", function() {
+    document.getElementById("sheet-scroll-container").scrollTo(0, 0);
     flipBackwards(0);
 });
 

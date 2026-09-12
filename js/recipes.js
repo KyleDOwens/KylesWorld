@@ -126,9 +126,11 @@ function flipBackwards(newIndex) {
  * Listeners for navigation buttons
  */
 document.getElementById("previous-recipe-button").addEventListener("click", function() {
+    document.getElementById("sheet-scroll-container").scrollTo(0, 0);
     flipBackwards(recipeIndex - 1);
 });
 document.getElementById("next-recipe-button").addEventListener("click", function() {
+    document.getElementById("sheet-scroll-container").scrollTo(0, 0);
     flipForwards(recipeIndex + 1);
 });
 document.getElementById("table-contents-button").addEventListener("click", function() {

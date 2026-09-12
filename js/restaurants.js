@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCache();
     addListenerToFilters();
     initializeFilters();
-    // parseUrl();
-    // applyFilters(true);
+    parseUrl();
+    applyFilters(true);
 
     // Update map tiles since some may not load by this point
     map.invalidateSize();
@@ -581,15 +581,13 @@ function base62ToBitString(encoding) {
  * Set which filters are on/off, based on the state info within the bit string
  * @param {string} bitString The bit string containing the state of each filter
  */
-function decodeAndSetFilters(bitString) {
+function decodeFilters(bitString) {
     // Each bit represents a filter on/off
     let filterCheckboxes = document.querySelectorAll(".multi-option input");
     for (let i = 0; i < filterCheckboxes.length; i++) {
         let filterCheckbox = filterCheckboxes[i];
         filterCheckbox.checked = (bitString[i] == "1") ? true : false;
     }
-
-    applyFilters(true);
 }
 
 /**
@@ -651,8 +649,13 @@ function parseUrl() {
     // Apply all passed in state information
     if (encodedFilters) {
         let filtersBitString = base62ToBitString(encodedFilters).slice(1);
-        decodeAndSetFilters(filtersBitString);
+        decodeFilters(filtersBitString);
     }
+    
+    // Apply filters to manual decoding actually turns on/off restaurants in relation to the set filters
+    applyFilters(true);
+
+    // Finish applying all passed in state information
     if (encodedManualSelections) {
         let manualSelectionsBitString = base62ToBitString(encodedManualSelections).slice(1);
         decodeAndSetManualSelections(manualSelectionsBitString);

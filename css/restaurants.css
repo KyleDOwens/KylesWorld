@@ -68,12 +68,12 @@ button:disabled {
 <--- ================================================ --*/
 /*#region MAP_PANEL */
 #map-window {
-    height: 80%;
+    height: 83%;
 }
 
 #map {
     margin: 10px;
-    height: calc(78% + 1px);
+    height: calc(75% + 1px);
     border: inset;
 
     border-top: 3px solid #808080;
@@ -315,6 +315,7 @@ button:disabled {
     color: gray;
     font-size: 10pt;
     vertical-align: top;
+    min-height: 20px;
 }
 /*#endregion SHARE_SELECTIONS */
 

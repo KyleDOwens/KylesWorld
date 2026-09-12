@@ -103,7 +103,9 @@
 }
 #options-container button:disabled
 {
-    text-decoration: line-through
+    text-decoration: line-through;
+    pointer-events: none;
+    cursor: default;
 }
 #options-container button:active,
 #options-container button:disabled,
@@ -241,6 +243,12 @@
     flex-wrap: wrap;
     align-items: stretch;
     gap: 10px;
+}
+.playlist-block .disabled {
+    text-decoration: line-through;
+    pointer-events: none;
+    cursor: default;
+    color: #606060;
 }
 .playlist-block {
     vertical-align: top;

@@ -27,14 +27,11 @@
     * don't think i should do this - would feel weird to just have reviews for those
 
 # RESTAURANTS
-* [-] Reduce # of markers on map or add marker clustering
-    * https://stadiamaps.com/build-a-map/#map=9.78/29.461/-98.584&style=outdoors
-    * https://github.com/Leaflet/Leaflet.markercluster
 * [-] Create custom map viewer and remove LeafletJS
-* [-] Create image for each color (no more color shifting)
 
 # RECIPES
 * [-] Add pictures for missing recipes
+* [-] Maybe remove "book" theming so I can include longer recipes (like conchas)?
 
 # PHOTOBOOK
 * [-] Add 2024 boston photos?

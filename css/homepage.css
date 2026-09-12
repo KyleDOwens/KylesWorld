@@ -3,7 +3,6 @@
 <--- ================================================ --*/
 #sheet-overlay {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     gap: 0;
 }
@@ -135,6 +134,7 @@ h1 {
         height: auto;
     }
     #sheet-overlay {
+        flex-wrap: wrap;
         flex-direction: unset;
     }
     #email-container {

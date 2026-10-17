@@ -41,6 +41,7 @@ dirs = [
     # ("images/photobook/china", 8),
     # ("images/photobook/camino", 8),
     # ("images/recipes", 8),
+    ("images/music/2026/after_fellasleepinthesun.jpg", 13),
 ]
 
 for d, q in dirs:

@@ -109,7 +109,7 @@ function updateDisplay() {
 window.addEventListener("resize", () => {
     let width = window.innerWidth;
     let listTitle = document.getElementById("music-window-title");
-    if (width <= 414) {
+    if (width <= 492) {
         listTitle.innerHTML = `${currentYear} ${currentList}`;
     }
     else {

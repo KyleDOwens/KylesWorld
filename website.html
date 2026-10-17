@@ -361,7 +361,7 @@
             Unfortunately, we first have to download some helpful tools before we can start coding a website.
             We need a program to write our code in.
             Technically you can do your coding in any text editor app, like notepad, but that would be <i>very</i> inconvenient for many many reasons.
-            So instead, let's download and a text editor that is specifically meant to be used for coding.
+            So instead, let's download and a text editor app that is specifically meant to be used for coding.
         </p>
         <p>
             The best option for this is "Visual Studio Code", also known as "VS Code".
@@ -444,6 +444,44 @@
         <div class="rendering">
             Hello World!
         </div>
+        <p>
+            Let's try to expand on this by adding more text to our website!
+            To do that, I'm going to try adding a new paragraph of text on a new line.
+        </p>
+        <p>
+            In order to view our changes, we should save our HTML file.
+            If we refresh the page in our web browser, we should be able to see our changes!
+        </p>
+        <p>
+            Let's see what our changes did...
+        </p>
+        <p class="html-block">
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html <span class="attr">lang=<span class="str">"en"</span></span>&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta <span class="attr">charset=<span class="str">"UTF-8"</span></span>&gt;</span>
+    <span class="tag">&lt;meta <span class="attr">name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1.0"</span></span>&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Document<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    Hello World!
+    this is my example paragraph!
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+        </p>
+        <div class="rendering">
+            Hello World!
+            this is my example paragraph!
+        </div>
+        <p>
+            Uh oh, our text is all appearing on the same line!
+            This isn't really what we wanted... so why is this happening?
+        </p>
+        <p>
+            Well, it's because there is no <i>structure</i> to our website yet.
+            Our HTML can't differentiate between what text is supposed to belong to one paragraph, and what text is supposed to belong to a different paragraph.
+            So how do we start to introduce structure?
+        </p>
 
 
         <!-- ================================================ --->
@@ -454,8 +492,7 @@
             <!-- intro to tags -->
             So far, our website is not very exciting.
             It's no different than a text file.
-            So, let's introduce some more complex topics.
-            To do this, let's talk about how HTML is structured.
+            So let's talk about how HTML is structured.
         </p>
         <p>
             HTML code is made up of "tags".
@@ -463,9 +500,9 @@
         </p>
         <p>
             Tag are used to define elements that will be displayed on your website.
-            An HTML element is the building block of your website.
-            An element is a "thing" that is on your website.
-            For example, a paragraph, image, or navigation menu are each elements.
+            An HTML element is just a "thing" that is on your website.
+            Elements are the building block of your website.
+            For example, an element could be a paragraph, image, button, navigation menu, etc.
         </p>
         <p>
             Elements are defined with two tags: an opening tag and a closing tag.
@@ -488,8 +525,8 @@
 <span class="tag">&lt;/head&gt;</span>
 <span class="tag">&lt;body&gt;</span> <span class="comm">&lt;&minus;&minus; This is the body's opening tag!</span>
     Hello World! <span class="comm">&lt;&minus;&minus; This is content that is inside the body tag!</span>
-<span class="tag">&lt;/body&gt;</span>
-<span class="tag">&lt;/html&gt;</span> <span class="comm">&lt;&minus;&minus; This is the body's closing tag!</span>
+<span class="tag">&lt;/body&gt;</span> <span class="comm">&lt;&minus;&minus; This is the body's closing tag!</span>
+<span class="tag">&lt;/html&gt;</span>
         </p>
         <p>
             <!-- text tags -->
@@ -501,18 +538,18 @@
         </p>
         <table>
             <thead><th>Tag</th><th>What it defines</th></thead>
-            <tr><td><span class="tag">&lt;p&gt;</span></td><td>Defines a paragraph</td></tr>
-            <tr><td><span class="tag">&lt;h1&gt;</span></td><td>Defines the primary header text</td></tr>
-            <tr><td><span class="tag">&lt;h2&gt;</span></td><td>Defines secondary header text</td></tr>
-            <tr><td><span class="tag">&lt;b&gt;</span></td><td>Defines bold text</td></tr>
-            <tr><td><span class="tag">&lt;i&gt;</span></td><td>Defines italic text</td></tr>
-            <tr><td><span class="tag">&lt;u&gt;</span></td><td>Defines underlined text</td></tr>
-            <tr><td><span class="tag">&lt;br&gt;</span></td><td>Defines a line break</td></tr>
-            <tr><td><span class="tag">&lt;a&gt;</span></td><td>Defines a hyperlink</td></tr>
+            <tr><td><span class="tag">&lt;p&gt;</span></td><td>Paragraph</td></tr>
+            <tr><td><span class="tag">&lt;h1&gt;</span></td><td>Primary header text</td></tr>
+            <tr><td><span class="tag">&lt;h2&gt;</span></td><td>Secondary header text</td></tr>
+            <tr><td><span class="tag">&lt;b&gt;</span></td><td>Bold text</td></tr>
+            <tr><td><span class="tag">&lt;i&gt;</span></td><td>Italic text</td></tr>
+            <tr><td><span class="tag">&lt;u&gt;</span></td><td>Underlined text</td></tr>
+            <tr><td><span class="tag">&lt;br&gt;</span></td><td>Line break</td></tr>
+            <tr><td><span class="tag">&lt;a&gt;</span></td><td>Hyperlink</td></tr>
         </table>
         <p>
             Let's see this in action!
-            Using what we have learned, let's put our "Hello World!" text into a paragraph, and add a second paragraph like this:
+            Using what we have learned, let's put our text into two different paragraphs like this:
         </p>
         <p class="html-block">
 <span class="tag">&lt;!DOCTYPE html&gt;</span>
@@ -528,95 +565,22 @@
 <span class="tag">&lt;/body&gt;</span>
 <span class="tag">&lt;/html&gt;</span>
         </p>
-        <p>
-            In order to view our changes, we should save our HTML file after we add the paragraph to it.
-            If we refresh the page in our web browser, we should be able to see our changes!
-            It should look something like this:
-        </p>
         <div class="rendering">
             <p>Hello World!</p>
             <p>this is my example paragraph!</p>
         </div>
         <p>
-            I encourage you to try experimenting will all of the tags I listed above to see what they do in action.
+            Notice how a space is automatically put between our two paragraphs now!
+            We've introduced <i>structure</i> to our website!
+        </p>
+        <p>
+            I encourage you to try experimenting will some of the tags I listed above to see what they do in action.
         </p>
         <p>
             A very important observation of this is that the order that you put your website content matters!
             The first element defined in your file will be what shows up at the top of your website, followed by the second element, and so on.
         </p>
 
-
-
-        <!-- ================================================ --->
-        <!--                     COMMENTS                     --->
-        <!-- ================================================ --->
-        <h2>Comments</h2>
-        <p>
-            Let's say you want to annotate your code so you can write down how something works, or write down a note about that part of the code.
-            To do that, programmers use <i>comments</i>.
-            Comments are parts of the code that are only there for the human programmer, and are completely ignored by the computer.
-            In VS Code, comments are highlighted <span class="comm">green</span>.
-        </p>
-        <p>
-            To make a comment in HTML, type <span class="comm">&lt;!-- &minus;&minus;&gt;</span>.
-            Anything that goes in the middle will be ignored by the computer, and not show up on your website.
-            Lets add a comment to our code to see this in action.
-        </p>
-        <p class="html-block">
-<span class="tag">&lt;!DOCTYPE html&gt;</span>
-<span class="tag">&lt;html <span class="attr">lang=<span class="str">"en"</span></span>&gt;</span>
-<span class="tag">&lt;head&gt;</span>
-    <span class="tag">&lt;meta <span class="attr">charset=<span class="str">"UTF-8"</span></span>&gt;</span>
-    <span class="tag">&lt;meta <span class="attr">name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1.0"</span></span>&gt;</span>
-    <span class="tag">&lt;title&gt;</span>Document<span class="tag">&lt;/title&gt;</span>
-<span class="tag">&lt;/head&gt;</span>
-<span class="tag">&lt;body&gt;</span>
-    <span class="comm">&lt;!-- This is my comment, which is ignored by my website &minus;&minus;&gt;</span>
-    <span class="tag">&lt;p&gt;</span> Hello World! <span class="tag">&lt;/p&gt; </span>
-    <span class="tag">&lt;p&gt;</span> this is my example paragraph! <span class="tag">&lt;/p&gt; </span>
-<span class="tag">&lt;/body&gt;</span>
-<span class="tag">&lt;/html&gt;</span>
-        </p>
-        <p>
-            If we refresh our website, we can see these comments don't appear!
-        </p>
-        <div class="rendering">
-            <!-- This is my comment, which is ignored by my website -->
-            <p>Hello World!</p>
-            <p>this is my example paragraph!</p>
-        </div>
-        <p>
-            Comments are very useful, even though they don't do anything to your website.
-            It is very useful to leave yourself comments explaining what something is supposed to do, or explain why you made a certain decision.
-            Comments are mostly for your future self.
-            You may think you'll remember, but I guarantee after multiple months of not looking at your code you will begin to forget why you did things a certain way.
-        </p>
-        <p>
-            Documenting your thought process in general is important, especially if you want to make a big/complex website.
-            I always have a text file where I can write notes about my thought process while coding.
-        </p>
-        <p>
-            Comments can also be used for organization.
-            I like to leave big comments as section headers to make it visually easier to find where I am in my code.
-            This is completely optional, I just have found it helpful.
-        </p>
-        <p class="html-block">
-<span class="tag">&lt;!DOCTYPE html&gt;</span>
-<span class="tag">&lt;html <span class="attr">lang=<span class="str">"en"</span></span>&gt;</span>
-<span class="tag">&lt;head&gt;</span>
-    <span class="tag">&lt;meta <span class="attr">charset=<span class="str">"UTF-8"</span></span>&gt;</span>
-    <span class="tag">&lt;meta <span class="attr">name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1.0"</span></span>&gt;</span>
-    <span class="tag">&lt;title&gt;</span>Document<span class="tag">&lt;/title&gt;</span>
-<span class="tag">&lt;/head&gt;</span>
-<span class="tag">&lt;body&gt;</span>
-    <span class="comm">&lt;!-- ================================= &minus;&minus;&gt;</span>
-    <span class="comm">&lt;!--       Example Section Header      &minus;&minus;&gt;</span>
-    <span class="comm">&lt;!-- ================================= &minus;&minus;&gt;</span>
-    <span class="tag">&lt;p&gt;</span> Hello World! <span class="tag">&lt;/p&gt; </span>
-    <span class="tag">&lt;p&gt;</span> this is my example paragraph! <span class="tag">&lt;/p&gt; </span>
-<span class="tag">&lt;/body&gt;</span>
-<span class="tag">&lt;/html&gt;</span>
-        </p>
 
 
 
@@ -627,9 +591,9 @@
         <p>
             This is a good start, but you may notice that all the tags above only apply to text.
             But a text-only website is boring, so lets add some images!
-            The
-            <span class="tag">&lt;img&gt;</span>
-            tag defines an image.
+        </p>
+        <p>
+            The <span class="tag">&lt;img&gt;</span> tag defines an image.
             Compared to the above tags, the <span class="tag">&lt;img&gt;</span> tag is slightly more complicated.
             They introduce two new concepts.
         </p>
@@ -640,10 +604,10 @@
             This is written the same way as an opening tag.
         </p>
         <p>
-            The reason only one tag is needed is because an image is not meant to <i>contain</i> anything extra other than itself.
-            We only use opening and closing tags to define what goes inside an element.
-            But if nothing is meant to go inside of it, then it doesn't make sense to use two tags.
-            After all, it wouldn't make sense conceptually for an image to contain text inside of it or contain another image inside of it.
+            The reason only one tag is needed is because an image cannot <i>contain</i> anything other than itself.
+            After all, we only use opening and closing tags to define what goes inside an element.
+            But if nothing is meant to go inside of the element in the first place, then it doesn't make sense to use two tags.
+            For example, it doesn't really make sense an image to "contain" something other than the image it is displaying.
         </p>
         <p>
             This is not exclusive to just <span class="tag">&lt;img&gt;</span> tags.
@@ -654,7 +618,7 @@
         <p>
             The second new concept introduced are <i>attributes</i>.
             Attributes are additional pieces of information you must give the tag to help it do what it needs to.
-            Attributes are not displayed on the website like text is, they just provide extra contextual information that the tag needs to function.
+            Attributes are not displayed on the website like text is, they just provide extra contextual information behind the scenes that the tag needs to function.
             The <span class="tag">&lt;img&gt;</span> tag contains two attributes:
             <ol>
                 <li><span class="attr">src</span> - this tells the tag where the source image file is that it will display</li>
@@ -668,8 +632,7 @@
         <p>
             Let's try adding an image to our website!
             PNG, JPG, or a GIF files are most commonly used with the <span class="tag">&lt;img&gt;</span> tag.
-            I'll be adding a GIF for my example.
-            I recommend to move your image file to the same folder as your HTML file.
+            I recommend you copy your image file into the same folder as your HTML file.
             That way the path to your image from your HTML is very easy to find 
             (if they are in the same folder, the path is just the name of the image file).
         </p>
@@ -722,7 +685,7 @@
         </p>
         <p>
             Good nesting will make your file <i>so</i> much easier to read and make it much easier to style elements when you get around to writing your CSS.
-            Whereas bad nesting can make your life a living nightmare.
+            Whereas bad nesting can make your file miserable to read through and understand.
         </p>
         <p>
             Let's work through a basic example.
@@ -837,44 +800,129 @@
             As a general rule of thumb, simplicity is key and you want to try to use as little nesting as possible to achieve the structure/design you want.
         </p>
 
+
+
+        <!-- ================================================ --->
+        <!--                     COMMENTS                     --->
+        <!-- ================================================ --->
+        <h2>Comments</h2>
+        <p>
+            Now that our website code is starting to get a little more complicated, we should talk about readability.
+            Whenever you code anything, you also want to make sure it is easy to read/understand the code.
+            One way to do that is to reduce complexity where you can, like I mentioned above.
+            But another way is to annotate your code so you can write down how something works, or write down a note about that part of the code.
+        </p>
+        <p>
+            To annotate their code do that, programmers use <i>comments</i>.
+            Comments are parts of the code that are only there to provide context for the human programmer, and are completely ignored by the computer.
+            In VS Code, comments are highlighted <span class="comm">green</span>.
+        </p>
+        <p>
+            To make a comment in HTML, type <span class="comm">&lt;!-- &minus;&minus;&gt;</span>.
+            Anything that goes in the middle will be ignored by the computer, and not show up on your website.
+            Lets add a comment to our code to see this in action.
+        </p>
+        <p class="html-block">
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html <span class="attr">lang=<span class="str">"en"</span></span>&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta <span class="attr">charset=<span class="str">"UTF-8"</span></span>&gt;</span>
+    <span class="tag">&lt;meta <span class="attr">name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1.0"</span></span>&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Document<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="comm">&lt;!-- This is my comment, which is ignored by my website &minus;&minus;&gt;</span>
+    <span class="tag">&lt;p&gt;</span> Hello World! <span class="tag">&lt;/p&gt; </span>
+    <span class="tag">&lt;p&gt;</span> this is my example paragraph! <span class="tag">&lt;/p&gt; </span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+        </p>
+        <p>
+            If we refresh our website, we can see these comments don't appear!
+        </p>
+        <div class="rendering">
+            <!-- This is my comment, which is ignored by my website -->
+            <p>Hello World!</p>
+            <p>this is my example paragraph!</p>
+        </div>
+        <p>
+            Comments are very useful, even though they don't do anything to your website.
+            It is very useful to leave yourself comments explaining what something is supposed to do, or explain why you made a certain decision for how to code something.
+        </p>
+        <p>
+            If you think "I don't need to leave comments because no one will every look at my code," think again!
+            YOU will look at your own code.
+            Comments for your future self are still extremely valuable.
+            You may think you'll remember, but I guarantee after multiple months of not looking at your code you will begin to forget why you did things a certain way.
+        </p>
+        <p>
+            Comments can also be used for visual organization.
+            I like to leave big comments as section headers to visually separate parts of my code.
+            This also makes it really easy to locate specific sections of code when I am scrolling through long files.
+            This is completely optional, I just have found it helpful.
+        </p>
+        <p class="html-block">
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html <span class="attr">lang=<span class="str">"en"</span></span>&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta <span class="attr">charset=<span class="str">"UTF-8"</span></span>&gt;</span>
+    <span class="tag">&lt;meta <span class="attr">name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1.0"</span></span>&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Document<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="comm">&lt;!-- ================================= &minus;&minus;&gt;</span>
+    <span class="comm">&lt;!--       Example Section Header      &minus;&minus;&gt;</span>
+    <span class="comm">&lt;!-- ================================= &minus;&minus;&gt;</span>
+    <span class="tag">&lt;p&gt;</span> Hello World! <span class="tag">&lt;/p&gt; </span>
+    <span class="tag">&lt;p&gt;</span> this is my example paragraph! <span class="tag">&lt;/p&gt; </span>
+
+    <span class="comm">&lt;!-- ================================= &minus;&minus;&gt;</span>
+    <span class="comm">&lt;!--       Another Section Header      &minus;&minus;&gt;</span>
+    <span class="comm">&lt;!-- ================================= &minus;&minus;&gt;</span>
+    <span class="tag">&lt;p&gt;</span> this is a second section of my code <span class="tag">&lt;/p&gt; </span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+        </p>
+
+
+
+
         <!-- ================================================ --->
         <!--               THE ALL-POWERFUL DIV               --->
         <!-- ================================================ --->
         <h2>The Div</h2>
         <p>
-            This leads me to the finally discuss the single most import HTML tag by far.
-            That is the <span class="tag">&lt;div&gt;</span> tag.
+            This leads me to the finally discuss the single most import HTML tag... the <span class="tag">&lt;div&gt;</span> tag!
             The <span class="tag">&lt;div&gt;</span> tag defines a division (AKA a section) of a document.
         </p>
         <p>
             All the other tags we have talked about so far define some sort of structure (e.g., <span class="tag">&lt;p&gt;</span> defines a paragraph, <span class="tag">&lt;ul&gt;</span> defines a list, <span class="tag">&lt;img&gt;</span> defines an image).
-            These all come with some built-in styling, and expectation with how they will be used.
+            These all come with some built-in styling and expectation with how they will be used.
         </p>
         <p>
             But not the <span class="tag">&lt;div&gt;</span>!
             The <span class="tag">&lt;div&gt;</span> just defines a <i>section</i> of the HTML.
             That's it.
-            You're just saying "the elements in this div all belong to the same section of my website".
-            What exact counts as a "section" and what that section does is completely up to you.
+            You're just saying "the elements in this <span class="tag">&lt;div&gt;</span> all belong together to the same section of my website".
+            What exact counts as a "section," how that section is structured, and what that section does is completely up to you.
         </p>
         <p>
-            Unlike most other tags, there is <i>almost no</i> styling or structure associated with that a <span class="tag">&lt;div&gt;</span> by default.
-            For example, the <span class="tag">&lt;p&gt;</span> tag by default adds space above and below your paragraph, and does not allow you to nest certain tags inside of it.
-            But not the <span class="tag">&lt;div&gt;</span>.
-            There is no assumption with how that section will be styled or used.
-            Also, there are no restrictions for what elements can be nested inside of it.
+            Unlike most other tags, the <span class="tag">&lt;div&gt;</span> does almost no styling/structuring by itself.
+            Instead, it gives <i>you</i> the absolute freedom to style it in whatever way you want.
+            And unlike some other elements, it places no restrictions on how it can be styled.
+            There is no assumption with how a <span class="tag">&lt;div&gt;</span> section will be styled or used.
             This means that they are extremely flexible, and can be easily styled to fit whatever need you have.
         </p>
         <p>
             The ability to create different sections of your website is an <i>extremely</i> powerful tool for defining what you want your website structure to look like.
-            If you want to do <i>anything</i> outside of what is defined by the default HTML tags, you should use a div.
+            If you want to do <i>anything</i> outside of what is defined by the default HTML tags, you should use a <span class="tag">&lt;div&gt;</span>.
             Want to have your website be in two columns?
             Create a <span class="tag">&lt;div&gt;</span> for each column.
-            Want one of the columns to be split into 3 sections?
-            Nest 3 <span class="tag">&lt;div&gt;</span> elements within your column.
-            Want to create a menu bar at the top of your screen above the two columns?
-            You guessed it, add a <span class="tag">&lt;div&gt;</span> before your columns that contains the menu bar options.
-            In fact, this is so powerful you could build your entire website out of <span class="tag">&lt;div&gt;</span> tags if you wanted (this is bad practice though, so don't do it).
+            Want to create a custom scrollbar?
+            Create a <span class="tag">&lt;div&gt;</span> that contains a scrollbar and up/down buttons.
+            Want to create a menu bar at the top of your screen?
+            You guessed it, add a <span class="tag">&lt;div&gt;</span> that contains the menu bar options.
+            In fact, this is so powerful you could build your <i>entire</i> website out of <span class="tag">&lt;div&gt;</span> tags if you wanted (please don't do this though).
         </p>
         <script>
             function toggleDivBorder() {
@@ -890,8 +938,7 @@
         </script>
         <p>
             Want to see how I used <span class="tag">&lt;div&gt;</span> tags in my website?
-            Click <a href="#" onclick="toggleDivBorder()">here</a> to put a red border around all the <span class="tag">&lt;div&gt;</span>s on this page.
-            Click <a href="#" onclick="toggleDivBorder()">here</a> to remove the border.
+            Click <a href="#" onclick="toggleDivBorder()">here</a> to toggle a red border around all the <span class="tag">&lt;div&gt;</span>s on this page.
             You can see how <span class="tag">&lt;div&gt;</span>s are used to group elements together!
         </p>
         <p>
@@ -908,10 +955,13 @@
     <span class="tag">&lt;title&gt;</span>Document<span class="tag">&lt;/title&gt;</span>
 <span class="tag">&lt;/head&gt;</span>
 <span class="tag">&lt;body&gt;</span>
-    <span class="tag">&lt;div&gt;</span> <span class="comm">&lt;!-- our first grouping &minus;&minus;&gt;</span>
+    <span class="comm">&lt;!-- our first grouping &minus;&minus;&gt;</span>
+    <span class="tag">&lt;div&gt;</span> 
         <span class="tag">&lt;p&gt;</span> Hello World! <span class="tag">&lt;/p&gt; </span>
     <span class="tag">&lt;/div&gt;</span>
-    <span class="tag">&lt;div&gt;</span> <span class="comm">&lt;!-- our second grouping &minus;&minus;&gt;</span>
+
+    <span class="comm">&lt;!-- our second grouping &minus;&minus;&gt;</span>
+    <span class="tag">&lt;div&gt;</span> 
         <span class="tag">&lt;p&gt;</span> this is my example paragraph! <span class="tag">&lt;/p&gt; </span>
         <span class="tag">&lt;img <span class="attr">src=</span><span class="str">"world.gif"</span> <span class="attr">alt=</span><span class="str">"Spinning world GIF"</span>&gt;</span>
     <span class="tag">&lt;/div&gt;</span>
@@ -929,8 +979,10 @@
         </div>
 
         <p>
-            Now at this point you may have a few questions.
-            Like:
+            You may have noticed this didn't really do anything... our website looks the exact same as it did before!
+        </p>
+        <p>
+            At this point you may have a few questions.
             <ul>
                 <li>How come adding the <span class="tag">&lt;div&gt;</span>s didn't change the way our website looks?</li>
                 <li>How does adding these <span class="tag">&lt;div&gt;</span> groups help us at all in making our website?</li>
@@ -941,12 +993,18 @@
             The answer to all of them is that the main power from the <span class="tag">&lt;div&gt;</span> comes from it's ability to be styled!
         </p>
         <p>
-            By default, the <span class="tag">&lt;div&gt;</span> tag does have any styling.
-            This is why it does not change the way things look on our website, because we have not styled it at all.
-            Once we begin to style them, you will see that using <span class="tag">&lt;div&gt;</span>s can help us style an entire group of elements, allow us to make complex structures on our website.
+            Recall that I said the <span class="tag">&lt;div&gt;</span> does <i>not</i> have any default styling associated with it.
+            So if you don't style your <span class="tag">&lt;div&gt;</span>, it won't do anything.
+            This is why it does not change the way things look on our website!
         </p>
         <p>
-            As a result of all that, we need to start talking about the way we style a website, which conveniently provides the perfect segue into my introduction to CSS...
+            This freedom is very beneficial though!
+            It allows us to essentially create our own structures, even really complex ones!
+            This is why <span class="tag">&lt;div&gt;</span>s are so useful, and how they can do so many different things.
+        </p>
+        <p>
+            But how do we actually go about styling our <span class="tag">&lt;div&gt;</span>?
+            That conveniently provides the perfect segue into website styling with CSS...
         </p>
 
 
@@ -991,7 +1049,7 @@
             The first step is to define the element you want to style.
             This is called our "element selector".
             One way to do this is to type the tag name of the element.
-            So, to style the <span class="tag">&lt;p&gt;</span> tag, we would type "p":
+            So, to style the <span class="tag">&lt;p&gt;</span> tag, we would type "p".
         </p>
         <p>
             Then, we type an open and close curly braces, "{" and "}".
@@ -1007,10 +1065,16 @@
             Now we are ready to start styling.
             Every part of an element you can style has a property name associated with it.
             These property names are pre-defined by the CSS standards but are mostly self-explanatory.
+        </p>
+        <p>
             For example, to style the background color you would use the <span class="attr">background-color</span> property.
             To style the font size you would use the <span class="attr">font-size</span> property.
-            There are too many to list here, so you shouldn't try to memorize them all.
-            You'll eventually start to memorize the most used properties, and can Google everything else you forget.
+        </p>
+        <p>
+            There are too many properties to list here.
+            You shouldn't try to memorize them all either!
+            Just Google them when you need, and eventually you'll start to memorize the most useful ones.
+            (Googling things is an <i>extremely</i> important skill for coding - it is normal and expected for you to constantly Google how to do things.)
         </p>
         <p>
             The value that the property can be assigned depends on what you are styling.
@@ -1053,8 +1117,8 @@
         <h2>IDs - Styling Specific Elements</h2>
         <p>
             Notice that doing this styles <i>all</i> the <span class="tag">&lt;p&gt;</span> tags in the entire website.
-            Sometimes that is what we want to do.
-            But other times, we want to only style a specific element.
+            Sometimes that is exactly what we want to do.
+            But other times, we may want to only style a single specific element.
             So how do we do that? 
         </p>
         <p>
@@ -1067,7 +1131,7 @@
             Then in the opening tag, type <span class="attr">id=</span><span class="str">"yourIdName"</span> (replacing "yourIdName" with whatever you want the ID to be).
         </p>
         <p class="html-block">
-<span class="tag">&lt;p <span class="attr">id=</span><span class="str">"yourIdName"</span>&gt;</span> this is my example paragraph! <span class="tag">&lt;/p&gt; </span>
+<span class="tag">&lt;p <span class="attr">id=</span><span class="str">"yourIdName"</span>&gt;</span> Hello World! <span class="tag">&lt;/p&gt; </span>
         </p>
         <p>
             Now go back to your CSS file.
@@ -1088,10 +1152,10 @@
         </p>
         <div class="rendering">
             <div>
-                <p>Hello World!</p>
+                <p style="background-color: red; font-size: 16pt;">Hello World!</p>
             </div>
             <div>
-                <p style="background-color: red; font-size: 16pt;">this is my example paragraph!</p>
+                <p>this is my example paragraph!</p>
                 <img src="images/homepage/world.gif" alt="Spinning world GIF">
             </div>
         </div>
@@ -1105,14 +1169,14 @@
         <!-- ================================================ --->
         <h2>Classes - Styling Groups of Elements</h2>
         <p>
-            So now we can style all elements of a certain type, or we can style a specific element by itself.
+            So now we can style all elements of a certain tag, or we can style a specific element by itself.
             But, what if want to apply the same styling to a specific <i>group</i> of elements?
             We can't target the tag in CSS, since that will apply it to all the elements of that tag.
             And we can't use ID values, since any given ID can only belong to a single element.
         </p>
         <p>
             The solution is to use another HTML attribute - a <span class="attr">class</span>.
-            This is like an ID value, but multiple elements can have the same class value!
+            A class is like an ID value, but multiple elements can have the same class value!
             And unlike IDs, an element can have multiple class values!
         </p>
         <p>
@@ -1142,17 +1206,18 @@
         <p class="css-block">
 <span class="elem">.yourClassName</span>
 <span class="elem">{</span>
-    <span class="attr">background-color:</span> red;
-    <span class="attr">font-size:</span> 16pt;
+    <span class="attr">background-color:</span> green;
+    <span class="attr">font-size:</span> 20pt;
 <span class="elem">}</span>
         </p>
         <div class="rendering">
             <div>
+                <p style="background-color: red; font-size: 16pt;">Hello World!</p>
                 <p>Hello World!</p>
             </div>
             <div>
-                <p style="background-color: red; font-size: 16pt;">this is my example paragraph!</p>
-                <p style="background-color: red; font-size: 16pt;">this is a second example paragraph with the same class!</p>
+                <p style="background-color: green; font-size: 20pt;">this is my example paragraph!</p>
+                <p style="background-color: green; font-size: 20pt;">this is a second example paragraph with the same class!</p>
                 <img src="images/homepage/world.gif" alt="Spinning world GIF">
             </div>
         </div>
@@ -1784,7 +1849,7 @@
         </p> -->
 
 
-
+<!--
         <h1>Advanced Topic - Responsive Design</h1>
         <p>
             This is a more advanced topic, but is something I think is worth mentioning.
@@ -1922,8 +1987,7 @@
             A website that is well designed and responsive will not need to rely on media queries as much since it's elements should grow/shrink more naturally.
             This section purposely does not go in-depth into responsive design, but hopefully it gives enough of a starting point for you to go out and learn more on your own.
         </p>
-
-
+ -->
 
 
 
@@ -2289,14 +2353,16 @@
         <!--                   INTRO TO GIT                   --->
         <!-- ================================================ --->
 
-        <h1 id="intro-git">Super Intro to Git</h1>
+        <h1 id="intro-git">Intro to Git</h1>
         <p>
             Because I recommend using GitHub Pages for hosting, I want to give a quick into how to set it up and talk about git.
             If you do not plan to use GitHub Pages, you can skip the rest of this guide.
-
-            This will be an extremely high-level overview intended for someone whose never used it, and doesn't intend to ever do any software development in their life (outside of their personal website of course).
-            The goal will be to cover some of the lingo used, and make you familiar with the process of uploading your code online with git.
-
+        </p>
+        <p>
+            This will be an extremely high-level overview intended for someone whose never used it.
+            The goal will be to cover some of the lingo used and make you familiar with the process of uploading your code online with git.
+        </p>
+        <p>
             Git is hard to learn, and can be confusing at first.
             I will do my best to make it as simple as I can.
         </p>
@@ -2307,7 +2373,7 @@
             Git is the name of a tool that is used to track changes you make to files.
 
             Why is this useful?
-            When you work on a project, it can be extraordinarily useful to track what changes you have made over time.
+            When you work on a project, it can be <i>extremely</i> useful to track what changes you have made over time.
             <ul>
                 <li>You to track progress easily</li>
                 <li>You can recover things that were deleted</li>
@@ -2341,6 +2407,7 @@
             But git can also be used to allow other people to easily access your files too!
             You can do this by having git store your remote files somewhere online (basically telling git "make XYZ-website the far away place you are storing my files").
         </p>
+        <!--
         <p>
             This is actually super useful, because if anyone wants to view your files or download them, you can just give them a link to where the remote files are stored, and they can download them whenever they want!
             We'll never have to send someone files manually ever again :)
@@ -2352,10 +2419,11 @@
             However, this mostly applies to big projects with big teams of people working on it.
             There are a bunch of tools git provides that give ways for teams to manage project files collaboratively, but I won't be going into them much here since for a personal website we don't really need to use those.
         </p>
+         -->
 
         <h2>The Commit Process - How to Update Remote Files</h2>
         <p>
-            Ok great so now we know the difference between local and remote files, and that having these two separate versions of the files allows us to easily detect changes and share our files with others.
+            Ok great so now we know the difference between local and remote files, and that having these two separate versions of the files allows us to easily detect changes.
             But recall that I mentioned that changing our local files doesn't affect the remote files at all.
             So what are we supposed to do when we want to change/update the remote files?
         </p>
@@ -2363,7 +2431,7 @@
             Well remember that git tracks the differences between our local and remote files.
             So we can spend as much time making local changes as we want.
             And whenever we're ready, we can tell git "update the remote files to have the same changes as my local files."
-            This will make the local file and the remote file the same!
+            This will the remote files to make them the same as the local files!
             This is how we update the remote files.
         </p>
         <p>
@@ -2371,8 +2439,8 @@
         </p>
         <p>
             A good way to think about committing, is to think of it as sending a package that contains all of the changes you want git to make to the remote git.
-            The first thing we have to do is put the changes we want into the package.
-            Then when we've added everything we want to update, we wrap up the package in preparation for sending it.
+            The first thing we have to do is "package up" all the changes we want send to the remote.
+            Then we "wrap up" the package in preparation for sending it.
             Then once the package is all wrapped up, we actually send it off to git.
             Once git receives the package, it automatically unwraps it, and applies all the changes you put inside the package.
         </p>
@@ -2382,17 +2450,17 @@
         <p>
             The first step of "putting the changes for a file into the package" is called <b>staging</b>.
             So, we make all the edits we want, then we stage the changes for the files we want to update on the remote.
-            Note that we do not have to stage changes for every file!
+            <!-- Note that we do not have to stage changes for every file!
             We can pick and choose which files we want to stage/update.
             We could update just one file, or a combination of files, or every single file.
-            Doesn't matter.
+            Doesn't matter. -->
         </p>
         <p>
             The next step is "wrapping up the package".
             This process of packaging up and sending the changes is called creating a <b>commit</b>.
             This essentially you finalizing the changes you want to be in the update, and adding extra into the package (such as a message describing what it is doing, the current date/time, etc.).
-            Another benefit of git is that git automatically keeps track of every commit you ever make!
-            This allows you to easily go back and see what changes you made for each commit, and when you made them.
+            <!-- Another benefit of git is that git automatically keeps track of every commit you ever make!
+            This allows you to easily go back and see what changes you made for each commit, and when you made them. -->
         </p>
         <p>
             The last step is "sending the package to the remote git".
@@ -2421,8 +2489,8 @@
             Note that GitHub is not the same thing as git!
             GitHub is a company that allows people to store git files online. 
             Git is a free tool available to anyone, and is owned by no one.
-            GitHub had no role in creating git, nor do they own git in any way, nor do they have anything to do with git as a tool.
-            All they do is provide a location for people to store their remote git files.
+            <!-- GitHub had no role in creating git, nor do they own git in any way, nor do they have anything to do with git as a tool. -->
+            All GitHub does is provide a location for people to store their remote git files.
         </p>
         <p>
             However, GitHub does provide some nice features for their users that are separate from git.
@@ -2478,6 +2546,8 @@
             By default, it just stores them on your computer in a different location.
             So, we will eventually need to move our remote files onto GitHub so we can use GitHub Pages.
         </p>
+
+        <h2>Adding Files to the Repository</h2>
         <p>
             Let's tackle the problem of the remote repository being empty first.
             This is fortunately easy to fix - we just need to create a commit that contains all of our files.
@@ -2506,6 +2576,8 @@
             That is because we don't have anywhere to push out commit to!
             This conveniently leads into us solving the second problem of needing to set up our remote repository on GitHub.
         </p>
+
+        <h2>Setting up the Remote</h2>
         <p>
             So, let's set up our remote repository.
             In the source control menu of VS code, you should now see a big blue button that says "Publish Branch".
